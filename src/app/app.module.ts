@@ -20,7 +20,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/sign',
+		redirectTo: '/compiler',
 		pathMatch: 'full'
 	},
 	{
@@ -49,7 +49,6 @@ const routes: Routes = [
 		canActivate: [AuthenticatedGuard],
 		component: UserComponent,
 		children: [
-			/* user */
 			{
 				path: 'profile',
 				canActivate: [MetaGuard],
@@ -70,6 +69,52 @@ const routes: Routes = [
 		component: PublicComponent,
 		children: [
 			/* user */
+			{
+				path: 'commands',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Commands'
+					}
+				},
+				loadChildren: () => import('./pages/user/commands/commands.module').then(m => m.CommandsModule)
+			}, 
+			{
+				path: 'compiler',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Compiler'
+					}
+				},
+				loadChildren: () => import('./pages/user/compiler/compiler.module').then(m => m.CompilerModule)
+			}, 
+			{
+				path: 'users',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Users'
+					}
+				},
+				loadChildren: () =>
+					import('./modules/user/pages/users/users.module').then(
+						(m) => m.UsersModule
+					)
+			},
+			{
+				path: 'forms',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Forms'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/customform/pages/customforms/customforms.module'
+					).then((m) => m.CustomformsModule)
+			},
 			{
 				path: 'document',
 				canActivate: [MetaGuard],
@@ -147,7 +192,7 @@ const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'profile',
+		redirectTo: 'compiler',
 		pathMatch: 'full'
 	}
 ];
