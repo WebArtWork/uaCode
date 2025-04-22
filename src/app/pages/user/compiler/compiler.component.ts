@@ -44,6 +44,24 @@ export class CompilerComponent {
 					},
 				],
 			},
+			{
+				name: 'Text',
+				key: 'bio',
+				fields: [
+					{
+						name: 'Placeholder',
+						value: 'Enter your bio',
+					},
+					{
+						name: 'Label',
+						value: 'Bio',
+					},
+					{
+						name: 'Textarea',
+						value: true,
+					},
+				],
+			},
 		],
 	});
 
