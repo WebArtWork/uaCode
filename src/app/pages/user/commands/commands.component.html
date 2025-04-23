@@ -53,12 +53,12 @@
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<div class="documents-main-row">
+					<div class="documents-main-row" *ngFor="let command of uaCodeServise.commands|arr">
 						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
+							{{command.prop}}
 						</div>
-						<a href="" class="documents__btn">Press button</a>
+						<a routerLink="/compiler" 
+						class="documents__btn">Press button</a>
 					</div>
 				</div>
 			</div>
