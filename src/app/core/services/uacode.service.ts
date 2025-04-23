@@ -13,10 +13,10 @@ export class UacodeService {
 	}
 
 	commands = [
-		{ id: 1, command: 'Друк', execute: 'print', example: `Друк('Світ');` },
+		{ id: 1, name: 'Друк', execute: 'print', example: `Друк('Світ');` },
 		{
 			id: 2,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Якщо (true) {
   Друк('Це працює!');
@@ -24,7 +24,7 @@ export class UacodeService {
 		},
 		{
 			id: 3,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Функція привітання(імя) {
   Друк('Привіт, ' + імя + '!');
@@ -34,7 +34,7 @@ export class UacodeService {
 		},
 		{
 			id: 4,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Функція рахувати(лічильник) {
   Поки (лічильник > 0) {
@@ -48,7 +48,7 @@ export class UacodeService {
 		},
 		{
 			id: 5,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна назва = 'Ніка';
 
@@ -56,7 +56,7 @@ export class UacodeService {
 		},
 		{
 			id: 6,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `константа рік = 2024;
 
@@ -64,7 +64,7 @@ export class UacodeService {
 		},
 		{
 			id: 7,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Для (Змінна i = 0; i < 5; i++) {
   Друк('Крок ' + i);
@@ -72,7 +72,7 @@ export class UacodeService {
 		},
 		{
 			id: 8,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Якщо (true та true) {
   Друк('Обидві умови істинні');
@@ -84,7 +84,7 @@ export class UacodeService {
 		},
 		{
 			id: 9,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Для (Змінна i = 0; i < 5; i++) {
   Якщо (i === 3) {
@@ -96,7 +96,7 @@ export class UacodeService {
 		},
 		{
 			id: 10,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Для (Змінна i = 0; i < 5; i++) {
   Якщо (i === 2) {
@@ -108,13 +108,13 @@ export class UacodeService {
 		},
 		{
 			id: 11,
-			command: 'Попередження',
+			name: 'Попередження',
 			execute: 'alert',
 			example: `Попередження('Привіт, це повідомлення для тебе!');`
 		},
 		{
 			id: 12,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна випадкове = ВипадковеЧисло();
 
@@ -122,7 +122,7 @@ export class UacodeService {
 		},
 		{
 			id: 13,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна сьогодні = Нова Дата();
 
@@ -130,13 +130,13 @@ export class UacodeService {
 		},
 		{
 			id: 14,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Друк('Час зараз: ' + Зараз());`
 		},
 		{
 			id: 15,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Друк('Округлити 4.6: ' + Округлити(4.6));
 
@@ -146,7 +146,7 @@ export class UacodeService {
 		},
 		{
 			id: 16,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Друк('Мінімум з 3 і 8: ' + Мінімум(3, 8));
 
@@ -154,7 +154,7 @@ export class UacodeService {
 		},
 		{
 			id: 17,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна корінь = Корінь(25);
 
@@ -162,13 +162,13 @@ export class UacodeService {
 		},
 		{
 			id: 18,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Друк('2 в степені 3: ' + Степінь(2, 3));`
 		},
 		{
 			id: 19,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна текст = 'Привіт';
 
@@ -176,7 +176,7 @@ export class UacodeService {
 		},
 		{
 			id: 20,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна імя = 'оля';
 
@@ -186,7 +186,7 @@ export class UacodeService {
 		},
 		{
 			id: 21,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна рядок1 = '42';
 
@@ -198,7 +198,7 @@ export class UacodeService {
 		},
 		{
 			id: 22,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна список = Масив;
 
@@ -214,7 +214,7 @@ export class UacodeService {
 		},
 		{
 			id: 23,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна учень = Обєкт;
 
@@ -230,7 +230,7 @@ export class UacodeService {
 		},
 		{
 			id: 24,
-			command: 'Друк',
+			name: 'Друк',
 			execute: 'print',
 			example: `Змінна дані = Обєкт;
 
