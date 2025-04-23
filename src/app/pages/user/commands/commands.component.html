@@ -6,33 +6,17 @@
 					<div class="documents-header-left__arrow" (click)="back()">
 						<span class="material-icons">arrow_back_ios</span>
 					</div>
-					<div
-						class="documents-header-left__avatar"
-						routerLink="/profile"
-					>
+					<div class="documents-header-left__avatar" routerLink="/profile">
 						<img [src]="userService.thumb" alt="" />
 					</div>
 				</div>
 				<div class="documents-header__title">Title header</div>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="burger-wrap"
-					class="burger-wrap"
-				>
-					<div
-						[class.burger--close]="isMenuOpen"
-						class="burger"
-					></div>
+				<div (click)="isMenuOpen = !isMenuOpen" class="burger-wrap" class="burger-wrap">
+					<div [class.burger--close]="isMenuOpen" class="burger"></div>
 				</div>
 			</div>
-			<div
-				[class.documents-sidebar--open]="isMenuOpen"
-				class="documents-sidebar"
-			>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="documents-sidebar__close"
-				>
+			<div [class.documents-sidebar--open]="isMenuOpen" class="documents-sidebar">
+				<div (click)="isMenuOpen = !isMenuOpen" class="documents-sidebar__close">
 					<span class="material-icons">close</span>
 				</div>
 				<div class="documents-sidebar-content">
@@ -53,12 +37,13 @@
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<div class="documents-main-row" *ngFor="let command of uaCodeServise.commands|arr">
-						<div class="documents__title">
-							{{command.prop}}
+					<div class="documents-main-row" *ngFor="let command of uaCodeServise.commands">
+						<div class="documents__title example_container">
+							<span>{{command.name}}</span>
+							<a routerLink="/compiler/command/{{command.id}}" class="documents__btn play_btn"><span
+									class="material-icons">play_arrow</span></a>
 						</div>
-						<a routerLink="/compiler" 
-						class="documents__btn">Press button</a>
+
 					</div>
 				</div>
 			</div>

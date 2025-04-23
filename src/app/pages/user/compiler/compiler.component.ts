@@ -15,7 +15,7 @@ export class CompilerComponent {
 		components: [
 			{
 				name: 'Text',
-				key: 'bio',
+				key: 'code',
 				fields: [
 					{
 						name: 'Placeholder',
@@ -46,7 +46,7 @@ export class CompilerComponent {
 			},
 			{
 				name: 'Text',
-				key: 'bio',
+				key: 'output',
 				fields: [
 					{
 						name: 'Placeholder',
@@ -65,9 +65,16 @@ export class CompilerComponent {
 		],
 	});
 
+	submition: Record<string, string> = {
+		code: '',
+		output: ''
+	}
+
 	isMenuOpen = false;
 
-	constructor(public userService: UserService, private _form: FormService) {}
+	constructor(public userService: UserService, private _form: FormService) {
+		this.submition['code'] = 'asd';
+	}
 
 	back(): void {
 		window.history.back();
