@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class UacodeService {
+
+	constructor() {
+	}
+
+	getExample(id: number): string {
+		const command = this.commands.find(cmd => cmd.id === id);
+		return command ? command.example : ' ';
+	}
+
 	commands = [
 		{
 			id: 1, name: "Друк", execute: "print", example: `Друк('Світ');

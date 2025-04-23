@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
+import { UacodeService } from 'src/app/core/services/uacode.service';
+import { Router } from '@angular/router';
 
 @Component({
 	templateUrl: './compiler.component.html',
@@ -72,8 +74,9 @@ export class CompilerComponent {
 
 	isMenuOpen = false;
 
-	constructor(public userService: UserService, private _form: FormService) {
-		this.submition['code'] = 'asd';
+	constructor(public userService: UserService, private _form: FormService, private uacodeService: UacodeService, private _router: Router) 
+	{
+		this.submition['code'] = this.uacodeService.getExample(Number(this._router.url.replace('/compiler/example/', '')));
 	}
 
 	back(): void {
