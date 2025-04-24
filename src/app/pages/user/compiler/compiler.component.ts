@@ -132,10 +132,16 @@ export class CompilerComponent {
 		private uacodeService: UacodeService,
 		private _router: Router
 	) {
-		this.submition['code'] = this.uacodeService.getExample(
-			Number(this._router.url.replace('/compiler/example/', ''))
-		);
+		if (this._router.url.includes('/example/')) {
+			this.submition['code'] = this.uacodeService.getExample(
+				Number(this._router.url.replace('/compiler/example/', ''))
+			);
+
+			this.compile();
+		}
 	}
+
+
 
 	back(): void {
 		window.history.back();
