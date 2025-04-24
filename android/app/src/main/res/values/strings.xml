@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">UA Code</string>
+    <string name="title_activity_main">UA Code</string>
+    <string name="package_name">uacode.webart.work</string>
+    <string name="custom_url_scheme">uacode.webart.work</string>
+</resources>
