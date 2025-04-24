@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
 	templateUrl: './compiler.component.html',
 	styleUrls: ['./compiler.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class CompilerComponent {
 	formDoc: FormInterface = this._form.getForm('docForm', {
@@ -21,28 +21,28 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio',
+						value: 'Enter your bio'
 					},
 					{
 						name: 'Label',
-						value: 'Bio',
+						value: 'Bio'
 					},
 					{
 						name: 'Textarea',
-						value: true,
-					},
-				],
+						value: true
+					}
+				]
 			},
 			{
 				name: 'Button',
 				fields: [
 					{
 						name: 'Label',
-						value: "Запустити",
+						value: 'Запустити'
 					},
 					{
 						name: 'Submit',
-						value: true,
+						value: true
 					},
 					{
 						name: 'Click',
@@ -50,7 +50,7 @@ export class CompilerComponent {
 							this.compile();
 						}
 					}
-				],
+				]
 			},
 			{
 				name: 'Text',
@@ -58,35 +58,83 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio',
+						value: 'Enter your bio'
 					},
 					{
 						name: 'Label',
-						value: 'Bio',
+						value: 'Bio'
 					},
 					{
 						name: 'Textarea',
-						value: true,
-					},
-				],
-			},
-		],
+						value: true
+					}
+				]
+			}
+		]
 	});
 
 	compile() {
-		alert(this.submition['code']);
+		// Очищаємо поле виводу перед компіляцією
+		this.submition['output'] = '';
+
+		// Локальна функція для виводу в "консоль" — додає текст до поля output
+		const print = (message: string) => {
+			this.submition['output'] += message + '\n';
+		};
+
+		// Об'єкт для збереження відповідностей між UA-командами та JS-командами
+		const translations: Record<string, string> = {};
+
+		// Заповнюємо translations на основі команд, які надає сервіс
+		this.uacodeService.commands.forEach((cmd) => {
+			translations[cmd.name] = cmd.execute;
+		});
+
+		// Визначаємо логічні оператори, які треба замінити окремо
+		const logicalOperators: Record<string, string> = {
+			' та ': ' && ', // логічне І
+			' або ': ' || ' // логічне АБО
+		};
+
+		// Отримуємо введений український код та обрізаємо зайві пробіли
+		let translatedCode = this.submition['code'].trim();
+
+		// Заміна ключових слів з української на відповідні JS-команди
+		for (const [uaCmd, jsCmd] of Object.entries(translations)) {
+			translatedCode = translatedCode.split(uaCmd).join(jsCmd);
+		}
+
+		// Заміна логічних операторів (обов'язково з пробілами, щоб уникнути помилкових збігів)
+		for (const [uaCmd, jsCmd] of Object.entries(logicalOperators)) {
+			translatedCode = translatedCode.replace(uaCmd, jsCmd);
+		}
+
+		try {
+			// Виконання згенерованого JS-коду
+			// eslint-disable-next-line no-eval — вимикаємо лінтер на це місце, бо eval зазвичай небезпечний
+			eval(translatedCode);
+		} catch (error: any) {
+			// У разі помилки — виводимо повідомлення про помилку
+			this.submition['output'] = 'Помилка в коді: ' + error.message;
+		}
 	}
 
 	submition: Record<string, string> = {
 		code: '',
 		output: ''
-	}
+	};
 
 	isMenuOpen = false;
 
-	constructor(public userService: UserService, private _form: FormService, private uacodeService: UacodeService, private _router: Router) 
-	{
-		this.submition['code'] = this.uacodeService.getExample(Number(this._router.url.replace('/compiler/example/', '')));
+	constructor(
+		public userService: UserService,
+		private _form: FormService,
+		private uacodeService: UacodeService,
+		private _router: Router
+	) {
+		this.submition['code'] = this.uacodeService.getExample(
+			Number(this._router.url.replace('/compiler/example/', ''))
+		);
 	}
 
 	back(): void {
