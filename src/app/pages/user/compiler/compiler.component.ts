@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 	standalone: false
 })
 export class CompilerComponent {
+	isQuestion = this._router.url.includes('/question/');
+
 	formDoc: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
 		title: 'Doc form',
@@ -18,6 +20,7 @@ export class CompilerComponent {
 			{
 				name: 'Text',
 				key: 'code',
+				disabled: !!this.isQuestion,
 				fields: [
 					{
 						name: 'Placeholder',
@@ -55,6 +58,7 @@ export class CompilerComponent {
 			{
 				name: 'Text',
 				key: 'output',
+				disabled: !this.isQuestion,
 				fields: [
 					{
 						name: 'Placeholder',

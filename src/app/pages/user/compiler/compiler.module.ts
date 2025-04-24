@@ -7,8 +7,13 @@ const routes: Routes = [
 	{
 		path: '',
 		component: CompilerComponent
-	}, {
+	},
+	{
 		path: 'command/:id',
+		component: CompilerComponent
+	},
+	{
+		path: 'question/:id',
 		component: CompilerComponent
 	}
 ];
@@ -17,4 +22,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes), CoreModule],
 	declarations: [CompilerComponent]
 })
-export class CompilerModule { }
+export class CompilerModule {}
