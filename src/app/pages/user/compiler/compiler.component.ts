@@ -38,12 +38,18 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Label',
-						value: "Let's go",
+						value: "Запустити",
 					},
 					{
 						name: 'Submit',
 						value: true,
 					},
+					{
+						name: 'Click',
+						value: () => {
+							this.compile();
+						}
+					}
 				],
 			},
 			{
@@ -66,6 +72,10 @@ export class CompilerComponent {
 			},
 		],
 	});
+
+	compile() {
+		alert(this.submition['code']);
+	}
 
 	submition: Record<string, string> = {
 		code: '',
