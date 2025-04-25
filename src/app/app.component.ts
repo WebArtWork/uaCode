@@ -13,6 +13,8 @@ export class AppComponent {
 	constructor(private _router: Router) {
 		if (Capacitor.isNativePlatform()) {
 			App.addListener('appUrlOpen', ({ url }) => {
+				alert(JSON.stringify(url));
+				alert(new URL(url).pathname);
 				this._router.navigateByUrl(new URL(url).pathname);
 			});
 		}
