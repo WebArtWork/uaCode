@@ -142,6 +142,12 @@ export class CompilerComponent {
 			);
 
 			this.compile();
+		} else if (this._router.url.includes('/question/')) {
+			this.submition['code'] = this.uacodeService.getQuestion(
+				Number(this._router.url.replace('/compiler/question/', ''))
+			);
+
+			this.compile();
 		}
 	}
 
