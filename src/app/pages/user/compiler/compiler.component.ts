@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { UacodeService } from 'src/app/core/services/uacode.service';
@@ -58,7 +57,27 @@ export class CompilerComponent {
 			{
 				name: 'Text',
 				key: 'output',
-				disabled: !this.isQuestion,
+				hidden: this.isQuestion,
+				disabled: true,
+				fields: [
+					{
+						name: 'Placeholder',
+						value: 'Enter your bio'
+					},
+					{
+						name: 'Label',
+						value: 'Bio'
+					},
+					{
+						name: 'Textarea',
+						value: true
+					}
+				]
+			},
+			{
+				name: 'Text',
+				key: 'answer',
+				hidden: !this.isQuestion,
 				fields: [
 					{
 						name: 'Placeholder',
@@ -77,6 +96,34 @@ export class CompilerComponent {
 		]
 	});
 
+	submition: Record<string, string> = {
+		code: '',
+		answer: '',
+		output: ''
+	};
+
+	isMenuOpen = false;
+
+	constructor(
+		private _uacodeService: UacodeService,
+		private _form: FormService,
+		private _router: Router
+	) {
+		if (this._router.url.includes('/command/')) {
+			this.submition['code'] = this._uacodeService.getExample(
+				Number(this._router.url.replace('/compiler/command/', ''))
+			);
+
+			this.compile();
+		} else if (this._router.url.includes('/question/')) {
+			this.submition['code'] = this._uacodeService.getQuestion(
+				Number(this._router.url.replace('/compiler/question/', ''))
+			);
+
+			this.compile();
+		}
+	}
+
 	compile() {
 		// Очищаємо поле виводу перед компіляцією
 		this.submition['output'] = '';
@@ -90,7 +137,7 @@ export class CompilerComponent {
 		const translations: Record<string, string> = {};
 
 		// Заповнюємо translations на основі команд, які надає сервіс
-		this.uacodeService.commands.forEach((cmd) => {
+		this._uacodeService.commands.forEach((cmd) => {
 			translations[cmd.name] = cmd.execute;
 		});
 
@@ -120,34 +167,6 @@ export class CompilerComponent {
 		} catch (error: any) {
 			// У разі помилки — виводимо повідомлення про помилку
 			this.submition['output'] = 'Помилка в коді: ' + error.message;
-		}
-	}
-
-	submition: Record<string, string> = {
-		code: '',
-		output: ''
-	};
-
-	isMenuOpen = false;
-
-	constructor(
-		public userService: UserService,
-		private _form: FormService,
-		private uacodeService: UacodeService,
-		private _router: Router
-	) {
-		if (this._router.url.includes('/command/')) {
-			this.submition['code'] = this.uacodeService.getExample(
-				Number(this._router.url.replace('/compiler/command/', ''))
-			);
-
-			this.compile();
-		} else if (this._router.url.includes('/question/')) {
-			this.submition['code'] = this.uacodeService.getQuestion(
-				Number(this._router.url.replace('/compiler/question/', ''))
-			);
-
-			this.compile();
 		}
 	}
 

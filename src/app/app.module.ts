@@ -77,8 +77,11 @@ const routes: Routes = [
 						title: 'Commands'
 					}
 				},
-				loadChildren: () => import('./pages/user/commands/commands.module').then(m => m.CommandsModule)
-			}, 
+				loadChildren: () =>
+					import('./pages/user/commands/commands.module').then(
+						(m) => m.CommandsModule
+					)
+			},
 			{
 				path: 'compiler',
 				canActivate: [MetaGuard],
@@ -87,58 +90,9 @@ const routes: Routes = [
 						title: 'Compiler'
 					}
 				},
-				loadChildren: () => import('./pages/user/compiler/compiler.module').then(m => m.CompilerModule)
-			}, 
-			{
-				path: 'users',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Users'
-					}
-				},
 				loadChildren: () =>
-					import('./modules/user/pages/users/users.module').then(
-						(m) => m.UsersModule
-					)
-			},
-			{
-				path: 'forms',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Forms'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/customform/pages/customforms/customforms.module'
-					).then((m) => m.CustomformsModule)
-			},
-			{
-				path: 'document',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Document'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/guest/document/document.module').then(
-						(m) => m.DocumentModule
-					)
-			},
-			{
-				path: 'components',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Components'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/guest/components/components.module').then(
-						(m) => m.ComponentsModule
+					import('./pages/user/compiler/compiler.module').then(
+						(m) => m.CompilerModule
 					)
 			}
 		]
@@ -213,7 +167,7 @@ const routes: Routes = [
 			http: {
 				url: environment.url
 			},
-			socket: environment.production,
+			socket: false,
 			meta: {
 				useTitleSuffix: true,
 				defaults: {
