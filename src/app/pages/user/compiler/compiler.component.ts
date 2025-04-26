@@ -78,6 +78,7 @@ export class CompilerComponent {
 				name: 'Text',
 				key: 'answer',
 				hidden: !this.isQuestion,
+				class: 'wrong',
 				fields: [
 					{
 						name: 'Placeholder',
@@ -167,6 +168,16 @@ export class CompilerComponent {
 		} catch (error: any) {
 			// У разі помилки — виводимо повідомлення про помилку
 			this.submition['output'] = 'Помилка в коді: ' + error.message;
+		}
+	}
+
+	testAnswer() {
+		if (this.isQuestion) {
+			this.formDoc.components[3].class =
+				this.submition['output'].trim() ===
+				this.submition['answer'].trim()
+					? 'right'
+					: 'wrong';
 		}
 	}
 

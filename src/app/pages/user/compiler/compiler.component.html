@@ -49,8 +49,9 @@
 				<div class="documents-main-content">
 					<div class="documents-main-row">
 						<wform
-							[config]="formDoc"
 							[submition]="submition"
+							[config]="formDoc"
+							(wChange)="testAnswer()"
 						></wform>
 					</div>
 				</div>

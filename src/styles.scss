@@ -1,1 +1,13 @@
 @use 'scss';
+
+.wrong {
+	.form-container {
+		border: 3px solid red;
+	}
+}
+
+.right {
+	.form-container {
+		border: 3px solid blue;
+	}
+}
