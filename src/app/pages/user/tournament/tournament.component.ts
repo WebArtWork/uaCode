@@ -4,6 +4,9 @@ import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interfa
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { UacodetournamentService } from 'src/app/modules/uacodetournament/services/uacodetournament.service';
 import { Router } from '@angular/router';
+import { UacodeparticipationService } from 'src/app/modules/uacodeparticipation/services/uacodeparticipation.service';
+import { Uacodeparticipation } from 'src/app/modules/uacodeparticipation/interfaces/uacodeparticipation.interface';
+import { CoreService } from 'wacom';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -11,13 +14,26 @@ import { Router } from '@angular/router';
 	standalone: false
 })
 export class TournamentComponent {
+	get mine(): boolean {
+		return this.tournament.device === this._core.deviceID;
+	}
+
 	tournament = this._tournamentService.doc(
 		this._router.url.replace('/tournament/', '')
 	);
 
-	formDoc: FormInterface = this._form.getForm('docForm', {
+	participations: Uacodeparticipation[] = [];
+
+	participation: Uacodeparticipation;
+
+	submition: Record<string, unknown> = {
+		name: '',
+		code: ''
+	};
+
+	participateForm: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
-		title: 'Doc form',
+		title: 'Participate form',
 		components: [
 			{
 				name: 'Text',
@@ -36,29 +52,15 @@ export class TournamentComponent {
 			},
 			{
 				name: 'Text',
-				key: 'phone',
+				key: 'code',
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your phone'
+						value: 'Enter your code'
 					},
 					{
 						name: 'Label',
-						value: 'Phone'
-					}
-				]
-			},
-			{
-				name: 'Text',
-				key: 'bio',
-				fields: [
-					{
-						name: 'Placeholder',
-						value: 'Enter your bio'
-					},
-					{
-						name: 'Label',
-						value: 'Bio'
+						value: 'Code'
 					},
 					{
 						name: 'Textarea',
@@ -71,27 +73,77 @@ export class TournamentComponent {
 				fields: [
 					{
 						name: 'Label',
-						value: "Let's go"
+						value: 'Update'
 					},
 					{
 						name: 'Submit',
 						value: true
+					},
+					{
+						name: 'Click',
+						value: () => {
+							const participation = {
+								...this.submition,
+								tournament: this.tournament._id,
+								device: this._core.deviceID
+							} as Uacodeparticipation;
+
+							if (this.participation) {
+								this._participationService
+									.update(participation)
+									.subscribe(() => {
+										const part: Uacodeparticipation =
+											this.participations.find(
+												(p) =>
+													p.device ===
+													this._core.deviceID
+											) as Uacodeparticipation;
+										if (part) {
+											part.name = participation.name;
+										}
+									});
+							} else {
+								this._participationService
+									.create(participation)
+									.subscribe(() => {
+										this._load();
+									});
+							}
+						}
 					}
 				]
 			}
 		]
 	});
 
-	isMenuOpen = false;
-
 	constructor(
+		private _participationService: UacodeparticipationService,
 		private _tournamentService: UacodetournamentService,
 		public userService: UserService,
+		private _core: CoreService,
 		private _form: FormService,
 		private _router: Router
-	) {}
+	) {
+		this._load();
+	}
 
-	back(): void {
-		window.history.back();
+	private _load() {
+		this._participationService
+			.get({}, { name: 'public' })
+			.subscribe((participations) => {
+				this.participations = participations;
+
+				if (
+					participations.find((p) => p.device === this._core.deviceID)
+				) {
+					this.participation = participations.find(
+						(p) => p.device === this._core.deviceID
+					) as Uacodeparticipation;
+
+					this.submition['name'] = this.participation.name;
+
+					this.submition['code'] = this.participation.code;
+				}
+			});
 	}
 }

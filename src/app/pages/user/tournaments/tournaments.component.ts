@@ -4,6 +4,7 @@ import { FormService } from 'src/app/core/modules/form/form.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { Uacodetournament } from 'src/app/modules/uacodetournament/interfaces/uacodetournament.interface';
 import { UacodetournamentService } from 'src/app/modules/uacodetournament/services/uacodetournament.service';
+import { AlertService, CoreService } from 'wacom';
 
 @Component({
 	templateUrl: './tournaments.component.html',
@@ -15,7 +16,9 @@ export class TournamentsComponent {
 
 	constructor(
 		private _tournamentService: UacodetournamentService,
+		private _alert: AlertService,
 		private _form: FormService,
+		private _core: CoreService,
 		private _router: Router
 	) {
 		this._tournamentService
@@ -30,7 +33,10 @@ export class TournamentsComponent {
 				close();
 
 				this._tournamentService
-					.create(tournament as Uacodetournament)
+					.create({
+						...(tournament as Uacodetournament),
+						device: this._core.deviceID
+					})
 					.subscribe((created) => {
 						this._router.navigateByUrl(
 							'/tournament/' + created._id
@@ -38,6 +44,40 @@ export class TournamentsComponent {
 					});
 			}
 		});
+	}
+
+	open(tournament: Uacodetournament) {
+		if (tournament.isPrivate) {
+			this._form.modal<Record<string, number>>(this._formJoin, {
+				label: 'Change',
+				click: (submition: unknown, close: () => void) => {
+					close();
+
+					this._tournamentService
+						.fetch(
+							{
+								code: Number(
+									(submition as { code: number }).code
+								)
+							},
+							{ name: 'test' }
+						)
+						.subscribe((found) => {
+							if (found) {
+								this._router.navigateByUrl(
+									'/tournament/' + tournament._id
+								);
+							} else {
+								this._alert.error({
+									text: 'Tournament not found'
+								});
+							}
+						});
+				}
+			});
+		} else {
+			this._router.navigateByUrl('/tournament/' + tournament._id);
+		}
 	}
 
 	private _tournamentCreationForm: FormInterface = this._form.getForm(
@@ -53,11 +93,35 @@ export class TournamentsComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter your name'
+							value: 'Enter name'
 						},
 						{
 							name: 'Label',
 							value: 'Name'
+						}
+					]
+				},
+				{
+					name: 'Boolean',
+					key: 'isPrivate',
+					fields: [
+						{
+							name: 'Label',
+							value: 'Private'
+						}
+					]
+				},
+				{
+					name: 'Text',
+					key: 'description',
+					fields: [
+						{
+							name: 'Placeholder',
+							value: 'Enter description'
+						},
+						{
+							name: 'Label',
+							value: 'Description'
 						}
 					]
 				},
@@ -104,4 +168,26 @@ export class TournamentsComponent {
 			]
 		}
 	);
+
+	private _formJoin: FormInterface = this._form.getForm('formJoin', {
+		formId: 'formJoin',
+		title: 'Join tournament',
+		components: [
+			{
+				name: 'Text',
+				key: 'code',
+				focused: true,
+				fields: [
+					{
+						name: 'Placeholder',
+						value: 'Enter code'
+					},
+					{
+						name: 'Label',
+						value: 'Code'
+					}
+				]
+			}
+		]
+	});
 }

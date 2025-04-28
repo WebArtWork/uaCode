@@ -15,54 +15,23 @@
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
-						</div>
-						<div class="documents__description">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Mollitia voluptatum facilis sit
-							necessitatibus, rem consectetur pariatur sapiente
-							incidunt laudantium praesentium aut iste omnis
-							suscipit autem deleniti, nisi temporibus obcaecati
-							eligendi?
-						</div>
+					<div
+						*ngFor="let tournament of tournaments"
+						class="documents-main-row"
+						(click)="open(tournament)"
+					>
+						<div class="documents__title">{{tournament.name}}</div>
+						<div
+							class="documents__description"
+							*ngIf="tournament.description"
+							[innerHtml]="tournament.description"
+						></div>
 						<div class="documents-tags">
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
+							<div
+								class="documents-tags__wrap"
+								*ngFor="let tag of tournament.tags"
+							>
+								<div class="documents-tags__item">{{tag}}</div>
 							</div>
 						</div>
 					</div>

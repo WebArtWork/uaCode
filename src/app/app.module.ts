@@ -70,6 +70,16 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'participations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Participations'
+					}
+				},
+				loadChildren: () => import('./modules/uacodeparticipation/pages/participations/participations.module').then(m => m.ParticipationsModule)
+			}, 
+			{
 				path: 'tournament',
 				canActivate: [MetaGuard],
 				data: {
