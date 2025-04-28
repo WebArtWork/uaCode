@@ -70,6 +70,32 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'tournament',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Tournament'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/tournament/tournament.module').then(
+						(m) => m.TournamentModule
+					)
+			},
+			{
+				path: 'tournaments',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Tournaments'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/tournaments/tournaments.module').then(
+						(m) => m.TournamentsModule
+					)
+			},
+			{
 				path: 'commands',
 				canActivate: [MetaGuard],
 				data: {
@@ -103,6 +129,19 @@ const routes: Routes = [
 		component: UserComponent,
 		children: [
 			/* admin */
+			{
+				path: 'tournaments',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Tournaments'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/uacodetournament/pages/tournaments/tournaments.module'
+					).then((m) => m.TournamentsModule)
+			},
 			{
 				path: 'users',
 				canActivate: [MetaGuard],
