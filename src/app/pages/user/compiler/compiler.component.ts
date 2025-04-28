@@ -14,20 +14,21 @@ export class CompilerComponent {
 
 	formDoc: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
-		title: 'Doc form',
+		title: '',
 		components: [
 			{
 				name: 'Text',
 				key: 'code',
+				class: 'codeBlock',
 				disabled: !!this.isQuestion,
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio'
+						value: 'Enter your code'
 					},
 					{
 						name: 'Label',
-						value: 'Bio'
+						value: 'Input'
 					},
 					{
 						name: 'Textarea',
@@ -58,15 +59,16 @@ export class CompilerComponent {
 				name: 'Text',
 				key: 'output',
 				hidden: this.isQuestion,
+				class: 'codeBlock',
 				disabled: true,
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio'
+						value: 'Here you get your result'
 					},
 					{
 						name: 'Label',
-						value: 'Bio'
+						value: 'Output'
 					},
 					{
 						name: 'Textarea',
