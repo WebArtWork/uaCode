@@ -3,12 +3,14 @@ import { Uacodetournament } from '../interfaces/uacodetournament.interface';
 import { CrudService } from 'wacom';
 
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class UacodetournamentService extends CrudService<Uacodetournament> {
+	methods = ['Rock, Paper, Scissors'];
+
 	constructor() {
 		super({
-			name: 'uacodetournament',
+			name: 'uacodetournament'
 		});
 	}
 }
