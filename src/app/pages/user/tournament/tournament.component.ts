@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
+import { UacodetournamentService } from 'src/app/modules/uacodetournament/services/uacodetournament.service';
+import { Router } from '@angular/router';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -9,6 +11,10 @@ import { FormService } from 'src/app/core/modules/form/form.service';
 	standalone: false
 })
 export class TournamentComponent {
+	tournament = this._tournamentService.doc(
+		this._router.url.replace('/tournament/', '')
+	);
+
 	formDoc: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
 		title: 'Doc form',
@@ -79,8 +85,10 @@ export class TournamentComponent {
 	isMenuOpen = false;
 
 	constructor(
+		private _tournamentService: UacodetournamentService,
 		public userService: UserService,
-		private _form: FormService
+		private _form: FormService,
+		private _router: Router
 	) {}
 
 	back(): void {
