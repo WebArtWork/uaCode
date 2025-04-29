@@ -24,11 +24,11 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your code'
+						value: 'Введіть ваш код'
 					},
 					{
 						name: 'Label',
-						value: 'Input'
+						value: 'Введення'
 					},
 					{
 						name: 'Textarea',
@@ -64,11 +64,11 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Here you get your result'
+						value: 'Тут беде ваш результат'
 					},
 					{
 						name: 'Label',
-						value: 'Output'
+						value: 'Виведення'
 					},
 					{
 						name: 'Textarea',
