@@ -280,9 +280,108 @@ wform {
 .burger:after {
 	bottom: 1px;
 }
-
+.compiler-wrapper{
+	.w-forms{
+		form{
+			display: flex;
+			flex-flow: row wrap;
+		}
+	}
+	.w-forms__component {
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+	.docForm_1{
+		flex: 0 0 100%;
+		max-width: 200px;
+		order: 3;
+	}
+	.docForm_2{
+		padding-left: 15px;
+	}
+	.docForm_0{
+		padding-right: 15px;
+	}
+}
 /* burger */
+.compiler-block{
+    height: calc(100vh - 100px);
+}
+.compiler-block{
+	@media screen and (max-width: 767px) {
+		background: none;
+		height: calc(100vh - 124px);
+		.compiler-wrapper .w-forms__component {
+			flex: 0 0 100%;
+			max-width: 100%;
+			background: var(--compliper);
+			margin-bottom: 15px;
+			border-radius: 6px;
+			padding: 12px;
+			box-shadow: var(--shadow);
+		}
+		.documents-main-row {
+			padding: 13px;
+		}
+		background: none !important;
+		padding: 0 !important;
+		.w-forms__title{
+			font-size: 24px !important;
+			font-weight: 600 !important;
+		}
+	}
 
+	textarea{
+		border: 2px solid var(--border-comp);
+		border-radius: 6px;
+		color: #ffffff7d;
+		resize: none;
+		max-height: 180px;
+	}
+	.w-forms__textarea{
+		border: 2px solid var(--border-comp) !important;
+		border-radius: 6px !important;
+		color: #ffffff7d !important;
+		resize: none !important;
+	}
+	.docForm_2{
+		textarea{
+			border: 2px solid var(--border-comp) !important ;
+			border-radius: 6px !important;
+			color: #ffffff7d !important;
+			resize: none !important;
+			max-height: 180px;
+		}
+	}
+	@media screen and (max-width: 479px) {
+		textarea{
+			min-height: 190px;
+		}
+		.docForm_1{
+			order: 0;
+			padding: 0 !important;
+			.form-container{
+				margin: 0;
+			}
+		}
+	}
+	@media screen and (max-width: 479px) {
+		textarea {
+			min-height: 260px;
+		}
+	}
+	@media screen and (max-width: 420px) {
+		textarea {
+			min-height: 210px;
+		}
+	}
+	@media screen and (max-width: 380px) {
+		textarea {
+			height: inherit !important;
+			min-height: 135px;
+		}
+	}
+}
 .documents {
 	&-wrapper {
 		//overflow-y: scroll;
@@ -320,9 +419,8 @@ wform {
 	}
 	&-main {
 		flex: 1 0;
-		padding-left: 280px;
 		&-content {
-			padding: 15px;
+			//padding: 15px;
 		}
 		&-row {
 			padding: 10px 20px;
@@ -519,7 +617,7 @@ wform {
 	}
 	.documents-main {
 		flex: 1 0;
-		padding-left: 236px;
+		//padding-left: 236px;
 	}
 }
 @media screen and (max-width: 991px) {
@@ -636,6 +734,9 @@ wform {
 	.documents-text {
 		flex: 0 0 100%;
 		padding: 20px 0 0 0;
+	}
+	.documents-wrapper {
+		height: calc(100vh - 80px);
 	}
 
 }
