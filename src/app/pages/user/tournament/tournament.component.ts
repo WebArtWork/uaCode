@@ -8,6 +8,7 @@ import { UacodeparticipationService } from 'src/app/modules/uacodeparticipation/
 import { Uacodeparticipation } from 'src/app/modules/uacodeparticipation/interfaces/uacodeparticipation.interface';
 import { AlertService, CoreService } from 'wacom';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { UacodeService } from 'src/app/core/services/uacode.service';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -17,6 +18,10 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class TournamentComponent {
 	get mine(): boolean {
 		return this.tournament.device === this._core.deviceID;
+	}
+
+	get options(): string[] {
+		return this._tournamentService.options[this.tournament.method];
 	}
 
 	tournament = this._tournamentService.doc(
@@ -95,33 +100,7 @@ export class TournamentComponent {
 					{
 						name: 'Click',
 						value: () => {
-							const participation = {
-								...this.submition,
-								tournament: this.tournament._id,
-								device: this._core.deviceID
-							} as Uacodeparticipation;
-
-							if (this.participation) {
-								this._participationService
-									.update(participation)
-									.subscribe(() => {
-										const part: Uacodeparticipation =
-											this.participations.find(
-												(p) =>
-													p.device ===
-													this._core.deviceID
-											) as Uacodeparticipation;
-										if (part) {
-											part.name = participation.name;
-										}
-									});
-							} else {
-								this._participationService
-									.create(participation)
-									.subscribe(() => {
-										this._load();
-									});
-							}
+							this._updateParticipation();
 						}
 					}
 				]
@@ -132,8 +111,9 @@ export class TournamentComponent {
 	constructor(
 		private _participationService: UacodeparticipationService,
 		private _tournamentService: UacodetournamentService,
-		private _clipboard: Clipboard,
+		private _commandService: UacodeService,
 		public userService: UserService,
+		private _clipboard: Clipboard,
 		private _alert: AlertService,
 		private _core: CoreService,
 		private _form: FormService,
@@ -146,8 +126,48 @@ export class TournamentComponent {
 		this._clipboard.copy(this.samples[this.tournament.method]);
 
 		this._alert.info({
+			unique: 'copy',
 			text: 'Скопійовано'
 		});
+	}
+
+	private _updateParticipation() {
+		if (
+			this._tournamentService.test[this.tournament.method](
+				this._commandService.translate(this.submition['code'] as string)
+			)
+		) {
+			const participation = {
+				...this.submition,
+				tournament: this.tournament._id,
+				device: this._core.deviceID
+			} as Uacodeparticipation;
+
+			if (this.participation) {
+				this._participationService
+					.update(participation)
+					.subscribe(() => {
+						const part: Uacodeparticipation =
+							this.participations.find(
+								(p) => p.device === this._core.deviceID
+							) as Uacodeparticipation;
+						if (part) {
+							part.name = participation.name;
+						}
+					});
+			} else {
+				this._participationService
+					.create(participation)
+					.subscribe(() => {
+						this._load();
+					});
+			}
+		} else {
+			this._alert.error({
+				unique: 'copy',
+				text: 'Ваш код не повертає підходящі варіанти'
+			});
+		}
 	}
 
 	private _load() {

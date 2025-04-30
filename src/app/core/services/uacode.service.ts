@@ -18,6 +18,37 @@ export class UacodeService {
 		return command ? command.question : ' ';
 	}
 
+	translate(code: string): string {
+		// Об'єкт для збереження відповідностей між UA-командами та JS-командами
+		const translations: Record<string, string> = {};
+
+		// Заповнюємо translations на основі команд, які надає сервіс
+		this.commands.forEach((cmd) => {
+			translations[cmd.name] = cmd.execute;
+		});
+
+		// Визначаємо логічні оператори, які треба замінити окремо
+		const logicalOperators: Record<string, string> = {
+			' та ': ' && ', // логічне І
+			' або ': ' || ' // логічне АБО
+		};
+
+		// Отримуємо введений український код та обрізаємо зайві пробіли
+		let translatedCode = code.trim();
+
+		// Заміна ключових слів з української на відповідні JS-команди
+		for (const [uaCmd, jsCmd] of Object.entries(translations)) {
+			translatedCode = translatedCode.split(uaCmd).join(jsCmd);
+		}
+
+		// Заміна логічних операторів (обов'язково з пробілами, щоб уникнути помилкових збігів)
+		for (const [uaCmd, jsCmd] of Object.entries(logicalOperators)) {
+			translatedCode = translatedCode.replace(uaCmd, jsCmd);
+		}
+
+		return translatedCode;
+	}
+
 	commands = [
 		{
 			id: 1,

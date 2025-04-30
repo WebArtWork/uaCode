@@ -140,6 +140,8 @@ export class InputComponent implements OnInit, OnChanges {
 	 */
 	error = false;
 
+	inputFocused = false;
+
 	constructor(private _core: CoreService) {}
 
 	/**

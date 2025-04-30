@@ -57,6 +57,12 @@
 						<div class="documents__description">
 							<h3>Доступні зміни</h3>
 							<pre>{{variables[tournament.method]}}</pre>
+							<h3>Можливі варіанти для повернення вашого коду</h3>
+							<ul>
+								<li *ngFor="let option of options">
+									{{option}}
+								</li>
+							</ul>
 							<div style="position: relative">
 								<h3>Базовий приклад коду</h3>
 								<i

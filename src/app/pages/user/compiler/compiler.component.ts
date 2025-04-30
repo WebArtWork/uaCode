@@ -108,18 +108,18 @@ export class CompilerComponent {
 	isMenuOpen = false;
 
 	constructor(
-		private _uacodeService: UacodeService,
+		private _commandService: UacodeService,
 		private _form: FormService,
 		private _router: Router
 	) {
 		if (this._router.url.includes('/command/')) {
-			this.submition['code'] = this._uacodeService.getExample(
+			this.submition['code'] = this._commandService.getExample(
 				Number(this._router.url.replace('/compiler/command/', ''))
 			);
 
 			this.compile();
 		} else if (this._router.url.includes('/question/')) {
-			this.submition['code'] = this._uacodeService.getQuestion(
+			this.submition['code'] = this._commandService.getQuestion(
 				Number(this._router.url.replace('/compiler/question/', ''))
 			);
 
@@ -136,37 +136,10 @@ export class CompilerComponent {
 			this.submition['output'] += message + '\n';
 		};
 
-		// Об'єкт для збереження відповідностей між UA-командами та JS-командами
-		const translations: Record<string, string> = {};
-
-		// Заповнюємо translations на основі команд, які надає сервіс
-		this._uacodeService.commands.forEach((cmd) => {
-			translations[cmd.name] = cmd.execute;
-		});
-
-		// Визначаємо логічні оператори, які треба замінити окремо
-		const logicalOperators: Record<string, string> = {
-			' та ': ' && ', // логічне І
-			' або ': ' || ' // логічне АБО
-		};
-
-		// Отримуємо введений український код та обрізаємо зайві пробіли
-		let translatedCode = this.submition['code'].trim();
-
-		// Заміна ключових слів з української на відповідні JS-команди
-		for (const [uaCmd, jsCmd] of Object.entries(translations)) {
-			translatedCode = translatedCode.split(uaCmd).join(jsCmd);
-		}
-
-		// Заміна логічних операторів (обов'язково з пробілами, щоб уникнути помилкових збігів)
-		for (const [uaCmd, jsCmd] of Object.entries(logicalOperators)) {
-			translatedCode = translatedCode.replace(uaCmd, jsCmd);
-		}
-
 		try {
 			// Виконання згенерованого JS-коду
 			// eslint-disable-next-line no-eval — вимикаємо лінтер на це місце, бо eval зазвичай небезпечний
-			eval(translatedCode);
+			eval(this._commandService.translate(this.submition['code']));
 		} catch (error: any) {
 			// У разі помилки — виводимо повідомлення про помилку
 			this.submition['output'] = 'Помилка в коді: ' + error.message;

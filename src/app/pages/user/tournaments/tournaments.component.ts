@@ -14,6 +14,8 @@ import { AlertService, CoreService } from 'wacom';
 export class TournamentsComponent {
 	tournaments: Uacodetournament[] = [];
 
+	loading = true;
+
 	constructor(
 		private _tournamentService: UacodetournamentService,
 		private _alert: AlertService,
@@ -23,27 +25,37 @@ export class TournamentsComponent {
 	) {
 		this._tournamentService
 			.get({}, { name: 'public' })
-			.subscribe((tournaments) => (this.tournaments = tournaments));
+			.subscribe((tournaments) => {
+				this.tournaments = tournaments;
+
+				this.loading = false;
+			});
 	}
 
 	add(): void {
-		this._form.modal<Uacodetournament>(this._tournamentCreationForm, {
-			label: 'Create',
-			click: async (tournament: unknown, close: () => void) => {
-				close();
+		this._form.modal<Uacodetournament>(
+			this._tournamentCreationForm,
+			{
+				label: 'Create',
+				click: async (tournament: unknown, close: () => void) => {
+					close();
 
-				this._tournamentService
-					.create({
-						...(tournament as Uacodetournament),
-						device: this._core.deviceID
-					})
-					.subscribe((created) => {
-						this._router.navigateByUrl(
-							'/tournament/' + created._id
-						);
-					});
+					this._tournamentService
+						.create({
+							...(tournament as Uacodetournament),
+							device: this._core.deviceID
+						})
+						.subscribe((created) => {
+							this._router.navigateByUrl(
+								'/tournament/' + created._id
+							);
+						});
+				}
+			},
+			{
+				method: this._tournamentService.methods[0]
 			}
-		});
+		);
 	}
 
 	open(tournament: Uacodetournament) {
@@ -131,7 +143,7 @@ export class TournamentsComponent {
 					fields: [
 						{
 							name: 'Items',
-							value: ['Rock, Paper, Scissors']
+							value: this._tournamentService.methods
 						},
 						{
 							name: 'Placeholder',

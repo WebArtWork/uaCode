@@ -68,7 +68,7 @@ export class CalendarComponent {
 
 		this.selectedDate = this.date({
 			year: this.currentYear,
-			month: this.currentMonth+1,
+			month: this.currentMonth + 1,
 			day: new Date().getDate()
 		});
 	}
@@ -180,11 +180,13 @@ export class CalendarComponent {
 
 		localStorage.setItem('travel_selectedDate', date);
 
-		this.dateClicked.emit(this.date({
-			year: Number(date.split('.')[0]),
-			month: Number(date.split('.')[1]) + 1,
-			day: Number(date.split('.')[2])
-		}));
+		this.dateClicked.emit(
+			this.date({
+				year: Number(date.split('.')[0]),
+				month: Number(date.split('.')[1]) + 1,
+				day: Number(date.split('.')[2])
+			})
+		);
 
 		this.createEvent.emit({
 			year: Number(date.split('.')[0]),
@@ -200,22 +202,25 @@ export class CalendarComponent {
 	}
 
 	/* move to wacom */
+	/**
+	 * Returns the week number of a given date within the same calendar year.
+	 *
+	 * - Week 1 starts on January 1st.
+	 * - Weeks start on Sunday (based on `getDay()`, where Sunday = 0).
+	 * - The function counts full 7-day weeks from the beginning of the year,
+	 *   adjusting for the day of the week the year starts on.
+	 *
+	 * @param date - The date for which to calculate the week number.
+	 * @returns The calendar year week number (1-based).
+	 */
 	getWeekNumber(date: Date): number {
-		const tempDate = new Date(date.getTime());
-
-		tempDate.setHours(0, 0, 0, 0);
-		// Set to nearest Thursday: current date + 4 - current day number, making Thursday day 4
-
-		tempDate.setDate(tempDate.getDate() + 4 - (tempDate.getDay() || 7));
-
-		const yearStart = new Date(tempDate.getFullYear(), 0, 1);
-
-		// Calculate full weeks to nearest Thursday
-
-		return Math.ceil(
-			((tempDate.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
-		);
+		const startOfYear = new Date(date.getFullYear(), 0, 1);
+		const diffInMs = date.getTime() - startOfYear.getTime();
+		const days = Math.floor(diffInMs / 86400000);
+		const week = Math.floor((days + startOfYear.getDay()) / 7) + 1;
+		return week;
 	}
+
 	getWeeksInMonth(month: number, year: number): number {
 		const firstDayOfMonth = new Date(year, month, 1);
 
