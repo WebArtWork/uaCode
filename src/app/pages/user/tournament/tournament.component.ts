@@ -6,7 +6,8 @@ import { UacodetournamentService } from 'src/app/modules/uacodetournament/servic
 import { Router } from '@angular/router';
 import { UacodeparticipationService } from 'src/app/modules/uacodeparticipation/services/uacodeparticipation.service';
 import { Uacodeparticipation } from 'src/app/modules/uacodeparticipation/interfaces/uacodeparticipation.interface';
-import { CoreService } from 'wacom';
+import { AlertService, CoreService } from 'wacom';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -21,6 +22,18 @@ export class TournamentComponent {
 	tournament = this._tournamentService.doc(
 		this._router.url.replace('/tournament/', '')
 	);
+
+	method = {
+		'Rock, Paper, Scissors': `Камінь, ножиці, папір`
+	};
+
+	variables = {
+		'Rock, Paper, Scissors': `Змінна мійОстаннійХід\nЗмінна суперникаОстаннійХід\nЗмінна кількістьМоїхКаменів\nЗмінна кількістьМоїхПаперів\nЗмінна кількістьМоїхНожиців\nЗмінна кількістьСуперникаКаменів\nЗмінна кількістьСуперникаПаперів\nЗмінна кількістьСуперникаНожиців`
+	};
+
+	samples = {
+		'Rock, Paper, Scissors': `Якщо (\n  кількістьСуперникаПаперів > кількістьСуперникаКаменів та \n  кількістьСуперникаПаперів > кількістьСуперникаНожиців\n) {\n  Поверни 'ножиці';\n} Інакше якщо (\n  кількістьСуперникаКаменів > кількістьСуперникаНожиців\n) {\n  Поверни 'папір';\n} Інакше {\n  Поверни 'камінь';\n}`
+	};
 
 	participations: Uacodeparticipation[] = [];
 
@@ -119,12 +132,22 @@ export class TournamentComponent {
 	constructor(
 		private _participationService: UacodeparticipationService,
 		private _tournamentService: UacodetournamentService,
+		private _clipboard: Clipboard,
 		public userService: UserService,
+		private _alert: AlertService,
 		private _core: CoreService,
 		private _form: FormService,
 		private _router: Router
 	) {
 		this._load();
+	}
+
+	copySample() {
+		this._clipboard.copy(this.samples[this.tournament.method]);
+
+		this._alert.info({
+			text: 'Скопійовано'
+		});
 	}
 
 	private _load() {

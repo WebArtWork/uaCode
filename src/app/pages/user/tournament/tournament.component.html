@@ -51,6 +51,25 @@
 						<wbutton>Start</wbutton>
 					</div>
 					<div class="documents-main-row">
+						<div class="documents__title">
+							Інформація про {{method[tournament.method]}}
+						</div>
+						<div class="documents__description">
+							<h3>Доступні зміни</h3>
+							<pre>{{variables[tournament.method]}}</pre>
+							<div style="position: relative">
+								<h3>Базовий приклад коду</h3>
+								<i
+									style="position: absolute; top: 0; right: 0"
+									class="material-icons"
+									(click)="copySample()"
+									>content_copy</i
+								>
+							</div>
+							<pre>{{samples[tournament.method]}}</pre>
+						</div>
+					</div>
+					<div class="documents-main-row">
 						<wform
 							[config]="participateForm"
 							[submition]="submition"
