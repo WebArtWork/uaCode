@@ -307,6 +307,17 @@ wform {
 .compiler-block{
     height: calc(100vh - 100px);
 }
+.inputFocused{
+	outline: none;
+	height: 100vh !important; /* высота равна высоте экрана */
+	max-height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;			
+	//margin: 15px;
+}
 .compiler-block{
 	@media screen and (max-width: 767px) {
 		background: none;
@@ -353,6 +364,7 @@ wform {
 	}
 	@media screen and (max-width: 479px) {
 		textarea{
+
 		}
 		.docForm_1{
 			order: 0;
