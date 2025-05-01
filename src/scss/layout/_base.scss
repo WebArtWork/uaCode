@@ -309,15 +309,87 @@ wform {
 }
 .inputFocused{
 	outline: none;
-	height: 100vh !important; /* высота равна высоте экрана */
+	/*height: calc(100vh - 160px) !important; /* высота равна высоте экрана 
 	max-height: 100%;
 	width: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1000;			
+	z-index: 1000;		
+	transition: all .3s;*/
+	.docForm_2{
+		position: fixed;
+	}
+	textarea{
+		height: 98% !important;
+   		max-height: 98% !important;
+	}	
 	//margin: 15px;
 }
+.docForm_2 label.inputFocused{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 102;
+	padding: 15px 15px 30px 15px !important;
+	background: var(--compliper);
+	height: 100vh !important;
+	&::before{
+		content: '';
+		width: 4px;
+		height: 26px;
+		display: block;
+		position: absolute;
+		right: 25px;
+		background: white;
+		top: 13px;
+		transform: rotate(45deg);
+	}
+	&::after{
+		content: '';
+		width: 4px;
+		height: 26px;
+		display: block;
+		position: absolute;
+		right: 25px;
+		background: white;
+		top: 13px;
+		transform: rotate(-45deg);
+	}
+  }
+  .docForm_0 label.inputFocused{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 101;
+	padding: 15px 15px 30px 15px !important;
+	background: var(--compliper);
+	height: 100vh !important;
+	&::before{
+		content: '';
+		width: 4px;
+		height: 26px;
+		display: block;
+		position: absolute;
+		right: 25px;
+		background: white;
+		top: 13px;
+		transform: rotate(45deg);
+	}
+	&::after{
+		content: '';
+		width: 4px;
+		height: 26px;
+		display: block;
+		position: absolute;
+		right: 25px;
+		background: white;
+		top: 13px;
+		transform: rotate(-45deg);
+	}
+  }
 .compiler-block{
 	@media screen and (max-width: 767px) {
 		background: none;
@@ -330,6 +402,7 @@ wform {
 			border-radius: 6px;
 			padding: 12px;
 			box-shadow: var(--shadow);
+			transition: all .3s;
 		}
 		.documents-main-row {
 			padding: 13px;
@@ -347,6 +420,7 @@ wform {
 		border-radius: 6px;
 		color: #ffffff7d;
 		resize: none;
+		transition: all .3s;
 	}
 	.w-forms__textarea{
 		border: 2px solid var(--border-comp) !important;
