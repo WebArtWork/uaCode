@@ -64,7 +64,7 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Тут беде ваш результат'
+						value: 'Тут буде ваш результат'
 					},
 					{
 						name: 'Label',
