@@ -19,36 +19,46 @@ export class UacodeService {
 	}
 
 	translate(code: string): string {
-		// Об'єкт для збереження відповідностей між UA-командами та JS-командами
+		// Step 1: Build the translations map
 		const translations: Record<string, string> = {};
-
-		// Заповнюємо translations на основі команд, які надає сервіс
 		this.commands.forEach((cmd) => {
 			translations[cmd.name] = cmd.execute;
 		});
 
-		// Визначаємо логічні оператори, які треба замінити окремо
+		// Step 2: Logical operators
 		const logicalOperators: Record<string, string> = {
-			ВІРНО: 'true', // логічне І
-			НЕВІРНО: 'false', // логічне І
-			' ТА ': ' && ', // логічне І
-			' АБО ': ' || ' // логічне АБО
+			ВІРНО: 'true',
+			НЕВІРНО: 'false',
+			' ТА ': ' && ',
+			' АБО ': ' || '
 		};
 
-		// Отримуємо введений український код та обрізаємо зайві пробіли
-		let translatedCode = code.trim();
+		// Step 3: Split code into parts - code vs string literals
+		const stringRegex = /(["'`])((?:\\.|(?!\1).)*?)\1/g;
+		const placeholders: string[] = [];
 
-		// Заміна ключових слів з української на відповідні JS-команди
+		// Replace string literals with placeholders
+		let protectedCode = code.replace(stringRegex, (match) => {
+			const index = placeholders.length;
+			placeholders.push(match);
+			return `__STR_PLACEHOLDER_${index}__`;
+		});
+
+		// Step 4: Translate only non-string parts
 		for (const [uaCmd, jsCmd] of Object.entries(translations)) {
-			translatedCode = translatedCode.split(uaCmd).join(jsCmd);
+			protectedCode = protectedCode.split(uaCmd).join(jsCmd);
 		}
-
-		// Заміна логічних операторів (обов'язково з пробілами, щоб уникнути помилкових збігів)
 		for (const [uaCmd, jsCmd] of Object.entries(logicalOperators)) {
-			translatedCode = translatedCode.replace(uaCmd, jsCmd);
+			protectedCode = protectedCode.split(uaCmd).join(jsCmd);
 		}
 
-		return translatedCode;
+		// Step 5: Restore string literals
+		const finalCode = protectedCode.replace(
+			/__STR_PLACEHOLDER_(\d+)__/g,
+			(_, i) => placeholders[+i]
+		);
+
+		return finalCode.trim();
 	}
 
 	commands = [
@@ -127,12 +137,12 @@ export class UacodeService {
 		},
 		{
 			id: 10,
-			name: 'Зупинити',
+			name: 'Перервати',
 			execute: 'break',
 			example:
-				"Для (Змінна i = 0; i < 5; i++) {\n  Якщо (i === 3) {\n    Зупинити;\n  }\n\n  Друк('i: ' + i);\n}",
+				"Для (Змінна i = 0; i < 5; i++) {\n  Якщо (i === 3) {\n    Перервати;\n  }\n\n  Друк('i: ' + i);\n}",
 			question:
-				"Для (Змінна i = 0; i < 3; i++) {\n  Якщо (i === 3) {\n    Зупинити;\n  }\n\n  Друк('i: ' + i);\n}"
+				"Для (Змінна i = 0; i < 3; i++) {\n  Якщо (i === 3) {\n    Перервати;\n  }\n\n  Друк('i: ' + i);\n}"
 		},
 		{
 			id: 11,
@@ -177,17 +187,21 @@ export class UacodeService {
 		},
 		{
 			id: 16,
-			name: 'Підлога',
+			name: 'ДоМеньшогоЦілого',
 			execute: 'Math.floor',
-			example: "Друк('Підлога 4.9: ' + Підлога(4.9));",
-			question: "Друк('Підлога 4.9: ' + Підлога(4.9));"
+			example:
+				"Друк('До меньшого цілого 4.9: ' + ДоМеньшогоЦілого(4.9));",
+			question:
+				"Друк('До меньшого цілого 4.9: ' + ДоМеньшогоЦілого(4.9));"
 		},
 		{
 			id: 17,
-			name: 'Стеля',
+			name: 'ДоБільшогоЦілого',
 			execute: 'Math.ceil',
-			example: "Друк('Стеля 4.1: ' + Стеля(4.1));",
-			question: "Друк('Стеля 4.1: ' + Стеля(4.1));"
+			example:
+				"Друк('До більшого цілого 4.1: ' + ДоБільшогоЦілого(4.1));",
+			question:
+				"Друк('До більшого цілого 4.1: ' + ДоБільшогоЦілого(4.1));"
 		},
 		{
 			id: 18,

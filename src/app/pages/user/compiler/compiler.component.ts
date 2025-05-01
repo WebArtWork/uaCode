@@ -117,17 +117,17 @@ export class CompilerComponent {
 				Number(this._router.url.replace('/compiler/command/', ''))
 			);
 
-			this.compile();
+			this.compile(true);
 		} else if (this._router.url.includes('/question/')) {
 			this.submition['code'] = this._commandService.getQuestion(
 				Number(this._router.url.replace('/compiler/question/', ''))
 			);
 
-			this.compile();
+			this.compile(true);
 		}
 	}
 
-	compile() {
+	compile(skipAlert = false) {
 		// Очищаємо поле виводу перед компіляцією
 		this.submition['output'] = '';
 
@@ -137,9 +137,17 @@ export class CompilerComponent {
 		};
 
 		try {
+			const code = this._commandService.translate(this.submition['code']);
 			// Виконання згенерованого JS-коду
 			// eslint-disable-next-line no-eval — вимикаємо лінтер на це місце, бо eval зазвичай небезпечний
-			eval(this._commandService.translate(this.submition['code']));
+			eval(
+				skipAlert
+					? code
+							.split('\n')
+							.filter((line) => !line.includes('alert('))
+							.join('\n')
+					: code
+			);
 		} catch (error: any) {
 			// У разі помилки — виводимо повідомлення про помилку
 			this.submition['output'] = 'Помилка в коді: ' + error.message;
