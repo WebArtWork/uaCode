@@ -6,7 +6,7 @@ import { UacodetournamentService } from 'src/app/modules/uacodetournament/servic
 import { Router } from '@angular/router';
 import { UacodeparticipationService } from 'src/app/modules/uacodeparticipation/services/uacodeparticipation.service';
 import { Uacodeparticipation } from 'src/app/modules/uacodeparticipation/interfaces/uacodeparticipation.interface';
-import { AlertService, CoreService } from 'wacom';
+import { AlertService, CoreService, HttpService } from 'wacom';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UacodeService } from 'src/app/core/services/uacode.service';
 
@@ -116,6 +116,7 @@ export class TournamentComponent {
 		private _alert: AlertService,
 		private _core: CoreService,
 		private _form: FormService,
+		private _http: HttpService,
 		private _router: Router
 	) {
 		this._load();
@@ -128,6 +129,20 @@ export class TournamentComponent {
 			unique: 'copy',
 			text: 'Скопійовано'
 		});
+	}
+
+	start() {
+		this._http
+			.post('/api/uacode/start', this.tournament)
+			.subscribe((participations: Uacodeparticipation[]) => {
+				if (participations) {
+					participations.sort((a, b) => {
+						return a.points - b.points;
+					});
+
+					this.participations = participations;
+				}
+			});
 	}
 
 	private _updateParticipation() {
@@ -176,6 +191,10 @@ export class TournamentComponent {
 				{ name: 'public' }
 			)
 			.subscribe((participations) => {
+				participations.sort((a, b) => {
+					return a.points - b.points;
+				});
+
 				this.participations = participations;
 
 				if (
