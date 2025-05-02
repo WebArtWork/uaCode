@@ -35,7 +35,10 @@
 						<div class="documents__description">
 							<ul>
 								<li *ngFor="let participant of participations">
-									{{participant.name}}
+									<span>{{participant.name}}</span>
+									<span *ngIf="participant.points">
+										- {{participant.points}}</span
+									>
 								</li>
 							</ul>
 						</div>
@@ -48,7 +51,7 @@
 						>
 							Code: {{tournament.code}}
 						</div>
-						<wbutton>Start</wbutton>
+						<wbutton (click)="start()">Start</wbutton>
 					</div>
 					<div class="documents-main-row">
 						<div class="documents__title">
