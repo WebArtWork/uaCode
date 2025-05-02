@@ -37,7 +37,7 @@ export class TournamentComponent {
 	};
 
 	samples = {
-		'Rock, Paper, Scissors': `Якщо (\n  кількістьСуперникаПаперів > кількістьСуперникаКаменів та \n  кількістьСуперникаПаперів > кількістьСуперникаНожиців\n) {\n  Поверни 'ножиці';\n} Інакше якщо (\n  кількістьСуперникаКаменів > кількістьСуперникаНожиців\n) {\n  Поверни 'папір';\n} Інакше {\n  Поверни 'камінь';\n}`
+		'Rock, Paper, Scissors': `Якщо (\n  кількістьСуперникаПаперів > кількістьСуперникаКаменів ТА \n  кількістьСуперникаПаперів > кількістьСуперникаНожиців\n) {\n  Поверни 'ножиці';\n} ІнакшеЯкщо (\n  кількістьСуперникаКаменів > кількістьСуперникаНожиців\n) {\n  Поверни 'папір';\n} Інакше {\n  Поверни 'камінь';\n}`
 	};
 
 	participations: Uacodeparticipation[] = [];
@@ -56,7 +56,6 @@ export class TournamentComponent {
 			{
 				name: 'Text',
 				key: 'name',
-				focused: true,
 				fields: [
 					{
 						name: 'Placeholder',
@@ -172,7 +171,10 @@ export class TournamentComponent {
 
 	private _load() {
 		this._participationService
-			.get({}, { name: 'public' })
+			.get(
+				{ query: 'tournament=' + this.tournament._id },
+				{ name: 'public' }
+			)
 			.subscribe((participations) => {
 				this.participations = participations;
 

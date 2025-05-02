@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Uacodetournament } from '../interfaces/uacodetournament.interface';
-import { CrudService } from 'wacom';
+import { AlertService, CrudService } from 'wacom';
 
 @Injectable({
 	providedIn: 'root'
@@ -32,33 +32,44 @@ export class UacodetournamentService extends CrudService<Uacodetournament> {
 
 			let кількістьСуперникаНожиців = 0;
 
-			for (let i = 0; i < 99999; i++) {
-				const my_option = eval(code);
+			for (let i = 0; i < 999; i++) {
+				try {
+					const my_option = eval(`()=>{
+						${code}
+					}`)();
 
-				if (!options.includes(my_option)) {
+					if (!options.includes(my_option)) {
+						return false;
+					}
+
+					мійОстаннійХід = my_option;
+
+					const opponentOption = Math.floor(Math.random() * 3);
+
+					суперникаОстаннійХід = options[opponentOption];
+
+					if (options.indexOf(my_option) === 0) {
+						кількістьМоїхКаменів++;
+					} else if (options.indexOf(my_option) === 1) {
+						кількістьМоїхПаперів++;
+					} else {
+						кількістьМоїхНожиців++;
+					}
+
+					if (opponentOption === 0) {
+						кількістьСуперникаКаменів++;
+					} else if (opponentOption === 1) {
+						кількістьСуперникаПаперів++;
+					} else {
+						кількістьСуперникаНожиців++;
+					}
+				} catch (error: any) {
+					this._alert.error({
+						unique: 'code',
+						text: 'Помилка в коді: ' + error.message
+					});
+
 					return false;
-				}
-
-				мійОстаннійХід = my_option;
-
-				const opponentOption = Math.floor(Math.random() * 3);
-
-				суперникаОстаннійХід = options[opponentOption];
-
-				if (options.indexOf(my_option) === 0) {
-					кількістьМоїхКаменів++;
-				} else if (options.indexOf(my_option) === 1) {
-					кількістьМоїхПаперів++;
-				} else {
-					кількістьМоїхНожиців++;
-				}
-
-				if (opponentOption === 0) {
-					кількістьСуперникаКаменів++;
-				} else if (opponentOption === 1) {
-					кількістьСуперникаПаперів++;
-				} else {
-					кількістьСуперникаНожиців++;
 				}
 			}
 
@@ -66,7 +77,7 @@ export class UacodetournamentService extends CrudService<Uacodetournament> {
 		}
 	};
 
-	constructor() {
+	constructor(private _alert: AlertService) {
 		super({
 			name: 'uacodetournament'
 		});
