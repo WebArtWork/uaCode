@@ -6,10 +6,11 @@ import { AlertService, CrudService } from 'wacom';
 	providedIn: 'root'
 })
 export class UacodetournamentService extends CrudService<Uacodetournament> {
-	methods = ['Rock, Paper, Scissors'];
+	methods = ['Rock, Paper, Scissors', 'Magicians'];
 
 	options = {
-		'Rock, Paper, Scissors': ['камінь', 'папір', 'ножиці']
+		'Rock, Paper, Scissors': ['камінь', 'папір', 'ножиці'],
+		Magicians: ['камінь', 'папір', 'ножиці']
 	};
 
 	test = {
@@ -74,6 +75,9 @@ export class UacodetournamentService extends CrudService<Uacodetournament> {
 			}
 
 			return true;
+		},
+		Magicians: (code: string): boolean => {
+			return false;
 		}
 	};
 

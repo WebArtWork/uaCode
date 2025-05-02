@@ -161,7 +161,7 @@ export class TournamentsComponent {
 					fields: [
 						{
 							name: 'Items',
-							value: ['Reality']
+							value: ['Reality', 'One Mirror']
 						},
 						{
 							name: 'Placeholder',
