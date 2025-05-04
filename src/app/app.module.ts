@@ -16,6 +16,7 @@ import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { GuestGuard } from './core/guards/guest.guard';
 import { AdminsGuard } from './core/guards/admins.guard';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import * as io from 'socket.io-client';
 
 const routes: Routes = [
 	{
@@ -77,8 +78,11 @@ const routes: Routes = [
 						title: 'Participations'
 					}
 				},
-				loadChildren: () => import('./modules/uacodeparticipation/pages/participations/participations.module').then(m => m.ParticipationsModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/uacodeparticipation/pages/participations/participations.module'
+					).then((m) => m.ParticipationsModule)
+			},
 			{
 				path: 'tournament',
 				canActivate: [MetaGuard],
@@ -216,7 +220,10 @@ const routes: Routes = [
 			http: {
 				url: environment.url
 			},
-			socket: false,
+			socket: {
+				url: environment.url
+			},
+			io,
 			meta: {
 				useTitleSuffix: true,
 				defaults: {

@@ -2,30 +2,20 @@
 	<div class="documents-container">
 		<div class="documents-list">
 			<div class="documents-header">
-				<div class="documents-header-left">
-					<!-- TODO Andrew, why when we remove documents-header-left, things got broken -->
-					<div class="documents-header-left__arrow">
-						<span class="material-icons">brokenicon</span>
-					</div>
-				</div>
 				<div class="documents-header__title">Tournaments</div>
 				<div class="burger-wrap" (click)="add()">
 					<span class="material-icons">add</span>
 				</div>
 			</div>
 			<div class="documents-main">
-				<div class="documents-main-content" *ngIf="loading">
-					Page is loading
-					<!-- TODO Andrew make this section looking good, maybe with an illustraiton -->
-				</div>
-				<div
-					class="documents-main-content"
-					*ngIf="!loading && !tournaments.length"
-				>
-					No tournaments
-					<!-- TODO Andrew make this section looking good, maybe with an illustraiton -->
-				</div>
 				<div class="documents-main-content" *ngIf="!loading">
+					<div
+						*ngFor="let method of methods"
+						class="documents-main-row"
+						routerLink="/tournament/public/{{method}}"
+					>
+						<div class="documents__title">{{method}}</div>
+					</div>
 					<div
 						*ngFor="let tournament of tournaments"
 						class="documents-main-row"

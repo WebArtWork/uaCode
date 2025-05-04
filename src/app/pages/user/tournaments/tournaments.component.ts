@@ -12,6 +12,8 @@ import { AlertService, CoreService } from 'wacom';
 	standalone: false
 })
 export class TournamentsComponent {
+	readonly methods = this._tournamentService.methods;
+
 	tournaments: Uacodetournament[] = [];
 
 	loading = true;
@@ -47,7 +49,7 @@ export class TournamentsComponent {
 						})
 						.subscribe((created) => {
 							this._router.navigateByUrl(
-								'/tournament/' + created._id
+								'/tournament/private/' + created._id
 							);
 						});
 				}
@@ -77,7 +79,7 @@ export class TournamentsComponent {
 						.subscribe((found) => {
 							if (found) {
 								this._router.navigateByUrl(
-									'/tournament/' + tournament._id
+									'/tournament/private/' + tournament._id
 								);
 							} else {
 								this._alert.error({
@@ -88,7 +90,7 @@ export class TournamentsComponent {
 				}
 			});
 		} else {
-			this._router.navigateByUrl('/tournament/' + tournament._id);
+			this._router.navigateByUrl('/tournament/private/' + tournament._id);
 		}
 	}
 

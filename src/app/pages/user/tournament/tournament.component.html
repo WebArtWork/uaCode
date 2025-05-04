@@ -3,25 +3,25 @@
 		<div class="documents-list">
 			<div class="documents-header">
 				<div class="documents-header__title">
-					{{tournament.name || ('Common.No name tournament' |
-					translate)}}
+					{{tournament ? tournament.name || (`Common.No name
+					tournament` | translate) : method}}
 				</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
 					<div
-						*ngIf="tournament.description || tournament.tags?.length"
+						*ngIf="tournament?.description || tournament?.tags?.length"
 						class="documents-main-row"
 					>
 						<div
 							class="documents__description"
-							*ngIf="tournament.description"
-							[innerHtml]="tournament.description"
+							*ngIf="tournament?.description"
+							[innerHtml]="tournament?.description"
 						></div>
 						<div class="documents-tags">
 							<div
 								class="documents-tags__wrap"
-								*ngFor="let tag of tournament.tags"
+								*ngFor="let tag of tournament?.tags"
 							>
 								<div class="documents-tags__item">{{tag}}</div>
 							</div>
@@ -43,7 +43,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="documents-main-row" *ngIf="mine">
+					<div class="documents-main-row" *ngIf="mine && tournament">
 						<div class="documents__title">Admin</div>
 						<div
 							class="documents__description"
@@ -51,15 +51,31 @@
 						>
 							Code: {{tournament.code}}
 						</div>
+
+						<winput placeholder="name"></winput>
+
+						<winput placeholder="description"></winput>
+
+						<wselect
+							placeholder="Select tournament tags"
+							[items]="['Reality', 'One Mirror']"
+							[select]="tournament.tags"
+							[multiple]="true"
+							(modelChange)="
+								tournament.tags = $event;
+								update()
+							"
+						></wselect>
+
 						<wbutton (click)="start()">Start</wbutton>
 					</div>
 					<div class="documents-main-row">
 						<div class="documents__title">
-							Інформація про {{method[tournament.method]}}
+							Інформація про {{name[method]}}
 						</div>
 						<div class="documents__description">
 							<h3>Доступні зміни</h3>
-							<pre>{{variables[tournament.method]}}</pre>
+							<pre>{{variables[method]}}</pre>
 							<h3>Можливі варіанти для повернення вашого коду</h3>
 							<ul>
 								<li *ngFor="let option of options">
@@ -75,7 +91,7 @@
 									>content_copy</i
 								>
 							</div>
-							<pre>{{samples[tournament.method]}}</pre>
+							<pre>{{samples[method]}}</pre>
 						</div>
 					</div>
 					<div class="documents-main-row">

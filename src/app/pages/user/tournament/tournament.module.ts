@@ -5,7 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 	{
-		path: ':_id',
+		path: 'private/:_id',
+		component: TournamentComponent
+	},
+	{
+		path: 'public/:_method',
+		component: TournamentComponent
+	},
+	{
+		path: 'demo/:_method',
 		component: TournamentComponent
 	}
 ];

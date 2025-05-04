@@ -6,7 +6,7 @@ import { UacodetournamentService } from 'src/app/modules/uacodetournament/servic
 import { Router } from '@angular/router';
 import { UacodeparticipationService } from 'src/app/modules/uacodeparticipation/services/uacodeparticipation.service';
 import { Uacodeparticipation } from 'src/app/modules/uacodeparticipation/interfaces/uacodeparticipation.interface';
-import { AlertService, CoreService, HttpService } from 'wacom';
+import { AlertService, CoreService, HttpService, SocketService } from 'wacom';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UacodeService } from 'src/app/core/services/uacode.service';
 
@@ -16,28 +16,45 @@ import { UacodeService } from 'src/app/core/services/uacode.service';
 	standalone: false
 })
 export class TournamentComponent {
+	readonly isPrivate = this._router.url.split('/')[2] === 'private';
+
 	get mine(): boolean {
-		return this.tournament.device === this._core.deviceID;
+		return this.tournament?.device === this._core.deviceID;
+	}
+
+	get method(): string {
+		return this.isPrivate
+			? this.tournament?.method || ''
+			: this._router.url.split('/')[3].split('%20').join(' ');
 	}
 
 	get options(): string[] {
-		return this._tournamentService.options[this.tournament.method];
+		return this._tournamentService.options[this.method];
 	}
 
-	tournament = this._tournamentService.doc(
-		this._router.url.replace('/tournament/', '')
-	);
+	tournament =
+		this._router.url.split('/')[2] === 'private'
+			? this._tournamentService.doc(this._router.url.split('/')[3])
+			: null;
 
-	method = {
-		'Rock, Paper, Scissors': `Камінь, ножиці, папір`
+	name: Record<string, string> = {
+		'Rock, Paper, Scissors': `Камінь, ножиці, папір`,
+		Magicians: 'Маги',
+		"The Prisoner's Dilemma": `Дилема в'язня`
 	};
 
-	variables = {
-		'Rock, Paper, Scissors': `Змінна мійОстаннійХід\nЗмінна суперникаОстаннійХід\nЗмінна кількістьМоїхКаменів\nЗмінна кількістьМоїхПаперів\nЗмінна кількістьМоїхНожиців\nЗмінна кількістьСуперникаКаменів\nЗмінна кількістьСуперникаПаперів\nЗмінна кількістьСуперникаНожиців`
+	variables: Record<string, string> = {
+		'Rock, Paper, Scissors': `Змінна мійОстаннійХід\nЗмінна суперникаОстаннійХід\nЗмінна кількістьМоїхКаменів\nЗмінна кількістьМоїхПаперів\nЗмінна кількістьМоїхНожиців\nЗмінна кількістьСуперникаКаменів\nЗмінна кількістьСуперникаПаперів\nЗмінна кількістьСуперникаНожиців`,
+		Magicians:
+			'Змінна моєОстаннєЗакляття\nЗмінна останнєЗакляттяСуперника\nЗмінна кількістьМоїхАтак\nЗмінна кількістьМоїхЗахистів\nЗмінна кількістьМоїхЛікувань\nЗмінна кількістьМоїхМедитацій\nЗмінна кількістьСуперникаАтак\nЗмінна кількістьСуперникаЗахистів\nЗмінна кількістьСуперникаЛікувань\nЗмінна кількістьСуперникаМедитацій\nЗмінна рівеньМогоЖиття\nЗмінна рівеньМоєїМани\nЗмінна рівеньЖиттяСуперника\nЗмінна рівеньМаниСуперника',
+		"The Prisoner's Dilemma":
+			'Змінна мійОстаннійВибір\nЗмінна останнійВибірСуперника\nЗмінна кількістьМоїхЗрад\nЗмінна кількістьМоїхМовчань\nЗмінна кількістьЗрадСуперника\nЗмінна кількістьМовчаньСуперника'
 	};
 
-	samples = {
-		'Rock, Paper, Scissors': `Якщо (\n  кількістьСуперникаПаперів > кількістьСуперникаКаменів ТА \n  кількістьСуперникаПаперів > кількістьСуперникаНожиців\n) {\n  Поверни 'ножиці';\n} ІнакшеЯкщо (\n  кількістьСуперникаКаменів > кількістьСуперникаНожиців\n) {\n  Поверни 'папір';\n} Інакше {\n  Поверни 'камінь';\n}`
+	samples: Record<string, string> = {
+		'Rock, Paper, Scissors': `Якщо (\n  кількістьСуперникаПаперів > кількістьСуперникаКаменів ТА \n  кількістьСуперникаПаперів > кількістьСуперникаНожиців\n) {\n  Поверни 'ножиці';\n} ІнакшеЯкщо (\n  кількістьСуперникаКаменів > кількістьСуперникаНожиців\n) {\n  Поверни 'папір';\n} Інакше {\n  Поверни 'камінь';\n}`,
+		Magicians: `Якщо (рівеньМогоЖиття <= 30) {\n  Якщо (рівеньМоєїМани >= 20) {\n    Поверни 'лікування';\n  } Інакше {\n    Поверни 'медитація';\n  }\n} ІнакшеЯкщо (рівеньМоєїМани < 10) {\n  Поверни 'медитація';\n} ІнакшеЯкщо (\n  кількістьСуперникаАтак > кількістьСуперникаЗахистів\n) {\n  Поверни 'захист';\n} Інакше {\n  Поверни 'атака';\n}`,
+		"The Prisoner's Dilemma": `Якщо (останнійВибірСуперника == 'зрадити') {\n  Поверни 'зрадити';\n} ІнакшеЯкщо (кількістьЗрадСуперника > кількістьМовчаньСуперника) {\n  Поверни 'зрадити';\n} Інакше {\n  Поверни 'мовчати';\n}`
 	};
 
 	participations: Uacodeparticipation[] = [];
@@ -112,6 +129,7 @@ export class TournamentComponent {
 		private _tournamentService: UacodetournamentService,
 		private _commandService: UacodeService,
 		public userService: UserService,
+		private _socket: SocketService,
 		private _clipboard: Clipboard,
 		private _alert: AlertService,
 		private _core: CoreService,
@@ -120,10 +138,20 @@ export class TournamentComponent {
 		private _router: Router
 	) {
 		this._load();
+
+		this._socket.on('uacode', (data) => {
+			console.log(data);
+		});
+	}
+
+	update() {
+		if (this.tournament) {
+			this._tournamentService.update(this.tournament);
+		}
 	}
 
 	copySample() {
-		this._clipboard.copy(this.samples[this.tournament.method]);
+		this._clipboard.copy(this.samples[this.method]);
 
 		this._alert.info({
 			unique: 'copy',
@@ -147,13 +175,14 @@ export class TournamentComponent {
 
 	private _updateParticipation() {
 		if (
-			this._tournamentService.test[this.tournament.method](
+			this._tournamentService.test[this.method](
 				this._commandService.translate(this.submition['code'] as string)
 			)
 		) {
 			const participation = {
 				...this.submition,
-				tournament: this.tournament._id,
+				tournament: this.tournament?._id || null,
+				method: this.method,
 				device: this._core.deviceID
 			} as Uacodeparticipation;
 
@@ -187,7 +216,11 @@ export class TournamentComponent {
 	private _load() {
 		this._participationService
 			.get(
-				{ query: 'tournament=' + this.tournament._id },
+				{
+					query: this.tournament
+						? 'tournament=' + this.tournament._id
+						: 'method=' + this.method
+				},
 				{ name: 'public' }
 			)
 			.subscribe((participations) => {
@@ -196,13 +229,23 @@ export class TournamentComponent {
 				});
 
 				this.participations = participations;
+			});
 
-				if (
-					participations.find((p) => p.device === this._core.deviceID)
-				) {
-					this.participation = participations.find(
-						(p) => p.device === this._core.deviceID
-					) as Uacodeparticipation;
+		this._participationService
+			.fetch(
+				this.tournament
+					? {
+							device: this._core.deviceID,
+							tournament: this.tournament._id
+						}
+					: {
+							device: this._core.deviceID,
+							method: this.method
+						}
+			)
+			.subscribe((participation) => {
+				if (participation) {
+					this.participation = participation;
 
 					this.submition['name'] = this.participation.name;
 
