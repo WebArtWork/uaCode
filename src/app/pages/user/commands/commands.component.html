@@ -2,17 +2,26 @@
 	<div class="documents-container">
 		<div class="documents-list">
 			<div class="documents-header">
-				<div class="documents-header__title" translate>Common.Commands</div>
+				<div class="documents-header__title" translate>
+					Common.Commands
+				</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<div class="documents-main-row" *ngFor="let command of uaCodeServise.commands">
+					<div
+						class="documents-main-row"
+						*ngFor="let command of uaCodeServise.commands"
+					>
 						<div class="documents__title example_container">
-							<span>{{command.name}}</span>
-							<a routerLink="/compiler/command/{{command.id}}" class="documents__btn play_btn"><span
-									class="material-icons">play_arrow</span></a>
+							<span>{{command.id}}. {{command.name}}</span>
+							<a
+								routerLink="/compiler/command/{{command.id}}"
+								class="documents__btn play_btn"
+								><span class="material-icons"
+									>play_arrow</span
+								></a
+							>
 						</div>
-
 					</div>
 				</div>
 			</div>

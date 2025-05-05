@@ -71,6 +71,26 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'quiz',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Quiz'
+					}
+				},
+				loadChildren: () => import('./pages/user/quiz/quiz.module').then(m => m.QuizModule)
+			}, 
+			{
+				path: 'quizzes',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Quizzes'
+					}
+				},
+				loadChildren: () => import('./pages/user/quizzes/quizzes.module').then(m => m.QuizzesModule)
+			}, 
+			{
 				path: 'participations',
 				canActivate: [MetaGuard],
 				data: {
