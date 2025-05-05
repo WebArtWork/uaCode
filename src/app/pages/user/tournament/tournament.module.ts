@@ -11,10 +11,6 @@ const routes: Routes = [
 	{
 		path: 'public/:_method',
 		component: TournamentComponent
-	},
-	{
-		path: 'demo/:_method',
-		component: TournamentComponent
 	}
 ];
 

@@ -137,10 +137,17 @@ export class TournamentComponent {
 		private _http: HttpService,
 		private _router: Router
 	) {
+		this._loadMine();
+
 		this._load();
 
 		this._socket.on('uacode', (data) => {
-			console.log(data);
+			if (
+				(data.tournament && this.tournament?._id === data.tournament) ||
+				(!data.tournament && data.method === this.method)
+			) {
+				this._load();
+			}
 		});
 	}
 
@@ -213,24 +220,7 @@ export class TournamentComponent {
 		}
 	}
 
-	private _load() {
-		this._participationService
-			.get(
-				{
-					query: this.tournament
-						? 'tournament=' + this.tournament._id
-						: 'method=' + this.method
-				},
-				{ name: 'public' }
-			)
-			.subscribe((participations) => {
-				participations.sort((a, b) => {
-					return a.points - b.points;
-				});
-
-				this.participations = participations;
-			});
-
+	private _loadMine() {
 		this._participationService
 			.fetch(
 				this.tournament
@@ -251,6 +241,25 @@ export class TournamentComponent {
 
 					this.submition['code'] = this.participation.code;
 				}
+			});
+	}
+
+	private _load() {
+		this._participationService
+			.get(
+				{
+					query: this.tournament
+						? 'tournament=' + this.tournament._id
+						: 'method=' + this.method
+				},
+				{ name: 'public' }
+			)
+			.subscribe((participations) => {
+				participations.sort((a, b) => {
+					return b.points - a.points;
+				});
+
+				this.participations = participations;
 			});
 	}
 }
