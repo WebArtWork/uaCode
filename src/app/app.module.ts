@@ -71,6 +71,36 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'allquizparticipations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Allquizparticipations'
+					}
+				},
+				loadChildren: () => import('./modules/uacodequizparticipation/pages/allquizparticipations/allquizparticipations.module').then(m => m.AllquizparticipationsModule)
+			}, 
+			{
+				path: 'allquizes',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Allquizes'
+					}
+				},
+				loadChildren: () => import('./modules/uacodequiz/pages/allquizes/allquizes.module').then(m => m.AllquizesModule)
+			}, 
+			{
+				path: 'classes',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Classes'
+					}
+				},
+				loadChildren: () => import('./modules/uacodeclass/pages/classes/classes.module').then(m => m.ClassesModule)
+			}, 
+			{
 				path: 'quiz',
 				canActivate: [MetaGuard],
 				data: {

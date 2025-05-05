@@ -1,0 +1,13 @@
+<h3>Classes</h3>
+
+<wselect
+	placeholder="Join or create class"
+	(modelChange)="setClass($event)"
+	[select]="loaded ? classId : null"
+	[items]="classes"
+	*ngIf="loaded"
+></wselect>
+
+<i class="material-icons" (click)="join()">group_add</i>
+
+<i class="material-icons" (click)="create()">add</i>

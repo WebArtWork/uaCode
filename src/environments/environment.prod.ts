@@ -9,15 +9,15 @@ export const environment = {
 		password: ''
 	},
 	image: {
-		default: 'https://ngx.webart.work/assets/logo.png',
-		logo: 'https://ngx.webart.work/assets/logo.png'
+		default: 'https://uacode.webart.work/assets/logo.png',
+		logo: 'https://uacode.webart.work/assets/logo.png'
 	},
 	meta: {
-		title: 'Web Art Work',
+		title: 'UA Code',
 		description:
 			'An amazing solution to build web or mobile app for your business',
-		favicon: 'https://ngx.webart.work/assets/favicon.ico',
-		image: 'https://ngx.webart.work/assets/logo.png'
+		favicon: 'https://uacode.webart.work/assets/favicon.ico',
+		image: 'https://uacode.webart.work/assets/logo.png'
 	},
 	defaultLanguageCode: 'en'
 };
