@@ -2,28 +2,8 @@
 	<div class="documents-container">
 		<div class="documents-list">
 			<div class="documents-header">
-				<div class="documents-header-left">
-					<div class="documents-header-left__arrow" (click)="back()">
-						<span class="material-icons">arrow_back_ios</span>
-					</div>
-					<div
-						class="documents-header-left__avatar"
-						routerLink="/profile"
-					>
-						<img [src]="userService.thumb" alt="" />
-					</div>
-				</div>
-				<div class="documents-header__title">Title header</div>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="burger-wrap"
-					class="burger-wrap"
-				>
-					<div
-						[class.burger--close]="isMenuOpen"
-						class="burger"
-					></div>
-				</div>
+				<core-theme></core-theme>
+				<div class="documents-header__title">Shop</div>
 			</div>
 			<div
 				[class.documents-sidebar--open]="isMenuOpen"
@@ -316,7 +296,10 @@
 						</div>
 					</div>
 					<div class="documents-main-row">
-						<wform [config]="formDoc"></wform>
+						<wform
+							[config]="formDoc"
+							[submition]="submition"
+						></wform>
 					</div>
 				</div>
 			</div>

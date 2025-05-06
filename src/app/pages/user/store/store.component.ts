@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
+import { AlertService, HttpService } from 'wacom';
 
 @Component({
 	templateUrl: './store.component.html',
@@ -9,6 +10,8 @@ import { FormService } from 'src/app/core/modules/form/form.service';
 	standalone: false
 })
 export class StoreComponent {
+	submition: Record<string, unknown> = {};
+
 	formDoc: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
 		title: 'Doc form',
@@ -42,8 +45,8 @@ export class StoreComponent {
 				]
 			},
 			{
-				name: 'Text',
-				key: 'bio',
+				name: 'Number',
+				key: 'books',
 				fields: [
 					{
 						name: 'Placeholder',
@@ -69,6 +72,21 @@ export class StoreComponent {
 					{
 						name: 'Submit',
 						value: true
+					},
+					{
+						name: 'Click',
+						value: () => {
+							this._http
+								.post('/api/bot/message', {
+									chatid: '-4759548231',
+									message: `Name: ${this.submition['name']}\nPhone: ${this.submition['phone']}\nBooks: ${this.submition['books']}`
+								})
+								.subscribe(() => {
+									this._alert.show({
+										text: 'We will contact with you'
+									});
+								});
+						}
 					}
 				]
 			}
@@ -79,10 +97,8 @@ export class StoreComponent {
 
 	constructor(
 		public userService: UserService,
+		private _alert: AlertService,
+		private _http: HttpService,
 		private _form: FormService
 	) {}
-
-	back(): void {
-		window.history.back();
-	}
 }

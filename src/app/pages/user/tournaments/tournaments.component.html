@@ -4,20 +4,19 @@
 			<div class="documents-header">
 				<core-theme></core-theme>
 				<div class="documents-header__title">Tournaments</div>
-				<div class="burger-wrap" (click)="add()">
+				<!-- <div class="burger-wrap" (click)="add()">
 					<span class="material-icons">add</span>
-				</div>
+				</div> -->
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content" *ngIf="!loading">
-					<div
-						*ngFor="let method of methods"
-						class="documents-main-row"
-						routerLink="/tournament/public/{{method}}"
-					>
-						<div class="documents__title">{{method}}</div>
+					<div class="documents-main-row">
+						<core-class></core-class>
+						<!-- (mine)="mineClass = $event"
+							(wChange)="load($event)" -->
 					</div>
-					<div
+					<h3>Class tournaments</h3>
+					<!-- <div
 						*ngFor="let tournament of tournaments"
 						class="documents-main-row"
 						(click)="open(tournament)"
@@ -36,6 +35,21 @@
 								<div class="documents-tags__item">{{tag}}</div>
 							</div>
 						</div>
+					</div> -->
+					<div
+						*ngFor="let method of methods"
+						class="documents-main-row"
+						routerLink="/tournament/public/{{method}}"
+					>
+						<div class="documents__title">{{method}}</div>
+					</div>
+					<h3>Global tournaments</h3>
+					<div
+						*ngFor="let method of methods"
+						class="documents-main-row"
+						routerLink="/tournament/public/{{method}}"
+					>
+						<div class="documents__title">{{method}}</div>
 					</div>
 				</div>
 			</div>
