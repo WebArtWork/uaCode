@@ -71,6 +71,16 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'store',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Store'
+					}
+				},
+				loadChildren: () => import('./pages/user/store/store.module').then(m => m.StoreModule)
+			}, 
+			{
 				path: 'allquizparticipations',
 				canActivate: [MetaGuard],
 				data: {

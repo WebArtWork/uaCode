@@ -20,11 +20,17 @@ import { CoreService, HttpService, StoreService } from 'wacom';
 export class ClassComponent implements AfterViewInit {
 	@Output() wChange = new EventEmitter();
 
+	@Output() mine = new EventEmitter();
+
 	classes: Uacodeclass[] = [];
+
+	class: Uacodeclass;
 
 	classId: string;
 
 	loaded = false;
+
+	isMine = false;
 
 	constructor(
 		private _classService: UacodeclassService,
@@ -33,24 +39,36 @@ export class ClassComponent implements AfterViewInit {
 		private _core: CoreService,
 		private _form: FormService,
 		private _cdr: ChangeDetectorRef
-	) {}
+	) {
+		this._load();
+	}
 
 	ngAfterViewInit(): void {
 		this._store.get('uacodeclassId', (classId) => {
 			if (classId) {
 				this.classId = classId;
 
-				this.wChange.emit(classId);
-			}
+				this.class = this.classes.find(
+					(c) => c._id === classId
+				) as Uacodeclass;
 
-			this._load();
+				this.wChange.emit(classId);
+
+				this._mine();
+			}
 		});
 	}
 
 	setClass(id: string) {
+		this.classId = id;
+
+		this.class = this.classes.find((c) => c._id === id) as Uacodeclass;
+
 		this._store.set('uacodeclassId', id);
 
 		this.wChange.emit(id);
+
+		this._mine();
 	}
 
 	create() {
@@ -66,6 +84,10 @@ export class ClassComponent implements AfterViewInit {
 					})
 					.subscribe((created) => {
 						this.classes.push(created);
+
+						this.class = this.classes.find(
+							(c) => c._id === this.classId
+						) as Uacodeclass;
 					});
 			}
 		});
@@ -89,6 +111,8 @@ export class ClassComponent implements AfterViewInit {
 								.subscribe((classDocument: Uacodeclass) => {
 									if (classDocument) {
 										this.classes.push(classDocument);
+
+										this.setClass(classDocument._id);
 									}
 								});
 						}
@@ -98,17 +122,33 @@ export class ClassComponent implements AfterViewInit {
 	}
 
 	private _load() {
-		this._classService
-			.get({
-				query: 'device=' + this._core.deviceID
-			})
-			.subscribe((classes) => {
-				this.classes = classes;
+		this._core.onComplete('uacodeclass_loaded').then(() => {
+			this.classes = this._classService.getDocs();
 
-				this.loaded = true;
+			this.class = this.classes.find(
+				(c) => c._id === this.classId
+			) as Uacodeclass;
 
-				this._cdr.detectChanges();
-			});
+			this._mine();
+
+			this.loaded = true;
+
+			this._cdr.detectChanges();
+		});
+	}
+
+	private _mine() {
+		if (this.classId) {
+			const classDocument = this.classes.find(
+				(c) => c._id === this.classId
+			);
+
+			if (classDocument) {
+				this.isMine = classDocument.device === this._core.deviceID;
+
+				this.mine.emit(classDocument.device === this._core.deviceID);
+			}
+		}
 	}
 
 	private _classCreationForm: FormInterface = this._form.getForm(

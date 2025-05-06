@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CoreModule } from 'src/app/core/core.module';
-import { QuizComponent } from './quiz.component';
+import { StoreComponent } from './store.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 	{
-		path: ':_id',
-		component: QuizComponent
+		path: '',
+		component: StoreComponent
 	}
 ];
 
 @NgModule({
 	imports: [RouterModule.forChild(routes), CoreModule],
-	declarations: [QuizComponent]
+	declarations: [StoreComponent]
 })
-export class QuizModule {}
+export class StoreModule {}

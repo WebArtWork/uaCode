@@ -3,14 +3,17 @@
 		<div class="documents-list">
 			<div class="documents-header">
 				<div class="documents-header__title">Quizzes</div>
-				<div class="burger-wrap" (click)="add()">
+				<div class="burger-wrap" (click)="add()" *ngIf="mineClass">
 					<span class="material-icons">add</span>
 				</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
 					<div class="documents-main-row">
-						<core-class (wChange)="load($event)"></core-class>
+						<core-class
+							(mine)="mineClass = $event"
+							(wChange)="load($event)"
+						></core-class>
 					</div>
 					<div
 						routerLink="/quiz/{{quiz._id}}"

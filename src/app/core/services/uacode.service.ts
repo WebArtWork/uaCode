@@ -18,6 +18,56 @@ export class UacodeService {
 		return command ? command.question : ' ';
 	}
 
+	translateErrorMessage(message: string): string {
+		const jsErrorTranslations: Record<string, string> = {
+			undefined: 'не визначено',
+			null: 'нульове значення',
+			'not a function': 'не є функцією',
+			'is not defined': 'не оголошено',
+			'Unexpected token': 'Несподіваний символ',
+			'Unexpected end of input': 'Несподіваний кінець вводу',
+			'Unexpected identifier': 'Несподіваний ідентифікатор',
+			missing: 'відсутній',
+			invalid: 'некоректний',
+			illegal: 'заборонений',
+			expected: 'очікується',
+			'assignment to constant variable': 'присвоєння константі',
+			'Cannot read property': 'Неможливо прочитати властивість',
+			'Cannot set property': 'Неможливо встановити властивість',
+			'of undefined': "об'єкта, що не визначено",
+			'of null': "об'єкта з нульовим значенням",
+			SyntaxError: 'Синтаксична помилка',
+			TypeError: 'Помилка типу',
+			ReferenceError: 'Помилка посилання',
+			RangeError: 'Помилка діапазону',
+			EvalError: 'Помилка eval',
+			URIError: 'Помилка URI',
+			stack: 'стек',
+			at: 'в',
+			line: 'рядок',
+			column: 'колонка',
+			unexpected: 'несподіваний',
+			token: 'символ',
+			identifier: 'ідентифікатор',
+			'reserved word': 'зарезервоване слово',
+			function: 'функція',
+			object: "об'єкт",
+			array: 'масив',
+			number: 'число',
+			string: 'рядок',
+			boolean: 'булеве значення',
+			NaN: 'не число (NaN)'
+		};
+
+		let translated = message;
+		for (const [en, ua] of Object.entries(jsErrorTranslations)) {
+			const regex = new RegExp(en, 'gi');
+			translated = translated.replace(regex, ua);
+		}
+
+		return translated;
+	}
+
 	translate(code: string): string {
 		// Step 1: Build the translations map
 		const translations: Record<string, string> = {};

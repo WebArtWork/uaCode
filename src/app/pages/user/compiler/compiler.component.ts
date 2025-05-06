@@ -150,7 +150,9 @@ export class CompilerComponent {
 			);
 		} catch (error: any) {
 			// У разі помилки — виводимо повідомлення про помилку
-			this.submition['output'] = 'Помилка в коді: ' + error.message;
+			this.submition['output'] =
+				'Помилка в коді: ' +
+				this._commandService.translateErrorMessage(error.message);
 		}
 	}
 

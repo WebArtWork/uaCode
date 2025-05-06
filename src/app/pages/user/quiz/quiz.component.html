@@ -1,322 +1,82 @@
-<div class="documents-wrapper" [class.documents-wrapper--open]="isMenuOpen">
+<div class="documents-wrapper">
 	<div class="documents-container">
 		<div class="documents-list">
 			<div class="documents-header">
-				<div class="documents-header-left">
-					<div class="documents-header-left__arrow" (click)="back()">
-						<span class="material-icons">arrow_back_ios</span>
-					</div>
-					<div
-						class="documents-header-left__avatar"
-						routerLink="/profile"
-					>
-						<img [src]="userService.thumb" alt="" />
-					</div>
-				</div>
-				<div class="documents-header__title">Title header</div>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="burger-wrap"
-					class="burger-wrap"
-				>
-					<div
-						[class.burger--close]="isMenuOpen"
-						class="burger"
-					></div>
-				</div>
-			</div>
-			<div
-				[class.documents-sidebar--open]="isMenuOpen"
-				class="documents-sidebar"
-			>
-				<div
-					(click)="isMenuOpen = !isMenuOpen"
-					class="documents-sidebar__close"
-				>
-					<span class="material-icons">close</span>
-				</div>
-				<div class="documents-sidebar-content">
-					<div class="documents-sidebar__img">
-						<img src="assets/default.png" alt="" />
-					</div>
-					<div class="documents-sidebar__title">
-						Title of sidebar...
-					</div>
-					<div class="documents-sidebar__description">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Sint molestiae consequatur quae. Modi corporis rem amet
-						tempore debitis assumenda minima repellat labore
-						expedita quam. Itaque accusamus culpa ullam
-						necessitatibus nisi.
-					</div>
+				<div class="documents-header__title">
+					{{quiz.name || (`Common.No name` | translate)}}
 				</div>
 			</div>
 			<div class="documents-main">
-				<div class="documents-main-content">
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
-						</div>
+				<div class="documents-main-content" *ngIf="loaded">
+					<div *ngIf="quiz?.description" class="documents-main-row">
+						<div
+							class="documents__description"
+							*ngIf="quiz?.description"
+							[innerHtml]="quiz.description"
+						></div>
+					</div>
+					<div
+						*ngIf="participations.length"
+						class="documents-main-row"
+					>
+						<div class="documents__title">Participants</div>
 						<div class="documents__description">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Mollitia voluptatum facilis sit
-							necessitatibus, rem consectetur pariatur sapiente
-							incidunt laudantium praesentium aut iste omnis
-							suscipit autem deleniti, nisi temporibus obcaecati
-							eligendi?
+							<ul>
+								<li *ngFor="let participant of participations">
+									<span>{{participant.name}}</span>
+									<span
+										class="material-icons"
+										*ngIf="mine"
+										(click)="loadParticipant(participant)"
+										>play_arrow</span
+									>
+								</li>
+							</ul>
 						</div>
 					</div>
-					<div class="documents-main-row">
+
+					<div
+						class="documents-main-row"
+						*ngIf="mine && participation"
+					>
 						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
+							{{participation.name}}
 						</div>
-						<div class="documents__description">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Mollitia voluptatum facilis sit
-							necessitatibus, rem consectetur pariatur sapiente
-							incidunt laudantium praesentium aut iste omnis
-							suscipit autem deleniti, nisi temporibus obcaecati
-							eligendi?
-						</div>
-						<div class="documents-tags">
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-							<div class="documents-tags__wrap">
-								<div class="documents-tags__item">
-									Smth here
-								</div>
-							</div>
-						</div>
+
+						<winput
+							placeholder="code"
+							[value]="participation.code"
+						></winput>
+
+						<winput
+							type="textarea"
+							[value]="output"
+							[disabled]="true"
+							placeholder="output"
+						></winput>
 					</div>
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
-						</div>
-						<div class="documents-triggers">
-							<div class="documents-triggers__wrap">
-								<div class="documents-triggers__item">
-									<div class="documents-triggers__img">
-										<img src="/assets/default.png" alt="" />
-									</div>
-									<div class="documents-triggers__title">
-										Trigger title...
-									</div>
-									<div
-										class="documents-triggers__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit
-									</div>
-								</div>
-							</div>
-							<div class="documents-triggers__wrap">
-								<div class="documents-triggers__item">
-									<div class="documents-triggers__img">
-										<img src="/assets/default.png" alt="" />
-									</div>
-									<div class="documents-triggers__title">
-										Trigger title...
-									</div>
-									<div
-										class="documents-triggers__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit
-									</div>
-								</div>
-							</div>
-							<div class="documents-triggers__wrap">
-								<div class="documents-triggers__item">
-									<div class="documents-triggers__img">
-										<img src="/assets/default.png" alt="" />
-									</div>
-									<div class="documents-triggers__title">
-										Trigger title...
-									</div>
-									<div
-										class="documents-triggers__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit
-									</div>
-								</div>
-							</div>
-							<div class="documents-triggers__wrap">
-								<div class="documents-triggers__item">
-									<div class="documents-triggers__img">
-										<img src="/assets/default.png" alt="" />
-									</div>
-									<div class="documents-triggers__title">
-										Trigger title...
-									</div>
-									<div
-										class="documents-triggers__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit
-									</div>
-								</div>
-							</div>
-						</div>
+
+					<div class="documents-main-row" *ngIf="mine && quiz">
+						<div class="documents__title">Admin</div>
+
+						<winput
+							placeholder="name"
+							[value]="quiz.name"
+							(wChange)="updateQuiz('name', $event)"
+						></winput>
+
+						<winput
+							type="textarea"
+							placeholder="description"
+							[value]="quiz.description"
+							(wChange)="updateQuiz('description', $event)"
+						></winput>
 					</div>
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
-						</div>
-						<div class="documents-wrap">
-							<div class="documents-img">
-								<img src="/assets/default.png" alt="" />
-							</div>
-							<div class="documents-text">
-								<div class="documents-text__title">
-									Lorem ipsum dolor sit amet consectetur
-									adipisicing elit.
-								</div>
-								<div class="documents-text__description">
-									<p>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Tenetur accusantium
-										quis minus mollitia voluptatum illo hic
-										laborum laboriosam et commodi. Quas
-										nulla doloribus mollitia vero nostrum
-										laudantium dolores quidem provident.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur,
-										adipisicing elit. Sunt accusantium
-										eveniet quo? Minus quisquam odit magnam
-										nulla.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur,
-										adipisicing elit. Sunt accusantium
-										eveniet quo? Minus quisquam odit magnam
-										nulla.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
-						</div>
-						<a href="" class="documents__btn">Press button</a>
-					</div>
-					<div class="documents-main-row">
-						<div class="documents-products-list">
-							<div class="documents-products__wrap">
-								<div class="documents-products__item">
-									<div class="documents-products__img">
-										<img src="assets/logo.png" alt="" />
-									</div>
-									<div class="documents-products__title">
-										Title of product card here
-									</div>
-									<div
-										class="documents-products__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Optio nesciunt
-										voluptates reiciendis sequi assumenda?
-										Illo porro qui ducimus sint provident
-										amet, molestias ut eligendi quod cumque,
-										laudantium dicta quasi. Iure!
-									</div>
-									<div class="documents-products__btn">
-										<wbutton type="primary"
-											>Hello World</wbutton
-										>
-									</div>
-								</div>
-							</div>
-							<div class="documents-products__wrap">
-								<div class="documents-products__item">
-									<div class="documents-products__img">
-										<img src="assets/logo.png" alt="" />
-									</div>
-									<div class="documents-products__title">
-										Title of product card here
-									</div>
-									<div
-										class="documents-products__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Optio nesciunt
-										voluptates reiciendis sequi assumenda?
-										Illo porro qui ducimus sint provident
-										amet, molestias ut eligendi quod cumque,
-										laudantium dicta quasi. Iure!
-									</div>
-									<div class="documents-products__btn">
-										<wbutton type="primary"
-											>Hello World</wbutton
-										>
-									</div>
-								</div>
-							</div>
-							<div class="documents-products__wrap">
-								<div class="documents-products__item">
-									<div class="documents-products__img">
-										<img src="assets/logo.png" alt="" />
-									</div>
-									<div class="documents-products__title">
-										Title of product card here
-									</div>
-									<div
-										class="documents-products__description"
-									>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Optio nesciunt
-										voluptates reiciendis sequi assumenda?
-										Illo porro qui ducimus sint provident
-										amet, molestias ut eligendi quod cumque,
-										laudantium dicta quasi. Iure!
-									</div>
-									<div class="documents-products__btn">
-										<wbutton type="primary"
-											>Hello World</wbutton
-										>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="documents-main-row">
-						<wform [config]="formDoc"></wform>
+					<div class="documents-main-row" *ngIf="!mine">
+						<wform
+							[config]="participateForm"
+							[submition]="submition"
+						></wform>
 					</div>
 				</div>
 			</div>
