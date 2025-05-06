@@ -12,11 +12,13 @@ import { FormcomponentsModule } from './formcomponents/formcomponents.module';
 import { SelectModule } from './modules/select/select.module';
 import { FormModule } from './modules/form/form.module';
 /* imports */
+import { ThemeComponent } from './components/theme/theme.component';
 import { ClassComponent } from './components/class/class.component';
 
 const components: Type<any>[] = [
 	/* components */
-	ClassComponent,
+	ThemeComponent,
+	ClassComponent
 ];
 
 const selectors: Type<any>[] = [

@@ -108,8 +108,6 @@ export class QuizComponent {
 		this._load();
 
 		this._mine();
-
-		this._socket.on('uacodequiz', (data) => {});
 	}
 
 	updateQuiz(field: 'name' | 'description', value: Value) {
@@ -117,6 +115,14 @@ export class QuizComponent {
 
 		this._core.afterWhile(() => {
 			this._quizService.update(this.quiz);
+		});
+	}
+
+	updateGrade(part: Uacodequizparticipation, value: Value) {
+		part.grade = value as string;
+
+		this._core.afterWhile(() => {
+			this._participationService.update(part, { name: 'owner' });
 		});
 	}
 
@@ -162,7 +168,13 @@ export class QuizComponent {
 
 				this.mine = classDocument?.device === this._core.deviceID;
 
-				if (!this.mine) {
+				if (this.mine) {
+					this._socket.on('uacodequiz', (data) => {
+						if (data === this.quizId) {
+							this._load();
+						}
+					});
+				} else {
 					this._loadMine();
 				}
 

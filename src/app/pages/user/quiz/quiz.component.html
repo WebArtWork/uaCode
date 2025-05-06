@@ -2,6 +2,7 @@
 	<div class="documents-container">
 		<div class="documents-list">
 			<div class="documents-header">
+				<core-theme></core-theme>
 				<div class="documents-header__title">
 					{{quiz.name || (`Common.No name` | translate)}}
 				</div>
@@ -30,6 +31,16 @@
 										(click)="loadParticipant(participant)"
 										>play_arrow</span
 									>
+
+									<winput
+										*ngIf="mine"
+										[value]="participant.grade"
+										(wChange)="updateGrade(participant, $event)"
+									></winput>
+
+									<span *ngIf="!mine">
+										({{participant.grade}})</span
+									>
 								</li>
 							</ul>
 						</div>
@@ -44,8 +55,10 @@
 						</div>
 
 						<winput
-							placeholder="code"
+							type="textarea"
 							[value]="participation.code"
+							[disabled]="true"
+							placeholder="code"
 						></winput>
 
 						<winput
