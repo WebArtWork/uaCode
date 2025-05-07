@@ -22,7 +22,7 @@ export class ClassComponent implements AfterViewInit {
 
 	@Output() mine = new EventEmitter();
 
-	classes: Uacodeclass[] = [];
+	classes: Uacodeclass[];
 
 	class: Uacodeclass;
 
@@ -138,7 +138,7 @@ export class ClassComponent implements AfterViewInit {
 	}
 
 	private _mine() {
-		if (this.classId) {
+		if (this.classId && this.classes) {
 			const classDocument = this.classes.find(
 				(c) => c._id === this.classId
 			);
@@ -147,6 +147,8 @@ export class ClassComponent implements AfterViewInit {
 				this.isMine = classDocument.device === this._core.deviceID;
 
 				this.mine.emit(classDocument.device === this._core.deviceID);
+			} else {
+				this.classId = '';
 			}
 		}
 	}
