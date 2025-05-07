@@ -14,7 +14,7 @@ export class StoreComponent {
 
 	formDoc: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
-		title: 'Doc form',
+		title: 'Оформлення замовлення',
 		components: [
 			{
 				name: 'Text',
@@ -22,11 +22,11 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your name'
+						value: "Введіть ваші прізвище та ім'я"
 					},
 					{
 						name: 'Label',
-						value: 'Name'
+						value: "Прізвище й ім'я"
 					}
 				]
 			},
@@ -36,11 +36,11 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your phone'
+						value: 'Введіть ваш номер телефону'
 					},
 					{
 						name: 'Label',
-						value: 'Phone'
+						value: 'Телефон'
 					}
 				]
 			},
@@ -50,11 +50,11 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio'
+						value: 'Вкажіть кількість книг, які ви хочете замовити'
 					},
 					{
 						name: 'Label',
-						value: 'Bio'
+						value: 'Кількість'
 					},
 					{
 						name: 'Textarea',
@@ -63,11 +63,54 @@ export class StoreComponent {
 				]
 			},
 			{
+				name: 'Text',
+				key: 'region',
+				fields: [
+					{
+						name: 'Placeholder',
+						value: 'Вкажіть ваш регіон/область'
+					},
+					{
+						
+						name: 'Label',
+						value: 'Регіон / Область'
+					},
+				]
+			},
+			{
+				name: 'Text',
+				key: 'city',
+				fields: [
+					{
+						name: 'Placeholder',
+						value: 'Вкажіть ваше місто'
+					},
+					{
+						name: 'Label',
+						value: 'Місто'
+					},
+				]
+			},
+			{
+				name: 'Text',
+				key: 'postOffice',
+				fields: [
+					{
+						name: 'Placeholder',
+						value: 'Вкажіть номер/адресу відділення/поштомату'
+					},
+					{
+						name: 'Label',
+						value: 'Відділення/поштомат/індекс'
+					},
+				]
+			},
+			{
 				name: 'Button',
 				fields: [
 					{
 						name: 'Label',
-						value: "Let's go"
+						value: "Замовити"
 					},
 					{
 						name: 'Submit',
@@ -79,11 +122,11 @@ export class StoreComponent {
 							this._http
 								.post('/api/bot/message', {
 									chatid: '-4759548231',
-									message: `Name: ${this.submition['name']}\nPhone: ${this.submition['phone']}\nBooks: ${this.submition['books']}`
+									message: `Name: ${this.submition['name']}\nPhone: ${this.submition['phone']}\nBooks: ${this.submition['books']}\nRegion: ${this.submition['region']}\nCity: ${this.submition['city']}\nPostOffice: ${this.submition['postOffice']}`
 								})
 								.subscribe(() => {
 									this._alert.show({
-										text: 'We will contact with you'
+										text: 'Дякуємо за замовлення!\n Ми сконтактуємо з вами найближчим часом'
 									});
 								});
 						}
