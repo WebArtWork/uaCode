@@ -68,7 +68,7 @@ export class TournamentComponent {
 
 	participateForm: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
-		title: 'Participate form',
+		title: 'Форма для участі',
 		components: [
 			{
 				name: 'Text',
@@ -76,11 +76,11 @@ export class TournamentComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your name'
+						value: "Введіть ім'я"
 					},
 					{
 						name: 'Label',
-						value: 'Name'
+						value: "Ім'я"
 					}
 				]
 			},
@@ -90,11 +90,11 @@ export class TournamentComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your code'
+						value: 'Введіть ваш код'
 					},
 					{
 						name: 'Label',
-						value: 'Code'
+						value: 'Код'
 					},
 					{
 						name: 'Textarea',
@@ -107,7 +107,7 @@ export class TournamentComponent {
 				fields: [
 					{
 						name: 'Label',
-						value: 'Update'
+						value: 'Приєднатися'
 					},
 					{
 						name: 'Submit',
@@ -215,7 +215,7 @@ export class TournamentComponent {
 		} else {
 			this._alert.error({
 				unique: 'copy',
-				text: 'Ваш код не повертає підходящі варіанти'
+				text: 'Ваш код не повертає потрібні варіанти'
 			});
 		}
 	}

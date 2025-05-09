@@ -73,7 +73,7 @@ export class ClassComponent implements AfterViewInit {
 
 	create() {
 		this._form.modal<Uacodeclass>(this._classCreationForm, {
-			label: 'Create',
+			label: 'Створити',
 			click: async (classDocument: unknown, close: () => void) => {
 				close();
 
@@ -95,7 +95,7 @@ export class ClassComponent implements AfterViewInit {
 
 	join() {
 		this._form.modal<Uacodeclass>(this._classJoinForm, {
-			label: 'Join',
+			label: 'Приєднатися',
 			click: async (classDocument: unknown, close: () => void) => {
 				close();
 
@@ -157,7 +157,7 @@ export class ClassComponent implements AfterViewInit {
 		'classCreationForm',
 		{
 			formId: 'classCreationForm',
-			title: 'Class creation',
+			title: 'Створення групи',
 			components: [
 				{
 					name: 'Text',
@@ -166,11 +166,11 @@ export class ClassComponent implements AfterViewInit {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter name'
+							value: "Введіть ім'я"
 						},
 						{
 							name: 'Label',
-							value: 'Name'
+							value: "Ім'я"
 						}
 					]
 				},
@@ -180,11 +180,11 @@ export class ClassComponent implements AfterViewInit {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter description'
+							value: 'Введіть опис'
 						},
 						{
 							name: 'Label',
-							value: 'Description'
+							value: 'Опис'
 						}
 					]
 				}
@@ -196,7 +196,7 @@ export class ClassComponent implements AfterViewInit {
 		'classJoinForm',
 		{
 			formId: 'classJoinForm',
-			title: 'Join class',
+			title: 'Приєднатися до групи',
 			components: [
 				{
 					name: 'Text',
@@ -205,11 +205,11 @@ export class ClassComponent implements AfterViewInit {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter name'
+							value: "Введіть ім'я"
 						},
 						{
 							name: 'Label',
-							value: 'Name'
+							value: "Ім'я"
 						}
 					]
 				},
@@ -219,11 +219,11 @@ export class ClassComponent implements AfterViewInit {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter description'
+							value: 'Введіть опис'
 						},
 						{
 							name: 'Label',
-							value: 'Description'
+							value: 'Опис'
 						}
 					]
 				}

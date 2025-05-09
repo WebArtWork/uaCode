@@ -36,7 +36,7 @@ export class QuizComponent {
 
 	participateForm: FormInterface = this._form.getForm('docForm', {
 		formId: 'docForm',
-		title: 'Participate form',
+		title: 'Форма для участі',
 		components: [
 			{
 				name: 'Text',
@@ -44,11 +44,11 @@ export class QuizComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your name'
+						value: "Введіть ім'я"
 					},
 					{
 						name: 'Label',
-						value: 'Name'
+						value: "Ім'я"
 					}
 				]
 			},
@@ -58,11 +58,11 @@ export class QuizComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your code'
+						value: 'Введіть ваш код'
 					},
 					{
 						name: 'Label',
-						value: 'Code'
+						value: 'Код'
 					},
 					{
 						name: 'Textarea',
@@ -75,7 +75,7 @@ export class QuizComponent {
 				fields: [
 					{
 						name: 'Label',
-						value: 'Update'
+						value: 'Приєднатися'
 					},
 					{
 						name: 'Submit',

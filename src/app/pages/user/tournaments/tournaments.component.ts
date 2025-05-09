@@ -83,7 +83,7 @@ export class TournamentsComponent {
 								);
 							} else {
 								this._alert.error({
-									text: 'Tournament not found'
+									text: 'Турній не знайдено'
 								});
 							}
 						});
@@ -98,7 +98,7 @@ export class TournamentsComponent {
 		'tournamentCreationForm',
 		{
 			formId: 'tournamentCreationForm',
-			title: 'Tournament creation',
+			title: 'Створення турніру',
 			components: [
 				{
 					name: 'Text',
@@ -107,11 +107,11 @@ export class TournamentsComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter name'
+							value: "Введіть ім'я"
 						},
 						{
 							name: 'Label',
-							value: 'Name'
+							value: "Ім'я"
 						}
 					]
 				},
@@ -121,7 +121,7 @@ export class TournamentsComponent {
 					fields: [
 						{
 							name: 'Label',
-							value: 'Private'
+							value: 'Приватний'
 						}
 					]
 				},
@@ -131,11 +131,11 @@ export class TournamentsComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter description'
+							value: 'Введіть опис'
 						},
 						{
 							name: 'Label',
-							value: 'Description'
+							value: 'Опис'
 						}
 					]
 				},
@@ -149,11 +149,11 @@ export class TournamentsComponent {
 						},
 						{
 							name: 'Placeholder',
-							value: 'Enter your bio'
+							value: 'Введіть коротко інформацію'
 						},
 						{
 							name: 'Label',
-							value: 'Bio'
+							value: 'Додаткова інформація'
 						}
 					]
 				},
@@ -167,11 +167,11 @@ export class TournamentsComponent {
 						},
 						{
 							name: 'Placeholder',
-							value: 'Enter your phone'
+							value: 'Введіть ваш телефон'
 						},
 						{
 							name: 'Label',
-							value: 'Phone'
+							value: 'Телефон'
 						},
 						{
 							name: 'Multiple',
@@ -185,7 +185,7 @@ export class TournamentsComponent {
 
 	private _formJoin: FormInterface = this._form.getForm('formJoin', {
 		formId: 'formJoin',
-		title: 'Join tournament',
+		title: 'Приєднатися до турніру',
 		components: [
 			{
 				name: 'Text',
@@ -194,11 +194,11 @@ export class TournamentsComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter code'
+						value: 'Введіть ваш код'
 					},
 					{
 						name: 'Label',
-						value: 'Code'
+						value: 'Код'
 					}
 				]
 			}

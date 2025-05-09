@@ -66,11 +66,11 @@ export class QuizzesComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter name'
+							value: "Введіть ім'я"
 						},
 						{
 							name: 'Label',
-							value: 'Name'
+							value: "Ім'я"
 						}
 					]
 				},
@@ -80,11 +80,11 @@ export class QuizzesComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Enter description'
+							value: 'Введіть опис'
 						},
 						{
 							name: 'Label',
-							value: 'Description'
+							value: 'Опис'
 						}
 					]
 				}
