@@ -139,6 +139,7 @@ export class CompilerComponent {
 			const code = `(()=>{${this._commandService.translate(this.submition['code'])}})()`;
 			// Виконання згенерованого JS-коду
 			// eslint-disable-next-line no-eval — вимикаємо лінтер на це місце, бо eval зазвичай небезпечний
+
 			eval(
 				skipAlert
 					? code

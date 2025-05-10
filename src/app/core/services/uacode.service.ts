@@ -20,6 +20,8 @@ export class UacodeService {
 
 	translateErrorMessage(message: string): string {
 		const jsErrorTranslations: Record<string, string> = {
+			true: 'ВІРНО',
+			false: 'НЕВІРНО',
 			undefined: 'не визначено',
 			null: 'нульове значення',
 			'not a function': 'не є функцією',
@@ -59,9 +61,11 @@ export class UacodeService {
 			NaN: 'не число (NaN)'
 		};
 
-		let translated = message;
+		let translated = message + '';
+
 		for (const [en, ua] of Object.entries(jsErrorTranslations)) {
 			const regex = new RegExp(en, 'gi');
+
 			translated = translated.replace(regex, ua);
 		}
 
@@ -301,7 +305,7 @@ export class UacodeService {
 			name: 'Зараз',
 			execute: 'Date.now',
 			example: "Друк('Час зараз: ' + Зараз());",
-			question: "Друк('Час зараз: ' + Зараз());"
+			question: "Друк('Часи будуть однакові: ' + (Зараз() == Зараз()));"
 		},
 		{
 			id: 24,
