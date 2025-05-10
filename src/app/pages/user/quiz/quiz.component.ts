@@ -138,9 +138,9 @@ export class QuizComponent {
 				};
 
 				try {
-					const code = this._commandService.translate(
+					const code = `(()=>{${this._commandService.translate(
 						participation.code
-					);
+					)}})()`;
 					// Виконання згенерованого JS-коду
 					// eslint-disable-next-line no-eval — вимикаємо лінтер на це місце, бо eval зазвичай небезпечний
 					eval(code);

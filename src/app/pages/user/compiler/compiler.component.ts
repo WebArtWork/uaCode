@@ -105,8 +105,6 @@ export class CompilerComponent {
 		output: ''
 	};
 
-	isMenuOpen = false;
-
 	constructor(
 		private _commandService: UacodeService,
 		private _form: FormService,
@@ -133,11 +131,12 @@ export class CompilerComponent {
 
 		// Локальна функція для виводу в "консоль" — додає текст до поля output
 		const print = (message: string) => {
-			this.submition['output'] += message + '\n';
+			this.submition['output'] +=
+				this._commandService.translateErrorMessage(message) + '\n';
 		};
 
 		try {
-			const code = this._commandService.translate(this.submition['code']);
+			const code = `(()=>{${this._commandService.translate(this.submition['code'])}})()`;
 			// Виконання згенерованого JS-коду
 			// eslint-disable-next-line no-eval — вимикаємо лінтер на це місце, бо eval зазвичай небезпечний
 			eval(
