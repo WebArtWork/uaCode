@@ -1,0 +1,1 @@
+import{_a as e,l as r}from"./chunk-DIESQVQ2.js";var n=(()=>{class t extends e{constructor(){super({name:"uacodequizparticipation"})}static{this.\u0275fac=function(o){return new(o||t)}}static{this.\u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{n as a};
