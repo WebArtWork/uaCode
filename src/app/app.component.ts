@@ -13,7 +13,11 @@ export class AppComponent {
 	constructor(private _router: Router) {
 		if (Capacitor.isNativePlatform()) {
 			App.addListener('appUrlOpen', ({ url }) => {
-				this._router.navigateByUrl('/compiler' + new URL(url).pathname);
+				this._router.navigateByUrl('/compiler').then(() => {
+					this._router.navigateByUrl(
+						'/compiler' + new URL(url).pathname
+					);
+				});
 			});
 		}
 	}
