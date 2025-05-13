@@ -1,6 +1,6 @@
-export const uacodetournamentFormComponents = {
-	formId: 'uacodetournament',
-	title: 'Uacodetournament',
+export const uacodetournamentparticipationFormComponents = {
+	formId: 'uacodetournamentparticipation',
+	title: 'Uacodetournamentparticipation',
 	components: [
 		{
 			name: 'Text',
@@ -9,7 +9,7 @@ export const uacodetournamentFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodetournament title',
+					value: 'fill uacodetournamentparticipation title',
 				},
 				{
 					name: 'Label',
@@ -23,7 +23,7 @@ export const uacodetournamentFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodetournament description',
+					value: 'fill uacodetournamentparticipation description',
 				},
 				{
 					name: 'Label',

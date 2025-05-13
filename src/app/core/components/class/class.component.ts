@@ -48,7 +48,7 @@ export class ClassComponent implements AfterViewInit {
 			if (classId) {
 				this.classId = classId;
 
-				this.class = this.classes.find(
+				this.class = this.classes?.find(
 					(c) => c._id === classId
 				) as Uacodeclass;
 

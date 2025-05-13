@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Uacodetournament } from '../interfaces/uacodetournament.interface';
+import { Uacodetournamentparticipation } from '../interfaces/uacodetournamentparticipation.interface';
 import { AlertService, CrudService } from 'wacom';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class UacodetournamentService extends CrudService<Uacodetournament> {
+export class UacodetournamentparticipationService extends CrudService<Uacodetournamentparticipation> {
 	methods = ['Rock, Paper, Scissors', "The Prisoner's Dilemma", 'Magicians'];
 
 	options: Record<string, string[]> = {
@@ -211,7 +211,7 @@ export class UacodetournamentService extends CrudService<Uacodetournament> {
 
 	constructor(private _alert: AlertService) {
 		super({
-			name: 'uacodetournament'
+			name: 'uacodetournamentparticipation'
 		});
 	}
 }

@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
-import { UacodetournamentService } from 'src/app/modules/uacodetournament/services/uacodetournament.service';
 import { Router } from '@angular/router';
-import { UacodeparticipationService } from 'src/app/modules/uacodeparticipation/services/uacodeparticipation.service';
-import { Uacodeparticipation } from 'src/app/modules/uacodeparticipation/interfaces/uacodeparticipation.interface';
 import { AlertService, CoreService, HttpService, SocketService } from 'wacom';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UacodeService } from 'src/app/core/services/uacode.service';
+import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
+import { UacodetournamentparticipationService } from 'src/app/modules/uacodetournamentparticipation/services/uacodetournamentparticipation.service';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -16,26 +15,17 @@ import { UacodeService } from 'src/app/core/services/uacode.service';
 	standalone: false
 })
 export class TournamentComponent {
-	readonly isPrivate = this._router.url.split('/')[2] === 'private';
+	readonly isClass = this._router.url.split('/')[2] === 'class';
+
+	readonly method = this._router.url.split('/')[3].split('%20').join(' ');
 
 	get mine(): boolean {
-		return this.tournament?.device === this._core.deviceID;
-	}
-
-	get method(): string {
-		return this.isPrivate
-			? this.tournament?.method || ''
-			: this._router.url.split('/')[3].split('%20').join(' ');
+		return true;
 	}
 
 	get options(): string[] {
-		return this._tournamentService.options[this.method];
+		return this._participationService.options[this.method];
 	}
-
-	tournament =
-		this._router.url.split('/')[2] === 'private'
-			? this._tournamentService.doc(this._router.url.split('/')[3])
-			: null;
 
 	name: Record<string, string> = {
 		'Rock, Paper, Scissors': `Камінь, ножиці, папір`,
@@ -57,9 +47,9 @@ export class TournamentComponent {
 		"The Prisoner's Dilemma": `Якщо (останнійВибірСуперника == 'зрадити') {\n  Поверни 'зрадити';\n} ІнакшеЯкщо (кількістьЗрадСуперника > кількістьМовчаньСуперника) {\n  Поверни 'зрадити';\n} Інакше {\n  Поверни 'мовчати';\n}`
 	};
 
-	participations: Uacodeparticipation[] = [];
+	participations: Uacodetournamentparticipation[] = [];
 
-	participation: Uacodeparticipation;
+	participation: Uacodetournamentparticipation;
 
 	submition: Record<string, unknown> = {
 		name: '',
@@ -125,8 +115,7 @@ export class TournamentComponent {
 	});
 
 	constructor(
-		private _participationService: UacodeparticipationService,
-		private _tournamentService: UacodetournamentService,
+		private _participationService: UacodetournamentparticipationService,
 		private _commandService: UacodeService,
 		public userService: UserService,
 		private _socket: SocketService,
@@ -143,18 +132,12 @@ export class TournamentComponent {
 
 		this._socket.on('uacode', (data) => {
 			if (
-				(data.tournament && this.tournament?._id === data.tournament) ||
-				(!data.tournament && data.method === this.method)
+				data.method === this.method &&
+				((!this.isClass && !data.class) || data.class === 'class')
 			) {
 				this._load();
 			}
 		});
-	}
-
-	update() {
-		if (this.tournament) {
-			this._tournamentService.update(this.tournament);
-		}
 	}
 
 	copySample() {
@@ -168,8 +151,10 @@ export class TournamentComponent {
 
 	start() {
 		this._http
-			.post('/api/uacode/start', this.tournament)
-			.subscribe((participations: Uacodeparticipation[]) => {
+			.post('/api/uacode/start', {
+				class: 'class'
+			})
+			.subscribe((participations: Uacodetournamentparticipation[]) => {
 				if (participations) {
 					participations.sort((a, b) => {
 						return a.points - b.points;
@@ -182,25 +167,25 @@ export class TournamentComponent {
 
 	private _updateParticipation() {
 		if (
-			this._tournamentService.test[this.method](
+			this._participationService.test[this.method](
 				this._commandService.translate(this.submition['code'] as string)
 			)
 		) {
 			const participation = {
 				...this.submition,
-				tournament: this.tournament?._id || null,
+				class: this.isClass ? 'class' : null,
 				method: this.method,
 				device: this._core.deviceID
-			} as Uacodeparticipation;
+			} as Uacodetournamentparticipation;
 
 			if (this.participation) {
 				this._participationService
 					.update(participation)
 					.subscribe(() => {
-						const part: Uacodeparticipation =
+						const part: Uacodetournamentparticipation =
 							this.participations.find(
 								(p) => p.device === this._core.deviceID
-							) as Uacodeparticipation;
+							) as Uacodetournamentparticipation;
 						if (part) {
 							part.name = participation.name;
 						}
@@ -223,10 +208,11 @@ export class TournamentComponent {
 	private _loadMine() {
 		this._participationService
 			.fetch(
-				this.tournament
+				this.isClass
 					? {
 							device: this._core.deviceID,
-							tournament: this.tournament._id
+							method: this.method,
+							class: 'class'
 						}
 					: {
 							device: this._core.deviceID,
@@ -248,9 +234,9 @@ export class TournamentComponent {
 		this._participationService
 			.get(
 				{
-					query: this.tournament
-						? 'tournament=' + this.tournament._id
-						: 'method=' + this.method
+					query:
+						`method=${this.method}` +
+						(this.isClass ? '&class=class' : '')
 				},
 				{ name: 'public' }
 			)

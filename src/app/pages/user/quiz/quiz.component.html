@@ -38,7 +38,7 @@
 										(wChange)="updateGrade(participant, $event)"
 									></winput>
 
-									<span *ngIf="!mine">
+									<span *ngIf="!mine && participant.grade">
 										({{participant.grade}})</span
 									>
 								</li>

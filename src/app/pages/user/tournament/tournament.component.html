@@ -3,14 +3,11 @@
 		<div class="documents-list">
 			<div class="documents-header">
 				<core-theme></core-theme>
-				<div class="documents-header__title">
-					{{tournament ? tournament.name || (`Common.No name
-					tournament` | translate) : method}}
-				</div>
+				<div class="documents-header__title">{{name[method]}}</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<div
+					<!-- <div
 						*ngIf="tournament?.description || tournament?.tags?.length"
 						class="documents-main-row"
 					>
@@ -27,7 +24,7 @@
 								<div class="documents-tags__item">{{tag}}</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div
 						*ngIf="participations.length"
 						class="documents-main-row"
@@ -44,20 +41,10 @@
 							</ul>
 						</div>
 					</div>
-					<div class="documents-main-row" *ngIf="mine && tournament">
-						<div class="documents__title">Admin</div>
-						<div
-							class="documents__description"
-							*ngIf="tournament.code"
-						>
-							Code: {{tournament.code}}
-						</div>
+					<div class="documents-main-row" *ngIf="mine && isClass">
+						<div class="documents__title">Секція вчителя</div>
 
-						<winput placeholder="name"></winput>
-
-						<winput placeholder="description"></winput>
-
-						<wselect
+						<!-- <wselect
 							placeholder="Select tournament tags"
 							[items]="['Reality', 'One Mirror']"
 							[select]="tournament.tags"
@@ -66,7 +53,7 @@
 								tournament.tags = $event;
 								update()
 							"
-						></wselect>
+						></wselect> -->
 
 						<wbutton (click)="start()">Start</wbutton>
 					</div>

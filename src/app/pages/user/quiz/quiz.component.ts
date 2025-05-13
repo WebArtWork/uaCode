@@ -193,19 +193,29 @@ export class QuizComponent {
 		} as Uacodequizparticipation;
 
 		if (this.participation) {
-			this._participationService.update(participation).subscribe(() => {
-				const part: Uacodequizparticipation = this.participations.find(
-					(p) => p.device === this._core.deviceID
-				) as Uacodequizparticipation;
+			this._participationService
+				.update({
+					...this.participation,
+					...participation
+				})
+				.subscribe(() => {
+					const part: Uacodequizparticipation =
+						this.participations.find(
+							(p) => p.device === this._core.deviceID
+						) as Uacodequizparticipation;
 
-				if (part) {
-					part.name = participation.name;
-				}
-			});
+					if (part) {
+						part.name = participation.name;
+					}
+				});
 		} else {
-			this._participationService.create(participation).subscribe(() => {
-				this._load();
-			});
+			this._participationService
+				.create(participation)
+				.subscribe((created) => {
+					this.participation = created;
+
+					this._load();
+				});
 		}
 	}
 

@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 	{
-		path: 'private/:_id',
+		path: 'class/:_method',
 		component: TournamentComponent
 	},
 	{

@@ -71,6 +71,32 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'quizparticipantions',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Quizparticipantions'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/uacodequizparticipation/pages/quizparticipantions/quizparticipantions.routes'
+					).then((r) => r.quizparticipantionsRoutes)
+			},
+			{
+				path: 'tournamentparticipations',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Tournamentparticipations'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/uacodetournamentparticipation/pages/tournamentparticipations/tournamentparticipations.routes'
+					).then((r) => r.tournamentparticipationsRoutes)
+			},
+			{
 				path: 'store',
 				canActivate: [MetaGuard],
 				data: {
@@ -78,18 +104,11 @@ const routes: Routes = [
 						title: 'Store'
 					}
 				},
-				loadChildren: () => import('./pages/user/store/store.module').then(m => m.StoreModule)
-			}, 
-			{
-				path: 'allquizparticipations',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Allquizparticipations'
-					}
-				},
-				loadChildren: () => import('./modules/uacodequizparticipation/pages/allquizparticipations/allquizparticipations.module').then(m => m.AllquizparticipationsModule)
-			}, 
+				loadChildren: () =>
+					import('./pages/user/store/store.module').then(
+						(m) => m.StoreModule
+					)
+			},
 			{
 				path: 'allquizes',
 				canActivate: [MetaGuard],
@@ -98,8 +117,11 @@ const routes: Routes = [
 						title: 'Allquizes'
 					}
 				},
-				loadChildren: () => import('./modules/uacodequiz/pages/allquizes/allquizes.module').then(m => m.AllquizesModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/uacodequiz/pages/allquizes/allquizes.module'
+					).then((m) => m.AllquizesModule)
+			},
 			{
 				path: 'classes',
 				canActivate: [MetaGuard],
@@ -108,8 +130,11 @@ const routes: Routes = [
 						title: 'Classes'
 					}
 				},
-				loadChildren: () => import('./modules/uacodeclass/pages/classes/classes.module').then(m => m.ClassesModule)
-			}, 
+				loadChildren: () =>
+					import(
+						'./modules/uacodeclass/pages/classes/classes.module'
+					).then((m) => m.ClassesModule)
+			},
 			{
 				path: 'quiz',
 				canActivate: [MetaGuard],
@@ -118,8 +143,11 @@ const routes: Routes = [
 						title: 'Quiz'
 					}
 				},
-				loadChildren: () => import('./pages/user/quiz/quiz.module').then(m => m.QuizModule)
-			}, 
+				loadChildren: () =>
+					import('./pages/user/quiz/quiz.module').then(
+						(m) => m.QuizModule
+					)
+			},
 			{
 				path: 'quizzes',
 				canActivate: [MetaGuard],
@@ -128,20 +156,10 @@ const routes: Routes = [
 						title: 'Quizzes'
 					}
 				},
-				loadChildren: () => import('./pages/user/quizzes/quizzes.module').then(m => m.QuizzesModule)
-			}, 
-			{
-				path: 'participations',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Participations'
-					}
-				},
 				loadChildren: () =>
-					import(
-						'./modules/uacodeparticipation/pages/participations/participations.module'
-					).then((m) => m.ParticipationsModule)
+					import('./pages/user/quizzes/quizzes.module').then(
+						(m) => m.QuizzesModule
+					)
 			},
 			{
 				path: 'tournament',
@@ -203,19 +221,6 @@ const routes: Routes = [
 		component: UserComponent,
 		children: [
 			/* admin */
-			{
-				path: 'tournaments',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Tournaments'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/uacodetournament/pages/tournaments/tournaments.module'
-					).then((m) => m.TournamentsModule)
-			},
 			{
 				path: 'users',
 				canActivate: [MetaGuard],

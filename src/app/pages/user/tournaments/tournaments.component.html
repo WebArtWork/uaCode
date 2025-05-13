@@ -9,37 +9,17 @@
 				</div> -->
 			</div>
 			<div class="documents-main">
-				<div class="documents-main-content" *ngIf="!loading">
+				<div class="documents-main-content">
 					<div class="documents-main-row">
 						<core-class></core-class>
 						<!-- (mine)="mineClass = $event"
 							(wChange)="load($event)" -->
 					</div>
 					<h3>Групові турніри</h3>
-					<!-- <div
-						*ngFor="let tournament of tournaments"
-						class="documents-main-row"
-						(click)="open(tournament)"
-					>
-						<div class="documents__title">{{tournament.name}}</div>
-						<div
-							class="documents__description"
-							*ngIf="tournament.description"
-							[innerHtml]="tournament.description"
-						></div>
-						<div class="documents-tags">
-							<div
-								class="documents-tags__wrap"
-								*ngFor="let tag of tournament.tags"
-							>
-								<div class="documents-tags__item">{{tag}}</div>
-							</div>
-						</div>
-					</div> -->
 					<div
 						*ngFor="let method of methods"
 						class="documents-main-row"
-						routerLink="/tournament/public/{{method}}"
+						routerLink="/tournament/class/{{method}}"
 					>
 						<div class="documents__title">{{method}}</div>
 					</div>
