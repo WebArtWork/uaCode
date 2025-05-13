@@ -26,14 +26,12 @@ export class ClassComponent implements AfterViewInit {
 
 	class: Uacodeclass;
 
-	classId: string;
-
 	loaded = false;
 
 	isMine = false;
 
 	constructor(
-		private _classService: UacodeclassService,
+		public classService: UacodeclassService,
 		private _store: StoreService,
 		private _http: HttpService,
 		private _core: CoreService,
@@ -46,7 +44,7 @@ export class ClassComponent implements AfterViewInit {
 	ngAfterViewInit(): void {
 		this._store.get('uacodeclassId', (classId) => {
 			if (classId) {
-				this.classId = classId;
+				this.classService.classId = classId;
 
 				this.class = this.classes?.find(
 					(c) => c._id === classId
@@ -60,7 +58,7 @@ export class ClassComponent implements AfterViewInit {
 	}
 
 	setClass(id: string) {
-		this.classId = id;
+		this.classService.classId = id;
 
 		this.class = this.classes.find((c) => c._id === id) as Uacodeclass;
 
@@ -77,13 +75,13 @@ export class ClassComponent implements AfterViewInit {
 			click: async (classDocument: unknown, close: () => void) => {
 				close();
 
-				this._classService
+				this.classService
 					.create({
 						...(classDocument as Uacodeclass),
 						device: this._core.deviceID
 					})
 					.subscribe((created) => {
-						this.classId = created._id;
+						this.classService.classId = created._id;
 
 						this.class = created;
 					});
@@ -97,7 +95,7 @@ export class ClassComponent implements AfterViewInit {
 			click: async (classDocument: unknown, close: () => void) => {
 				close();
 
-				this._classService
+				this.classService
 					.fetch(classDocument as Uacodeclass)
 					.subscribe((hasAccess) => {
 						if (hasAccess) {
@@ -121,10 +119,10 @@ export class ClassComponent implements AfterViewInit {
 
 	private _load() {
 		this._core.onComplete('uacodeclass_loaded').then(() => {
-			this.classes = this._classService.getDocs();
+			this.classes = this.classService.getDocs();
 
 			this.class = this.classes.find(
-				(c) => c._id === this.classId
+				(c) => c._id === this.classService.classId
 			) as Uacodeclass;
 
 			this._mine();
@@ -136,9 +134,9 @@ export class ClassComponent implements AfterViewInit {
 	}
 
 	private _mine() {
-		if (this.classId && this.classes) {
+		if (this.classService.classId && this.classes) {
 			const classDocument = this.classes.find(
-				(c) => c._id === this.classId
+				(c) => c._id === this.classService.classId
 			);
 
 			if (classDocument) {
@@ -146,7 +144,7 @@ export class ClassComponent implements AfterViewInit {
 
 				this.mine.emit(classDocument.device === this._core.deviceID);
 			} else {
-				this.classId = '';
+				this.classService.classId = '';
 			}
 		}
 	}

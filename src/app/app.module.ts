@@ -78,8 +78,11 @@ const routes: Routes = [
 						title: 'Achievements'
 					}
 				},
-				loadChildren: () => import('./modules/uacodeachievement/pages/achievements/achievements.routes').then(r => r.achievementsRoutes)
-			}, 
+				loadChildren: () =>
+					import(
+						'./pages/user/achievements/achievements.module'
+					).then((m) => m.AchievementsModule)
+			},
 			{
 				path: 'quizparticipantions',
 				canActivate: [MetaGuard],
@@ -231,6 +234,19 @@ const routes: Routes = [
 		component: UserComponent,
 		children: [
 			/* admin */
+			{
+				path: 'achievements',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Achievements'
+					}
+				},
+				loadChildren: () =>
+					import(
+						'./modules/uacodeachievement/pages/achievements/achievements.routes'
+					).then((r) => r.achievementsRoutes)
+			},
 			{
 				path: 'users',
 				canActivate: [MetaGuard],

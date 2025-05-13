@@ -8,6 +8,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { UacodeService } from 'src/app/core/services/uacode.service';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
 import { UacodetournamentparticipationService } from 'src/app/modules/uacodetournamentparticipation/services/uacodetournamentparticipation.service';
+import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -116,6 +117,7 @@ export class TournamentComponent {
 
 	constructor(
 		private _participationService: UacodetournamentparticipationService,
+		private _classService: UacodeclassService,
 		private _commandService: UacodeService,
 		public userService: UserService,
 		private _socket: SocketService,
@@ -133,7 +135,8 @@ export class TournamentComponent {
 		this._socket.on('uacode', (data) => {
 			if (
 				data.method === this.method &&
-				((!this.isClass && !data.class) || data.class === 'class')
+				((!this.isClass && !data.class) ||
+					data.class === this._classService.classId)
 			) {
 				this._load();
 			}
@@ -173,7 +176,7 @@ export class TournamentComponent {
 		) {
 			const participation = {
 				...this.submition,
-				class: this.isClass ? 'class' : null,
+				class: this.isClass ? this._classService.classId : null,
 				method: this.method,
 				device: this._core.deviceID
 			} as Uacodetournamentparticipation;
@@ -212,7 +215,7 @@ export class TournamentComponent {
 					? {
 							device: this._core.deviceID,
 							method: this.method,
-							class: 'class'
+							class: this._classService.classId
 						}
 					: {
 							device: this._core.deviceID,
@@ -236,7 +239,9 @@ export class TournamentComponent {
 				{
 					query:
 						`method=${this.method}` +
-						(this.isClass ? '&class=class' : '')
+						(this.isClass
+							? '&class=' + this._classService.classId
+							: '')
 				},
 				{ name: 'public' }
 			)
