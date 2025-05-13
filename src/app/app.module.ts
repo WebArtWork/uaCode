@@ -71,6 +71,16 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'achievements',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Achievements'
+					}
+				},
+				loadChildren: () => import('./modules/uacodeachievement/pages/achievements/achievements.routes').then(r => r.achievementsRoutes)
+			}, 
+			{
 				path: 'quizparticipantions',
 				canActivate: [MetaGuard],
 				data: {
