@@ -4,6 +4,7 @@
 	placeholder="Приєднайтеся або створіть групу"
 	(modelChange)="setClass($event)"
 	[select]="loaded ? classId : null"
+	[disabled]="!classes.length"
 	[items]="classes"
 	*ngIf="loaded"
 ></wselect>

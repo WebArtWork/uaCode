@@ -83,11 +83,9 @@ export class ClassComponent implements AfterViewInit {
 						device: this._core.deviceID
 					})
 					.subscribe((created) => {
-						this.classes.push(created);
+						this.classId = created._id;
 
-						this.class = this.classes.find(
-							(c) => c._id === this.classId
-						) as Uacodeclass;
+						this.class = created;
 					});
 			}
 		});

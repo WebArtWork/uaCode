@@ -115,9 +115,21 @@ export class SelectComponent implements OnInit, OnChanges {
 		}
 	}
 
+	showOptions() {
+		if (!this.disabled) {
+			this.selectShow = !this.selectShow;
+
+			this.focus_search();
+		}
+	}
+
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['select'] && !changes['select'].firstChange) {
 			this.ngOnInit();
+		}
+
+		if (changes['disabled'] && !changes['disabled'].firstChange) {
+			this.disabled = changes['disabled'].currentValue;
 		}
 	}
 

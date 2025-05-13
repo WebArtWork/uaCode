@@ -4,15 +4,13 @@
 
 	<!-- Select body containing the selected item(s) and dropdown -->
 	<div
-		class="w-select__body"
+		(clickOutside)="selectShow = false"
+		[class._disabled]="disabled"
 		[class._active]="selectShow"
-		(clickOutside)="selectShow=false"
+		class="w-select__body"
 	>
 		<!-- Select header with the selected item(s) -->
-		<div
-			(click)="selectShow=!selectShow; focus_search();"
-			class="w-select__header"
-		>
+		<div (click)="showOptions()" class="w-select__header">
 			<svg
 				width="20"
 				height="20"
