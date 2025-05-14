@@ -4,17 +4,18 @@
 			<div class="documents-header">
 				<core-theme></core-theme>
 				<div class="documents-header__title">Вікторини</div>
-				<div class="burger-wrap" (click)="add()" *ngIf="mineClass">
+				<div
+					*ngIf="classService.mineClass"
+					class="burger-wrap"
+					(click)="add()"
+				>
 					<span class="material-icons">add</span>
 				</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
 					<div class="documents-main-row">
-						<core-class
-							(mine)="mineClass = $event"
-							(wChange)="load($event)"
-						></core-class>
+						<core-class (wChange)="load($event)"></core-class>
 					</div>
 					<div
 						routerLink="/quiz/{{quiz._id}}"

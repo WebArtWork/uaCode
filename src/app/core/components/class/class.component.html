@@ -2,10 +2,10 @@
 
 <wselect
 	placeholder="Приєднайтеся або створіть групу"
-	(modelChange)="setClass($event)"
 	[select]="loaded ? classService.classId : null"
-	[disabled]="!classes.length"
-	[items]="classes"
+	[disabled]="!classService.classes.length"
+	(modelChange)="setClass($event)"
+	[items]="classService.classes"
 	*ngIf="loaded"
 ></wselect>
 
@@ -13,4 +13,6 @@
 
 <i class="material-icons" (click)="create()">add</i>
 
-<div *ngIf="isMine && class">Код для приєднання: {{class.code}}</div>
+<div *ngIf="classService.mineClass && class">
+	Код для приєднання: {{class.code}}
+</div>

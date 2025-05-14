@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { Router } from '@angular/router';
@@ -30,7 +29,7 @@ export class QuizComponent {
 	participation: Uacodequizparticipation;
 
 	submition: Record<string, unknown> = {
-		name: '',
+		name: localStorage.getItem('myname'),
 		code: ''
 	};
 
@@ -99,7 +98,6 @@ export class QuizComponent {
 		private _classService: UacodeclassService,
 		private _quizService: UacodequizService,
 		private _commandService: UacodeService,
-		public userService: UserService,
 		private _socket: SocketService,
 		private _core: CoreService,
 		private _form: FormService,
@@ -127,6 +125,8 @@ export class QuizComponent {
 	}
 
 	loadParticipant(part: Uacodequizparticipation) {
+		localStorage.setItem('myname', this.submition['name'] as string);
+
 		this._participationService
 			.fetch(part, { name: 'owner' })
 			.subscribe((participation) => {

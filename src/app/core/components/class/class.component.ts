@@ -1,5 +1,4 @@
 import {
-	AfterViewInit,
 	ChangeDetectorRef,
 	Component,
 	EventEmitter,
@@ -17,18 +16,12 @@ import { CoreService, HttpService, StoreService } from 'wacom';
 	styleUrls: ['./class.component.scss'],
 	standalone: false
 })
-export class ClassComponent implements AfterViewInit {
+export class ClassComponent {
 	@Output() wChange = new EventEmitter();
-
-	@Output() mine = new EventEmitter();
-
-	classes: Uacodeclass[];
 
 	class: Uacodeclass;
 
 	loaded = false;
-
-	isMine = false;
 
 	constructor(
 		public classService: UacodeclassService,
@@ -38,29 +31,31 @@ export class ClassComponent implements AfterViewInit {
 		private _form: FormService,
 		private _cdr: ChangeDetectorRef
 	) {
-		this._load();
-	}
+		this._core.onComplete('class').then(() => {
+			this.class = this.classService.classes?.find(
+				(c) => c._id === this.classService.classId
+			) as Uacodeclass;
 
-	ngAfterViewInit(): void {
-		this._store.get('uacodeclassId', (classId) => {
-			if (classId) {
-				this.classService.classId = classId;
-
-				this.class = this.classes?.find(
-					(c) => c._id === classId
-				) as Uacodeclass;
-
-				this.wChange.emit(classId);
-
-				this._mine();
+			if (!this.class) {
+				this.classService.classId = '';
 			}
+
+			this.wChange.emit(this.classService.classId);
+
+			this._mine();
+
+			this.loaded = true;
+
+			this._cdr.detectChanges();
 		});
 	}
 
 	setClass(id: string) {
 		this.classService.classId = id;
 
-		this.class = this.classes.find((c) => c._id === id) as Uacodeclass;
+		this.class = this.classService.classes.find(
+			(c) => c._id === id
+		) as Uacodeclass;
 
 		this._store.set('uacodeclassId', id);
 
@@ -85,7 +80,7 @@ export class ClassComponent implements AfterViewInit {
 
 						this.class = created;
 
-						this.isMine = true;
+						this.classService.mineClass = true;
 					});
 			}
 		});
@@ -108,7 +103,9 @@ export class ClassComponent implements AfterViewInit {
 								})
 								.subscribe((classDocument: Uacodeclass) => {
 									if (classDocument) {
-										this.classes.push(classDocument);
+										this.classService.classes.push(
+											classDocument
+										);
 
 										this.setClass(classDocument._id);
 									}
@@ -119,32 +116,15 @@ export class ClassComponent implements AfterViewInit {
 		});
 	}
 
-	private _load() {
-		this._core.onComplete('uacodeclass_loaded').then(() => {
-			this.classes = this.classService.getDocs();
-
-			this.class = this.classes.find(
-				(c) => c._id === this.classService.classId
-			) as Uacodeclass;
-
-			this._mine();
-
-			this.loaded = true;
-
-			this._cdr.detectChanges();
-		});
-	}
-
 	private _mine() {
-		if (this.classService.classId && this.classes) {
-			const classDocument = this.classes.find(
+		if (this.classService.classId && this.classService.classes) {
+			const classDocument = this.classService.classes.find(
 				(c) => c._id === this.classService.classId
 			);
 
 			if (classDocument) {
-				this.isMine = classDocument.device === this._core.deviceID;
-
-				this.mine.emit(classDocument.device === this._core.deviceID);
+				this.classService.mineClass =
+					classDocument.device === this._core.deviceID;
 			} else {
 				this.classService.classId = '';
 			}

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { Router } from '@angular/router';
@@ -49,7 +48,7 @@ export class TournamentComponent {
 	participation: Uacodetournamentparticipation;
 
 	submition: Record<string, unknown> = {
-		name: '',
+		name: localStorage.getItem('myname') || '',
 		code: ''
 	};
 
@@ -115,7 +114,6 @@ export class TournamentComponent {
 		private _participationService: UacodetournamentparticipationService,
 		private _classService: UacodeclassService,
 		private _commandService: UacodeService,
-		public userService: UserService,
 		private _socket: SocketService,
 		private _clipboard: Clipboard,
 		private _alert: AlertService,
@@ -165,6 +163,8 @@ export class TournamentComponent {
 	}
 
 	private _updateParticipation() {
+		localStorage.setItem('myname', this.submition['name'] as string);
+
 		if (
 			this._participationService.test[this.method](
 				this._commandService.translate(this.submition['code'] as string)

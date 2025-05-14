@@ -14,16 +14,22 @@
 						class="documents-main-row"
 						*ngFor="let achievement of [{}, {}, {}]"
 					>
-						<div class="documents__title">
+						<div class="documents__title" *ngIf="!method">
 							Камінь, ножиці, папір
 						</div>
 						<div class="documents-wrap">
 							<div class="documents-img">
-								<img src="/assets/achievement.png" alt="" />
+								<img
+									style="width: 100px; height: 100px"
+									src="/assets/achievement.png"
+									alt=""
+								/>
 							</div>
 							<div class="documents-text">
 								<div class="documents-text__title">
-									Honchar Denys
+									<span>Honchar Denys</span>
+
+									<span>15.05.2025</span>
 								</div>
 							</div>
 						</div>

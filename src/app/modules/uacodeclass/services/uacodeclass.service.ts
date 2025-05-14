@@ -6,7 +6,11 @@ import { CoreService, CrudService, StoreService } from 'wacom';
 	providedIn: 'root'
 })
 export class UacodeclassService extends CrudService<Uacodeclass> {
+	classes: Uacodeclass[];
+
 	classId: string;
+
+	mineClass = false;
 
 	constructor(
 		private _core: CoreService,
@@ -24,6 +28,12 @@ export class UacodeclassService extends CrudService<Uacodeclass> {
 			if (classId) {
 				this.classId = classId;
 			}
+
+			this._core.onComplete('uacodeclass_loaded').then(() => {
+				this.classes = this.getDocs();
+
+				this._core.complete('class');
+			});
 		});
 	}
 }

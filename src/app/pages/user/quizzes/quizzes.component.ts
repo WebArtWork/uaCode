@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { Uacodequiz } from 'src/app/modules/uacodequiz/interfaces/uacodequiz.interface';
 import { UacodequizService } from 'src/app/modules/uacodequiz/services/uacodequiz.service';
 
@@ -13,19 +14,14 @@ import { UacodequizService } from 'src/app/modules/uacodequiz/services/uacodequi
 export class QuizzesComponent {
 	quizzes: Uacodequiz[] = [];
 
-	mineClass = false;
-
-	classId: string;
-
 	constructor(
+		public classService: UacodeclassService,
 		private _quizService: UacodequizService,
 		private _form: FormService,
 		private _router: Router
 	) {}
 
 	load(classId: string): void {
-		this.classId = classId;
-
 		this._quizService
 			.get({
 				query: 'class=' + classId
@@ -44,7 +40,7 @@ export class QuizzesComponent {
 				this._quizService
 					.create({
 						...(tournament as Uacodequiz),
-						class: this.classId
+						class: this.classService.classId
 					})
 					.subscribe((created) => {
 						this._router.navigateByUrl('/quiz/' + created._id);

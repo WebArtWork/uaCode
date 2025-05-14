@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { UacodetournamentparticipationService } from 'src/app/modules/uacodetournamentparticipation/services/uacodetournamentparticipation.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class TournamentsComponent {
 	readonly name = this._participationService.name;
 
 	constructor(
-		private _participationService: UacodetournamentparticipationService
+		private _participationService: UacodetournamentparticipationService,
+		public classService: UacodeclassService
 	) {}
 }

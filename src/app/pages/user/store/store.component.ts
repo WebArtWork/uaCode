@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { AlertService, HttpService } from 'wacom';
@@ -71,10 +70,9 @@ export class StoreComponent {
 						value: 'Вкажіть ваш регіон/область'
 					},
 					{
-						
 						name: 'Label',
 						value: 'Регіон / Область'
-					},
+					}
 				]
 			},
 			{
@@ -88,7 +86,7 @@ export class StoreComponent {
 					{
 						name: 'Label',
 						value: 'Місто'
-					},
+					}
 				]
 			},
 			{
@@ -102,7 +100,7 @@ export class StoreComponent {
 					{
 						name: 'Label',
 						value: 'Відділення/поштомат/індекс'
-					},
+					}
 				]
 			},
 			{
@@ -110,7 +108,7 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Label',
-						value: "Замовити"
+						value: 'Замовити'
 					},
 					{
 						name: 'Submit',
@@ -139,7 +137,6 @@ export class StoreComponent {
 	isMenuOpen = false;
 
 	constructor(
-		public userService: UserService,
 		private _alert: AlertService,
 		private _http: HttpService,
 		private _form: FormService
