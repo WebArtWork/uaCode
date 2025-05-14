@@ -9,6 +9,8 @@ import { UacodetournamentparticipationService } from 'src/app/modules/uacodetour
 export class TournamentsComponent {
 	readonly methods = this._participationService.methods;
 
+	readonly name = this._participationService.name;
+
 	constructor(
 		private _participationService: UacodetournamentparticipationService
 	) {}

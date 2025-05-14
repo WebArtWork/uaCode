@@ -4,6 +4,12 @@
 			<div class="documents-header">
 				<core-theme></core-theme>
 				<div class="documents-header__title">{{name[method]}}</div>
+				<div
+					class="burger-wrap"
+					routerLink="/achievements/{{isClass ? 'class' : 'public'}}/{{method}}"
+				>
+					<span class="material-icons">emoji_events</span>
+				</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">

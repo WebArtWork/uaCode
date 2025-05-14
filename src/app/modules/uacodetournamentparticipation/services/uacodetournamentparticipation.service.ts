@@ -6,6 +6,12 @@ import { AlertService, CrudService } from 'wacom';
 	providedIn: 'root'
 })
 export class UacodetournamentparticipationService extends CrudService<Uacodetournamentparticipation> {
+	name: Record<string, string> = {
+		'Rock, Paper, Scissors': `Камінь, ножиці, папір`,
+		Magicians: 'Маги',
+		"The Prisoner's Dilemma": `Дилема в'язня`
+	};
+
 	methods = ['Rock, Paper, Scissors', "The Prisoner's Dilemma", 'Magicians'];
 
 	options: Record<string, string[]> = {

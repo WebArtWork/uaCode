@@ -4,9 +4,9 @@
 			<div class="documents-header">
 				<core-theme></core-theme>
 				<div class="documents-header__title">Турніри</div>
-				<!-- <div class="burger-wrap" (click)="add()">
-					<span class="material-icons">add</span>
-				</div> -->
+				<div class="burger-wrap" routerLink="/achievements">
+					<span class="material-icons">emoji_events</span>
+				</div>
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
@@ -15,21 +15,29 @@
 						<!-- (mine)="mineClass = $event"
 							(wChange)="load($event)" -->
 					</div>
+
 					<h3>Групові турніри</h3>
 					<div
 						*ngFor="let method of methods"
 						class="documents-main-row"
 						routerLink="/tournament/class/{{method}}"
 					>
-						<div class="documents__title">{{method}}</div>
+						<div class="documents__title">{{name[method]}}</div>
+						<div routerLink="/achievements/class/{{method}}">
+							<span class="material-icons">emoji_events</span>
+						</div>
 					</div>
+
 					<h3>Світові турніри</h3>
 					<div
 						*ngFor="let method of methods"
 						class="documents-main-row"
 						routerLink="/tournament/public/{{method}}"
 					>
-						<div class="documents__title">{{method}}</div>
+						<div class="documents__title">{{name[method]}}</div>
+						<div routerLink="/achievements/public/{{method}}">
+							<span class="material-icons">emoji_events</span>
+						</div>
 					</div>
 				</div>
 			</div>

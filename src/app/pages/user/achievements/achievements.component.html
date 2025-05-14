@@ -7,41 +7,23 @@
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<div class="documents-main-row">
+					<div class="documents-main-row" *ngIf="false">
+						No achievements section
+					</div>
+					<div
+						class="documents-main-row"
+						*ngFor="let achievement of [{}, {}, {}]"
+					>
 						<div class="documents__title">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit.
+							Камінь, ножиці, папір
 						</div>
 						<div class="documents-wrap">
 							<div class="documents-img">
-								<img src="/assets/default.png" alt="" />
+								<img src="/assets/achievement.png" alt="" />
 							</div>
 							<div class="documents-text">
 								<div class="documents-text__title">
-									Lorem ipsum dolor sit amet consectetur
-									adipisicing elit.
-								</div>
-								<div class="documents-text__description">
-									<p>
-										Lorem ipsum dolor sit amet consectetur
-										adipisicing elit. Tenetur accusantium
-										quis minus mollitia voluptatum illo hic
-										laborum laboriosam et commodi. Quas
-										nulla doloribus mollitia vero nostrum
-										laudantium dolores quidem provident.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur,
-										adipisicing elit. Sunt accusantium
-										eveniet quo? Minus quisquam odit magnam
-										nulla.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur,
-										adipisicing elit. Sunt accusantium
-										eveniet quo? Minus quisquam odit magnam
-										nulla.
-									</p>
+									Honchar Denys
 								</div>
 							</div>
 						</div>

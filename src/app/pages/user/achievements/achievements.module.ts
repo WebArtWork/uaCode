@@ -9,11 +9,11 @@ const routes: Routes = [
 		component: AchievementsComponent
 	},
 	{
-		path: 'tournament/class/:method',
+		path: 'class/:method',
 		component: AchievementsComponent
 	},
 	{
-		path: 'tournament/public/:method',
+		path: 'public/:method',
 		component: AchievementsComponent
 	}
 ];

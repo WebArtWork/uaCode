@@ -20,6 +20,8 @@ export class TournamentComponent {
 
 	readonly method = this._router.url.split('/')[3].split('%20').join(' ');
 
+	readonly name = this._participationService.name;
+
 	get mine(): boolean {
 		return true;
 	}
@@ -27,12 +29,6 @@ export class TournamentComponent {
 	get options(): string[] {
 		return this._participationService.options[this.method];
 	}
-
-	name: Record<string, string> = {
-		'Rock, Paper, Scissors': `Камінь, ножиці, папір`,
-		Magicians: 'Маги',
-		"The Prisoner's Dilemma": `Дилема в'язня`
-	};
 
 	variables: Record<string, string> = {
 		'Rock, Paper, Scissors': `Змінна мійОстаннійХід\nЗмінна суперникаОстаннійХід\nЗмінна кількістьМоїхКаменів\nЗмінна кількістьМоїхПаперів\nЗмінна кількістьМоїхНожиців\nЗмінна кількістьСуперникаКаменів\nЗмінна кількістьСуперникаПаперів\nЗмінна кількістьСуперникаНожиців`,
