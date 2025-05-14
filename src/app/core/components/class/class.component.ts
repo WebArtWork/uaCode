@@ -84,6 +84,8 @@ export class ClassComponent implements AfterViewInit {
 						this.classService.classId = created._id;
 
 						this.class = created;
+
+						this.isMine = true;
 					});
 			}
 		});

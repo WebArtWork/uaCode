@@ -83,9 +83,10 @@ export class UserService extends CrudService<User> {
 			this._store.remove('mode');
 
 			for (const _mode of this.modes) {
-				(document.body.parentNode as HTMLElement).classList.remove(_mode);
+				(document.body.parentNode as HTMLElement).classList.remove(
+					_mode
+				);
 			}
-
 		} else {
 			this._store.set('mode', mode);
 
@@ -110,7 +111,7 @@ export class UserService extends CrudService<User> {
 	updateMe(): void {
 		this.setUser(this.user);
 
-		this.update(this.user);
+		if (this.user._id) this.update(this.user);
 	}
 
 	updateMeAfterWhile(): void {
