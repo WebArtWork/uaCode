@@ -62,11 +62,11 @@ export class QuizzesComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: "Введіть ім'я"
+							value: "Введіть назву групи"
 						},
 						{
 							name: 'Label',
-							value: "Ім'я"
+							value: "Назва групи"
 						}
 					]
 				},
@@ -76,11 +76,11 @@ export class QuizzesComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Введіть опис'
+							value: 'Введіть код групи'
 						},
 						{
 							name: 'Label',
-							value: 'Опис'
+							value: 'Код групи'
 						}
 					]
 				}
