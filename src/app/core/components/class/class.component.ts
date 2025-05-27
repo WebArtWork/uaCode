@@ -76,11 +76,7 @@ export class ClassComponent {
 						device: this._core.deviceID
 					})
 					.subscribe((created) => {
-						this.classService.classId = created._id;
-
-						this.class = created;
-
-						this.classService.mineClass = true;
+						this.setClass(created._id);
 					});
 			}
 		});
