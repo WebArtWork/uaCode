@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { Router } from '@angular/router';
-import { AlertService, CoreService, HttpService, SocketService } from 'wacom';
+import { AlertService, CoreService, SocketService } from 'wacom';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UacodeService } from 'src/app/core/services/uacode.service';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
@@ -20,10 +20,6 @@ export class TournamentComponent {
 	readonly method = this._router.url.split('/')[3].split('%20').join(' ');
 
 	readonly name = this._participationService.name;
-
-	get mine(): boolean {
-		return true;
-	}
 
 	get options(): string[] {
 		return this._participationService.options[this.method];
@@ -119,7 +115,6 @@ export class TournamentComponent {
 		private _alert: AlertService,
 		private _core: CoreService,
 		private _form: FormService,
-		private _http: HttpService,
 		private _router: Router
 	) {
 		this._loadMine();
@@ -146,52 +141,40 @@ export class TournamentComponent {
 		});
 	}
 
-	start() {
-		this._http
-			.post('/api/uacode/start', {
-				class: 'class'
-			})
-			.subscribe((participations: Uacodetournamentparticipation[]) => {
-				if (participations) {
-					participations.sort((a, b) => {
-						return a.points - b.points;
-					});
-
-					this.participations = participations;
-				}
-			});
-	}
-
 	private _updateParticipation() {
-		localStorage.setItem('myname', this.submition['name'] as string);
+		localStorage.setItem(
+			'myname',
+			(this.submition['name'] as string) || ''
+		);
 
 		if (
 			this._participationService.test[this.method](
 				this._commandService.translate(this.submition['code'] as string)
 			)
 		) {
-			const participation = {
-				...this.submition,
-				class: this.isClass ? this._classService.classId : null,
-				method: this.method,
-				device: this._core.deviceID
-			} as Uacodetournamentparticipation;
-
 			if (this.participation) {
+				this._core.copy(this.submition, this.participation);
+
 				this._participationService
-					.update(participation)
+					.update(this.participation)
 					.subscribe(() => {
 						const part: Uacodetournamentparticipation =
 							this.participations.find(
 								(p) => p.device === this._core.deviceID
 							) as Uacodetournamentparticipation;
+
 						if (part) {
-							part.name = participation.name;
+							part.name = this.participation.name;
 						}
 					});
 			} else {
 				this._participationService
-					.create(participation)
+					.create({
+						...this.submition,
+						class: this.isClass ? this._classService.classId : null,
+						method: this.method,
+						device: this._core.deviceID
+					} as Uacodetournamentparticipation)
 					.subscribe(() => {
 						this._load();
 					});

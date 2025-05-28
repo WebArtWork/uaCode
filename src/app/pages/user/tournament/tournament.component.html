@@ -13,24 +13,6 @@
 			</div>
 			<div class="documents-main">
 				<div class="documents-main-content">
-					<!-- <div
-						*ngIf="tournament?.description || tournament?.tags?.length"
-						class="documents-main-row"
-					>
-						<div
-							class="documents__description"
-							*ngIf="tournament?.description"
-							[innerHtml]="tournament?.description"
-						></div>
-						<div class="documents-tags">
-							<div
-								class="documents-tags__wrap"
-								*ngFor="let tag of tournament?.tags"
-							>
-								<div class="documents-tags__item">{{tag}}</div>
-							</div>
-						</div>
-					</div> -->
 					<div
 						*ngIf="participations.length"
 						class="documents-main-row"
@@ -46,22 +28,6 @@
 								</li>
 							</ul>
 						</div>
-					</div>
-					<div class="documents-main-row" *ngIf="mine && isClass">
-						<div class="documents__title">Секція вчителя</div>
-
-						<!-- <wselect
-							placeholder="Select tournament tags"
-							[items]="['Reality', 'One Mirror']"
-							[select]="tournament.tags"
-							[multiple]="true"
-							(modelChange)="
-								tournament.tags = $event;
-								update()
-							"
-						></wselect> -->
-
-						<wbutton (click)="start()">Start</wbutton>
 					</div>
 					<div class="documents-main-row">
 						<div class="documents__title">

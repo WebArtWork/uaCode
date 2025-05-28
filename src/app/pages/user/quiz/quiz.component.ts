@@ -28,7 +28,7 @@ export class QuizComponent {
 	participation: Uacodequizparticipation;
 
 	submition: Record<string, unknown> = {
-		name: localStorage.getItem('myname'),
+		name: localStorage.getItem('myname') || '',
 		code: ''
 	};
 
@@ -283,7 +283,10 @@ export class QuizComponent {
 	private _participating: Uacodequizparticipation;
 
 	private _updateParticipation() {
-		localStorage.setItem('myname', this.submition['name'] as string);
+		localStorage.setItem(
+			'myname',
+			(this.submition['name'] as string) || ''
+		);
 
 		const participation = {
 			...this.submition,
