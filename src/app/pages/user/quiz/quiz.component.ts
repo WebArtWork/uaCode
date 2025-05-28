@@ -9,6 +9,7 @@ import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodec
 import { UacodequizparticipationService } from 'src/app/modules/uacodequizparticipation/services/uacodequizparticipation.service';
 import { Value } from 'src/app/core/modules/input/input.component';
 import { UacodeService } from 'src/app/core/services/uacode.service';
+import { Uacodequiz } from 'src/app/modules/uacodequiz/interfaces/uacodequiz.interface';
 
 @Component({
 	templateUrl: './quiz.component.html',
@@ -19,8 +20,6 @@ export class QuizComponent {
 	quizId = this._router.url.replace('/quiz/', '');
 
 	quiz = this._quizService.doc(this.quizId);
-
-	mine = false;
 
 	loaded = false;
 
@@ -95,7 +94,7 @@ export class QuizComponent {
 
 	constructor(
 		private _participationService: UacodequizparticipationService,
-		private _classService: UacodeclassService,
+		public classService: UacodeclassService,
 		private _quizService: UacodequizService,
 		private _commandService: UacodeService,
 		private _socket: SocketService,
@@ -105,8 +104,132 @@ export class QuizComponent {
 	) {
 		this._load();
 
-		this._mine();
+		this._socket.on('uacodequiz', (data) => {
+			if (data === this.quizId) {
+				this._load();
+
+				if (this._participating) {
+					this.loadParticipant();
+				}
+			}
+		});
+
+		this._core.onComplete('uacodeclass_loaded').then(() => {
+			if (!this.classService.mineClass) {
+				this._loadMine();
+			}
+
+			this.loaded = true;
+		});
 	}
+
+	mutate(): void {
+		this._quizMutateForm.components[1].hidden = false;
+
+		this._quizMutateForm.components[2].hidden = false;
+
+		this._form.modal<Uacodequiz>(
+			this._quizMutateForm,
+			{
+				label: 'Create',
+				click: async (document: unknown, close: () => void) => {
+					close();
+
+					const mutate: Uacodequiz = document as Uacodequiz;
+
+					if (mutate.quiz) {
+						this._core.copy(
+							{
+								name:
+									'Завдання вікторини «' +
+									this._commandService.commands[
+										this._commandService.commands.findIndex(
+											(c) => c.quiz === mutate.quiz
+										)
+									].name +
+									'»',
+								description: mutate.quiz
+							},
+							this.quiz
+						);
+					} else {
+						this._core.copy(document, this.quiz);
+					}
+
+					this._quizService.update(this.quiz);
+				}
+			},
+			this.quiz,
+			(document) => {
+				this._quizMutateForm.components[1].hidden = !!document.quiz;
+
+				this._quizMutateForm.components[2].hidden = !!document.quiz;
+			}
+		);
+	}
+
+	private _quizMutateForm: FormInterface = this._form.getForm(
+		'quizCreationForm',
+		{
+			formId: 'quizCreationForm',
+			title: 'Форма створення вікторини',
+			components: [
+				{
+					name: 'Select',
+					key: 'quiz',
+					fields: [
+						{
+							name: 'Placeholder',
+							value: 'Оберіть готову вікторину'
+						},
+						{
+							name: 'Label',
+							value: 'Готова вікторина'
+						},
+						{
+							name: 'Items',
+							value: this._commandService.commands.map(
+								(c) => c.quiz
+							)
+						},
+						{
+							name: 'Clearable',
+							value: true
+						}
+					]
+				},
+				{
+					name: 'Text',
+					key: 'name',
+					focused: true,
+					fields: [
+						{
+							name: 'Placeholder',
+							value: 'Введіть назву вікторини...'
+						},
+						{
+							name: 'Label',
+							value: 'Назва вікторини'
+						}
+					]
+				},
+				{
+					name: 'Text',
+					key: 'description',
+					fields: [
+						{
+							name: 'Placeholder',
+							value: 'Введіть завдання вікторини...'
+						},
+						{
+							name: 'Label',
+							value: 'Завдання вікторини'
+						}
+					]
+				}
+			]
+		}
+	);
 
 	updateQuiz(field: 'name' | 'description', value: Value) {
 		this.quiz[field] = value as string;
@@ -124,8 +247,8 @@ export class QuizComponent {
 		});
 	}
 
-	loadParticipant(part: Uacodequizparticipation) {
-		localStorage.setItem('myname', this.submition['name'] as string);
+	loadParticipant(part: Uacodequizparticipation = this._participating) {
+		this._participating = part;
 
 		this._participationService
 			.fetch(part, { name: 'owner' })
@@ -157,35 +280,11 @@ export class QuizComponent {
 			});
 	}
 
-	private _mine() {
-		this._core.onComplete('uacodeclass_loaded').then(() => {
-			const classes = this._classService.getDocs();
-
-			if (this.quiz.class) {
-				const classDocument = classes.find(
-					(c) => c._id === this.quiz.class
-				);
-
-				this.mine = classDocument?.device === this._core.deviceID;
-
-				if (this.mine) {
-					this._socket.on('uacodequiz', (data) => {
-						if (data === this.quizId) {
-							this._load();
-						}
-					});
-				} else {
-					this._loadMine();
-				}
-
-				this.loaded = true;
-			} else {
-				setTimeout(this._mine.bind(this), 500);
-			}
-		});
-	}
+	private _participating: Uacodequizparticipation;
 
 	private _updateParticipation() {
+		localStorage.setItem('myname', this.submition['name'] as string);
+
 		const participation = {
 			...this.submition,
 			quiz: this.quizId,

@@ -33,6 +33,10 @@ export class UacodeclassService extends CrudService<Uacodeclass> {
 				this.classes = this.getDocs();
 
 				this._core.complete('class');
+
+				this.mineClass =
+					this.classes.find((c) => c._id === this.classId)?.device ===
+					this._core.deviceID;
 			});
 		});
 	}
