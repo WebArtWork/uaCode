@@ -41,7 +41,7 @@ export class QuizzesComponent {
 		this._form.modal<Uacodequiz>(
 			this._quizCreationForm,
 			{
-				label: 'Create',
+				label: 'Створити',
 				click: async (document: unknown, close: () => void) => {
 					close();
 

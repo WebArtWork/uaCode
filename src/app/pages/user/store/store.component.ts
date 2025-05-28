@@ -21,7 +21,7 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: "Введіть ваші прізвище та ім'я"
+						value: "Введіть ваші прізвище та ім'я..."
 					},
 					{
 						name: 'Label',
@@ -35,7 +35,7 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Введіть ваш номер телефону'
+						value: 'Введіть ваш номер телефону...'
 					},
 					{
 						name: 'Label',
@@ -49,7 +49,7 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Вкажіть кількість книг, які ви хочете замовити'
+						value: 'Вкажіть кількість книг, які ви хочете замовити...'
 					},
 					{
 						name: 'Label',
@@ -67,7 +67,7 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Вкажіть ваш регіон/область'
+						value: 'Вкажіть ваш регіон/область...'
 					},
 					{
 						name: 'Label',
@@ -81,7 +81,7 @@ export class StoreComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Вкажіть ваше місто'
+						value: 'Вкажіть ваше місто...'
 					},
 					{
 						name: 'Label',
