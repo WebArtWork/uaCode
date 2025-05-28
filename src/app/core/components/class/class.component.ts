@@ -140,7 +140,7 @@ export class ClassComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: "Введіть назву групи"
+							value: "Введіть назву групи..."
 						},
 						{
 							name: 'Label',
@@ -154,7 +154,7 @@ export class ClassComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Введіть опис групи'
+							value: 'Введіть опис групи...'
 						},
 						{
 							name: 'Label',
@@ -179,7 +179,7 @@ export class ClassComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: "Введіть назву групи"
+							value: "Введіть назву групи..."
 						},
 						{
 							name: 'Label',
@@ -193,7 +193,7 @@ export class ClassComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: 'Введіть код групи'
+							value: 'Введіть код групи...'
 						},
 						{
 							name: 'Label',

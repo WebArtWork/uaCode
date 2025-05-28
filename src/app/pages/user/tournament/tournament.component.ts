@@ -58,7 +58,7 @@ export class TournamentComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: "Введіть ім'я"
+						value: "Введіть ім'я..."
 					},
 					{
 						name: 'Label',
@@ -72,7 +72,7 @@ export class TournamentComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Введіть ваш код'
+						value: 'Введіть ваш код...'
 					},
 					{
 						name: 'Label',

@@ -42,7 +42,7 @@ export class QuizComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: "Введіть ім'я"
+						value: "Введіть ім'я..."
 					},
 					{
 						name: 'Label',
@@ -56,7 +56,7 @@ export class QuizComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Введіть ваш код'
+						value: 'Введіть ваш код...'
 					},
 					{
 						name: 'Label',
@@ -73,7 +73,7 @@ export class QuizComponent {
 				fields: [
 					{
 						name: 'Label',
-						value: 'Приєднатися'
+						value: 'Надіслати'
 					},
 					{
 						name: 'Submit',
@@ -131,7 +131,7 @@ export class QuizComponent {
 		this._form.modal<Uacodequiz>(
 			this._quizMutateForm,
 			{
-				label: 'Create',
+				label: 'Створити',
 				click: async (document: unknown, close: () => void) => {
 					close();
 
