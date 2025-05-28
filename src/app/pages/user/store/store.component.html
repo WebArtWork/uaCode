@@ -1,69 +1,67 @@
-<div class="documents-wrapper" [class.documents-wrapper--open]="isMenuOpen">
-	<div class="documents-container">
-		<div class="documents-list">
-			<div class="documents-header">
-				<core-theme></core-theme>
-				<div class="documents-header__title">Магазин</div>
+<div class="documents-main-content">
+	<div class="documents-main-row">
+		<div class="documents__title">
+			Програмуй українською — легко, зрозуміло, сучасно.
+		</div>
+		<div class="documents__description">
+			Навчайся з книгою та додатком, створеним спеціально для тебе!
+		</div>
+	</div>
+	<div class="documents-main-row">
+		<div class="documents__title">
+			uaCode — перша книга з програмування українською мовою
+		</div>
+		<div class="documents-wrap">
+			<div class="documents-img">
+				<img src="/assets/default.png" alt="" />
 			</div>
-			<div class="documents-main">
-				<div class="documents-main-content">
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Програмуй українською — легко, зрозуміло, сучасно.
+			<div class="documents-text">
+				<div class="documents-text__title">Опис книги</div>
+				<div class="documents-text__description">
+					<p>
+						"uaCode" — це перша книга, що відкриває світ
+						програмування українською мовою, використовуючи
+						спеціально розроблений український синтаксис. Вона
+						поєднує сучасні технології з рідною мовою, щоб зробити
+						навчання доступним, зрозумілим і захопливим.
+					</p>
+					<p>
+						У книзі подано адаптовану термінологію, зрозумілу
+						теорію, практичні приклади та завдання різної
+						складності. Вона ідеально підходить як для самостійного
+						опрацювання, так і для занять у класах або гуртках.
+					</p>
+					<p>
+						Особливістю "uaCode" є мобільний додаток, що входить до
+						комплекту книги. У ньому зібрано всі приклади коду та
+						інтерактивні вправи, а також вбудоване середовище для
+						написання та запуску коду. У додатку доступні змагання у
+						форматі турнірів, де можна розв’язувати завдання,
+						змагатися з іншими й перевіряти свої знання. Також є
+						можливість створювати власні вправи для тестування
+						друзів або учнів. Завдяки QR-кодам, розміщеним у книзі,
+						можна миттєво перейти до прикладу або вправи в додатку.
+					</p>
+					<p>
+						"uaCode" — це не просто посібник. Це повноцінна
+						навчальна платформа, що робить програмування українською
+						доступним, захопливим і по-справжньому сучасним.
+					</p>
+				</div>
+				<div class="documents-tags">
+					<div class="documents-tags__wrap">
+						<div class="documents-tags__item">
+							<a href="https://www.instagram.com/ua.code"
+								><img src="/assets/instagram.png" alt=""
+							/></a>
 						</div>
-						<div class="documents__description">
-							Навчайся з книгою та додатком, створеним спеціально для тебе!
-						</div>
-					</div>
-					<div class="documents-main-row">
-						<div class="documents__title">
-							uaCode — перша книга з програмування українською мовою
-						</div>
-						<div class="documents-wrap">
-							<div class="documents-img">
-								<img src="/assets/default.png" alt="" />
-							</div>
-							<div class="documents-text">
-								<div class="documents-text__title">
-									Опис книги
-								</div>
-								<div class="documents-text__description">
-									<p>
-									"uaCode" — це перша книга, що відкриває світ програмування українською мовою, використовуючи спеціально розроблений український синтаксис. 
-									Вона поєднує сучасні технології з рідною мовою, щоб зробити навчання доступним, зрозумілим і захопливим.
-									</p>
-									<p>
-									У книзі подано адаптовану термінологію, зрозумілу теорію, практичні приклади та завдання різної складності. 
-									Вона ідеально підходить як для самостійного опрацювання, так і для занять у класах або гуртках.
-									</p>
-									<p>
-										Особливістю "uaCode" є мобільний додаток, що входить до комплекту книги. 
-										У ньому зібрано всі приклади коду та інтерактивні вправи, а також вбудоване середовище для написання та запуску коду.
-										У додатку доступні змагання у форматі турнірів, де можна розв’язувати завдання, змагатися з іншими й перевіряти свої знання. 
-										Також є можливість створювати власні вправи для тестування друзів або учнів. Завдяки QR-кодам, розміщеним у книзі, можна миттєво перейти до прикладу або вправи в додатку.
-									</p>
-									<p>
-										"uaCode" — це не просто посібник. Це повноцінна навчальна платформа, що робить програмування українською доступним, захопливим і по-справжньому сучасним.
-									</p>
-								</div>
-								<div class="documents-tags">
-									<div class="documents-tags__wrap">
-										<div class="documents-tags__item">
-											<a href="https://www.instagram.com/ua.code"><img src="/assets/instagram.png" alt="" /></a>
-										</div>
-									</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="documents-main-row">
-						<wform
-							[config]="formDoc"
-							[submition]="submition"
-						></wform>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="documents-main-row">
+			<wform [config]="formDoc" [submition]="submition"></wform>
 		</div>
 	</div>
 </div>

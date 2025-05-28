@@ -1,36 +1,20 @@
-<div class="documents-wrapper">
-	<div class="documents-container">
-		<div class="documents-list">
-			<div class="documents-header">
-				<core-theme></core-theme>
-				<div class="documents-header__title">Вікторини</div>
-				<div
-					*ngIf="classService.mineClass"
-					class="burger-wrap"
-					(click)="add()"
-				>
-					<span class="material-icons">add</span>
-				</div>
-			</div>
-			<div class="documents-main">
-				<div class="documents-main-content">
-					<div class="documents-main-row">
-						<core-class (wChange)="load($event)"></core-class>
-					</div>
-					<div
-						routerLink="/quiz/{{quiz._id}}"
-						*ngFor="let quiz of quizzes"
-						class="documents-main-row"
-					>
-						<div class="documents__title">{{quiz.name}}</div>
-						<div
-							class="documents__description"
-							[innerHtml]="quiz.description"
-							*ngIf="quiz.description"
-						></div>
-					</div>
-				</div>
-			</div>
-		</div>
+<div *ngIf="classService.mineClass" class="burger-wrap" (click)="add()">
+	<span class="material-icons">add</span>
+</div>
+<div class="documents-main-content">
+	<div class="documents-main-row">
+		<core-class (wChange)="load($event)"></core-class>
+	</div>
+	<div
+		routerLink="/quiz/{{quiz._id}}"
+		*ngFor="let quiz of quizzes"
+		class="documents-main-row"
+	>
+		<div class="documents__title">{{quiz.name}}</div>
+		<div
+			class="documents__description"
+			[innerHtml]="quiz.description"
+			*ngIf="quiz.description"
+		></div>
 	</div>
 </div>

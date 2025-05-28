@@ -9,10 +9,10 @@ import { UacodequizService } from 'src/app/modules/uacodequiz/services/uacodequi
 
 @Component({
 	templateUrl: './quizzes.component.html',
-	styleUrls: ['./quizzes.component.scss'],
 	standalone: false
 })
 export class QuizzesComponent {
+	// title Вікторини
 	quizzes: Uacodequiz[] = [];
 
 	constructor(

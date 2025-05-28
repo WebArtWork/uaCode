@@ -1,55 +1,41 @@
-<div class="wrapper" id="wrapper">
-	<nav class="nav">
-		<ul class="nav__ul container">
-			<li class="nav__li">
-				<a
-					routerLinkActive="_activeLink"
-					routerLink="/store"
-					class="nav__a"
-				>
-					<span class="material-icons">store</span>
-				</a>
-			</li>
-			<li class="nav__li">
-				<a
-					routerLinkActive="_activeLink"
-					routerLink="/commands"
-					class="nav__a"
-				>
-					<span class="material-icons">settings_input_component</span>
-				</a>
-			</li>
-			<li class="nav__li">
-				<a
-					routerLinkActive="_activeLink"
-					routerLink="/compiler"
-					class="nav__a"
-				>
-					<span class="material-icons">code</span>
-				</a>
-			</li>
-			<li class="nav__li">
-				<a
-					routerLinkActive="_activeLink"
-					routerLink="/quizzes"
-					class="nav__a"
-				>
-					<span class="material-icons">quiz</span>
-				</a>
-			</li>
-			<li class="nav__li">
-				<a
-					routerLinkActive="_activeLink"
-					routerLink="/tournaments"
-					class="nav__a"
-				>
-					<span class="material-icons">emoji_events </span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-
-	<div class="main">
-		<router-outlet></router-outlet>
-	</div>
+<div class="topbar">
+	<span (click)="us.setMode(us.mode === 'dark' ? 'white' : 'dark')">
+		<span class="material-icons"
+			>{{ us.mode === 'dark' ? 'dark_mode' : 'light_mode' }}</span
+		>
+	</span>
+	<a routerLinkActive="_activeLink" routerLink="/compiler">
+		<span class="material-icons">code</span>
+		<span>Компілятор</span>
+	</a>
 </div>
+<div class="main">
+	<router-outlet></router-outlet>
+</div>
+<nav class="footer">
+	<a routerLinkActive="_activeLink" routerLink="/store" class="footer-link">
+		<span class="material-icons">store</span>
+		<span>Магазин</span>
+	</a>
+	<a
+		routerLinkActive="_activeLink"
+		routerLink="/commands"
+		class="footer-link"
+	>
+		<span class="material-icons">settings_input_component</span>
+		<span>Команди</span>
+	</a>
+
+	<a routerLinkActive="_activeLink" routerLink="/quizzes" class="footer-link">
+		<span class="material-icons">quiz</span>
+		<span>Квізи</span>
+	</a>
+	<a
+		routerLinkActive="_activeLink"
+		routerLink="/tournaments"
+		class="footer-link"
+	>
+		<span class="material-icons">emoji_events </span>
+		<span>Турніри</span>
+	</a>
+</nav>

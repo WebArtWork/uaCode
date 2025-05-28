@@ -7,8 +7,7 @@ import { UacodeService } from 'src/app/core/services/uacode.service';
 	standalone: false
 })
 export class CommandsComponent {
-	isMenuOpen = false;
-
+	// title Команди
 	constructor(public uaCodeServise: UacodeService) {}
 
 	back(): void {

@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 
 @Component({
 	templateUrl: './compiler.component.html',
-	styleUrls: ['./compiler.component.scss'],
 	standalone: false
 })
 export class CompilerComponent {
+	// title Компілятор
 	isQuestion = this._router.url.includes('/question/');
 
 	formDoc: FormInterface = this._form.getForm('docForm', {

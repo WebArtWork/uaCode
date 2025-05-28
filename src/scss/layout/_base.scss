@@ -16,8 +16,28 @@ body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	background: linear-gradient(
+		to bottom,
+		#9d74e7 0%,
+		#d1c4e9 50%,
+		#f2f2f2 50%,
+		#f2f2f2 100%
+	);
+	background-attachment: fixed;
 }
 /* === PAGE LAYOUT === */
+app-root,
+app-public {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+.main {
+	flex-grow: 1;
+	overflow-y: auto;
+	padding: 20px;
+}
 .container {
 	margin-left: auto;
 	margin-right: auto;
@@ -263,14 +283,14 @@ wform {
 
 .burger::before,
 .burger::after {
-	content: "";
-    width: 80%;
-    height: 4px;
-    display: block;
-    background-color: var(--c-text-primary);
-    transition: all 0.3s;
-    position: absolute;
-    right: 0;
+	content: '';
+	width: 80%;
+	height: 4px;
+	display: block;
+	background-color: var(--c-text-primary);
+	transition: all 0.3s;
+	position: absolute;
+	right: 0;
 }
 
 .burger::before {
@@ -280,9 +300,9 @@ wform {
 .burger:after {
 	bottom: 1px;
 }
-.compiler-wrapper{
-	.w-forms{
-		form{
+.compiler-wrapper {
+	.w-forms {
+		form {
 			display: flex;
 			flex-flow: row wrap;
 		}
@@ -291,23 +311,23 @@ wform {
 		flex: 0 0 50%;
 		max-width: 50%;
 	}
-	.docForm_1{
+	.docForm_1 {
 		flex: 0 0 100%;
 		max-width: 200px;
 		order: 3;
 	}
-	.docForm_2{
+	.docForm_2 {
 		padding-left: 15px;
 	}
-	.docForm_0{
+	.docForm_0 {
 		padding-right: 15px;
 	}
 }
 /* burger */
-.compiler-block{
-    height: calc(100vh - 100px);
+.compiler-block {
+	height: calc(100vh - 100px);
 }
-.inputFocused{
+.inputFocused {
 	outline: none;
 	/*height: calc(100vh - 160px) !important; /* высота равна высоте экрана 
 	max-height: 100%;
@@ -317,16 +337,16 @@ wform {
 	left: 0;
 	z-index: 1000;		
 	transition: all .3s;*/
-	.docForm_2{
+	.docForm_2 {
 		position: fixed;
 	}
-	textarea{
+	textarea {
 		height: 98% !important;
-   		max-height: 98% !important;
-	}	
+		max-height: 98% !important;
+	}
 	//margin: 15px;
 }
-.docForm_2 label.inputFocused{
+.docForm_2 label.inputFocused {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -335,7 +355,7 @@ wform {
 	padding: 15px 15px 30px 15px !important;
 	background: var(--compliper);
 	height: 100vh !important;
-	&::before{
+	&::before {
 		content: '';
 		width: 4px;
 		height: 26px;
@@ -346,7 +366,7 @@ wform {
 		top: 13px;
 		transform: rotate(45deg);
 	}
-	&::after{
+	&::after {
 		content: '';
 		width: 4px;
 		height: 26px;
@@ -357,8 +377,8 @@ wform {
 		top: 13px;
 		transform: rotate(-45deg);
 	}
-  }
-  .docForm_0 label.inputFocused{
+}
+.docForm_0 label.inputFocused {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -367,7 +387,7 @@ wform {
 	padding: 15px 15px 30px 15px !important;
 	background: var(--compliper);
 	height: 100vh !important;
-	&::before{
+	&::before {
 		content: '';
 		width: 4px;
 		height: 26px;
@@ -378,7 +398,7 @@ wform {
 		top: 13px;
 		transform: rotate(45deg);
 	}
-	&::after{
+	&::after {
 		content: '';
 		width: 4px;
 		height: 26px;
@@ -389,8 +409,8 @@ wform {
 		top: 13px;
 		transform: rotate(-45deg);
 	}
-  }
-.compiler-block{
+}
+.compiler-block {
 	@media screen and (max-width: 767px) {
 		background: none;
 		height: calc(100vh - 124px);
@@ -402,34 +422,34 @@ wform {
 			border-radius: 6px;
 			padding: 12px;
 			box-shadow: var(--shadow);
-			transition: all .3s;
+			transition: all 0.3s;
 		}
 		.documents-main-row {
 			padding: 13px;
 		}
 		background: none !important;
 		padding: 0 !important;
-		.w-forms__title{
+		.w-forms__title {
 			font-size: 24px !important;
 			font-weight: 600 !important;
 		}
 	}
 
-	textarea{
+	textarea {
 		border: 2px solid var(--border-comp);
 		border-radius: 6px;
 		color: #ffffff7d;
 		resize: none;
-		transition: all .3s;
+		transition: all 0.3s;
 	}
-	.w-forms__textarea{
+	.w-forms__textarea {
 		border: 2px solid var(--border-comp) !important;
 		border-radius: 6px !important;
 		color: #ffffff7d !important;
 		resize: none !important;
 	}
-	.docForm_2{
-		textarea{
+	.docForm_2 {
+		textarea {
 			border: 2px solid var(--border-comp) !important ;
 			border-radius: 6px !important;
 			color: #ffffff7d !important;
@@ -437,15 +457,14 @@ wform {
 		}
 	}
 	@media screen and (max-width: 479px) {
-		textarea{
-
+		textarea {
 		}
-		.docForm_1{
+		.docForm_1 {
 			order: 0;
 			padding: 0 !important;
 			background: none !important;
 			margin: 0 0 0 0;
-			.form-container{
+			.form-container {
 				margin: 0;
 			}
 		}
@@ -454,15 +473,15 @@ wform {
 		textarea {
 			//min-height: 260px;
 		}
-		.compiler-wrapper{
+		.compiler-wrapper {
 			display: flex;
 			flex-flow: row wrap;
 			justify-content: space-between;
 			height: 100%;
 		}
-		.w-forms{
+		.w-forms {
 			height: 100%;
-			form{
+			form {
 				height: 100%;
 				justify-content: space-between;
 			}
@@ -506,7 +525,7 @@ wform {
 		margin: 0 auto;
 		height: 100%;
 	}
-	&-header{
+	&-header {
 		display: none;
 	}
 	&-list {
@@ -534,15 +553,15 @@ wform {
 		border-radius: 12px;
 		position: fixed;
 		top: 80px;
-		&__close{
+		&__close {
 			display: none;
 			width: 32px;
 			height: 32px;
 			position: absolute;
 			right: 10px;
 			top: 10px;
-			svg{
-				fill:var(--c-text-primary);
+			svg {
+				fill: var(--c-text-primary);
 			}
 		}
 		&-content {
@@ -664,42 +683,42 @@ wform {
 			background-color: #ba593b;
 		}
 	}
-	&-products{
-		&-list{
+	&-products {
+		&-list {
 			display: flex;
 			flex-flow: row wrap;
 			justify-content: center;
 		}
-		&__wrap{
+		&__wrap {
 			flex: 0 0 33.333%;
 			max-width: 33.333%;
 			padding: 0 15px;
 			display: flex;
 			margin-bottom: 30px;
 		}
-		&__item{
+		&__item {
 			display: flex;
 			flex-flow: column wrap;
 			padding: 15px;
 			background-color: var(--doc-products);
 			border-radius: 6px;
 		}
-		&__img{
-			img{
+		&__img {
+			img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 			}
 		}
-		&__title{
+		&__title {
 			font-weight: 600;
 			padding: 15px 0 5px 0;
 			color: var(--c-text-primary);
 		}
-		&__description{
+		&__description {
 			color: var(--c-text-primary);
 		}
-		&__btn{
+		&__btn {
 			padding-top: 15px;
 			margin-top: auto;
 		}
@@ -736,18 +755,18 @@ wform {
 		padding: 15px 30px 15px 15px;
 	}
 	.documents-main {
-		padding: 20px 0 0 ;
+		padding: 20px 0 0;
 	}
-	.documents-header{
-        display: flex;
-        position: fixed;
-        width: 100%;
-        top: 0;
+	.documents-header {
+		display: flex;
+		position: fixed;
+		width: 100%;
+		top: 0;
 		left: 0;
-        padding: 10px;
+		padding: 10px;
 		background: var(--header-doc);
 		z-index: 8;
-		&__title{
+		&__title {
 			position: absolute;
 			left: 50%;
 			transform: translate(-50%, -50%);
@@ -756,18 +775,18 @@ wform {
 			color: var(--c-text-primary);
 		}
 	}
-	.documents-header-left{
+	.documents-header-left {
 		display: flex;
 		align-items: center;
-		&__arrow{
+		&__arrow {
 			display: flex;
-			span{
+			span {
 				color: var(--c-text-primary);
 			}
 		}
-		&__avatar{
+		&__avatar {
 			margin-left: 20px;
-			img{
+			img {
 				width: 32px;
 				height: 32px;
 				object-fit: cover;
@@ -784,7 +803,7 @@ wform {
 		transform: translate(-50%, -50%);
 		top: 50%;
 	}
-	.documents-sidebar__close{
+	.documents-sidebar__close {
 		display: block;
 	}
 	.burger--close {
@@ -810,7 +829,7 @@ wform {
 	.documents-main-row {
 		padding: 10px 30px 20px 15px;
 	}
-	.documents-products__wrap{
+	.documents-products__wrap {
 		flex: 0 0 50%;
 		max-width: 50%;
 	}
@@ -834,14 +853,13 @@ wform {
 	.documents-wrapper {
 		height: calc(100vh - 80px);
 	}
-
 }
 @media screen and (max-width: 479px) {
 	.documents-triggers__wrap {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
-	.documents-products__wrap{
+	.documents-products__wrap {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}

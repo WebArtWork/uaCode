@@ -4,10 +4,10 @@ import { UacodetournamentparticipationService } from 'src/app/modules/uacodetour
 
 @Component({
 	templateUrl: './tournaments.component.html',
-	styleUrls: ['./tournaments.component.scss'],
 	standalone: false
 })
 export class TournamentsComponent {
+	// title Турніри 
 	readonly methods = this._participationService.methods;
 
 	readonly name = this._participationService.name;

@@ -1,24 +1,6 @@
-<div class="documents-wrapper">
-	<div class="documents-container">
-		<div class="documents-list">
-			<div class="documents-header">
-				<core-theme></core-theme>
-				<div class="documents-header__title" translate>
-					Common.Компілятор
-				</div>
-			</div>
-			<div class="documents-main">
-				<div class="documents-main-content">
-					<div class="documents-main-row compiler-block">
-						<wform
-							[submition]="submition"
-							[config]="formDoc"
-							(wChange)="testAnswer()"
-							class="compiler-wrapper"
-						></wform>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<wform
+	[submition]="submition"
+	[config]="formDoc"
+	(wChange)="testAnswer()"
+	class="compiler-wrapper"
+></wform>
