@@ -20,25 +20,16 @@ export class TournamentComponent {
 
 	readonly method = this._router.url.split('/')[3].split('%20').join(' ');
 
-	readonly name = this._rournamentService.nameTranslation;
+	readonly name = this._tournamentService.nameTranslation;
 
 	get options(): string[] {
-		return this._rournamentService.options[this.method];
+		return this._tournamentService.options[this.method];
 	}
 
-	variables: Record<string, string> = {
-		'Rock, Paper, Scissors': `Змінна мійОстаннійХід\nЗмінна суперникаОстаннійХід\nЗмінна кількістьМоїхКаменів\nЗмінна кількістьМоїхПаперів\nЗмінна кількістьМоїхНожиців\nЗмінна кількістьСуперникаКаменів\nЗмінна кількістьСуперникаПаперів\nЗмінна кількістьСуперникаНожиців`,
-		Magicians:
-			'Змінна моєОстаннєЗакляття\nЗмінна останнєЗакляттяСуперника\nЗмінна кількістьМоїхАтак\nЗмінна кількістьМоїхЗахистів\nЗмінна кількістьМоїхЛікувань\nЗмінна кількістьМоїхМедитацій\nЗмінна кількістьСуперникаАтак\nЗмінна кількістьСуперникаЗахистів\nЗмінна кількістьСуперникаЛікувань\nЗмінна кількістьСуперникаМедитацій\nЗмінна рівеньМогоЖиття\nЗмінна рівеньМоєїМани\nЗмінна рівеньЖиттяСуперника\nЗмінна рівеньМаниСуперника',
-		"The Prisoner's Dilemma":
-			'Змінна мійОстаннійВибір\nЗмінна останнійВибірСуперника\nЗмінна кількістьМоїхЗрад\nЗмінна кількістьМоїхМовчань\nЗмінна кількістьЗрадСуперника\nЗмінна кількістьМовчаньСуперника'
-	};
+	variables: Record<string, string> =
+		this._tournamentService.availableVariables;
 
-	samples: Record<string, string> = {
-		'Rock, Paper, Scissors': `Якщо (\n  кількістьСуперникаПаперів > кількістьСуперникаКаменів ТА \n  кількістьСуперникаПаперів > кількістьСуперникаНожиців\n) {\n  Поверни 'ножиці';\n} ІнакшеЯкщо (\n  кількістьСуперникаКаменів > кількістьСуперникаНожиців\n) {\n  Поверни 'папір';\n} Інакше {\n  Поверни 'камінь';\n}`,
-		Magicians: `Якщо (рівеньМогоЖиття <= 30) {\n  Якщо (рівеньМоєїМани >= 20) {\n    Поверни 'лікування';\n  } Інакше {\n    Поверни 'медитація';\n  }\n} ІнакшеЯкщо (рівеньМоєїМани < 10) {\n  Поверни 'медитація';\n} ІнакшеЯкщо (\n  кількістьСуперникаАтак > кількістьСуперникаЗахистів\n) {\n  Поверни 'захист';\n} Інакше {\n  Поверни 'атака';\n}`,
-		"The Prisoner's Dilemma": `Якщо (останнійВибірСуперника == 'зрадити') {\n  Поверни 'зрадити';\n} ІнакшеЯкщо (кількістьЗрадСуперника > кількістьМовчаньСуперника) {\n  Поверни 'зрадити';\n} Інакше {\n  Поверни 'мовчати';\n}`
-	};
+	samples: Record<string, string> = this._tournamentService.codeSamples;
 
 	participations: Uacodetournamentparticipation[] = [];
 
@@ -109,7 +100,7 @@ export class TournamentComponent {
 
 	constructor(
 		private _participationService: UacodetournamentparticipationService,
-		private _rournamentService: TournamentService,
+		private _tournamentService: TournamentService,
 		private _classService: UacodeclassService,
 		private _commandService: UacodeService,
 		private _socket: SocketService,
@@ -150,7 +141,7 @@ export class TournamentComponent {
 		);
 
 		if (
-			this._rournamentService.scriptLogicVerification[this.method](
+			this._tournamentService.scriptLogicVerification[this.method](
 				this._commandService.translate(this.submition['code'] as string)
 			)
 		) {
