@@ -8,6 +8,7 @@ import { UacodeService } from 'src/app/core/services/uacode.service';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
 import { UacodetournamentparticipationService } from 'src/app/modules/uacodetournamentparticipation/services/uacodetournamentparticipation.service';
 import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
+import { TournamentService } from 'src/app/core/services/tournament.service';
 
 @Component({
 	templateUrl: './tournament.component.html',
@@ -19,10 +20,10 @@ export class TournamentComponent {
 
 	readonly method = this._router.url.split('/')[3].split('%20').join(' ');
 
-	readonly name = this._participationService.name;
+	readonly name = this._rournamentService.nameTranslation;
 
 	get options(): string[] {
-		return this._participationService.options[this.method];
+		return this._rournamentService.options[this.method];
 	}
 
 	variables: Record<string, string> = {
@@ -108,6 +109,7 @@ export class TournamentComponent {
 
 	constructor(
 		private _participationService: UacodetournamentparticipationService,
+		private _rournamentService: TournamentService,
 		private _classService: UacodeclassService,
 		private _commandService: UacodeService,
 		private _socket: SocketService,
@@ -148,7 +150,7 @@ export class TournamentComponent {
 		);
 
 		if (
-			this._participationService.test[this.method](
+			this._rournamentService.scriptLogicVerification[this.method](
 				this._commandService.translate(this.submition['code'] as string)
 			)
 		) {
