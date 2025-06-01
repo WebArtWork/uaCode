@@ -16,6 +16,7 @@
 @use 'layout/scroll';
 @use 'layout/footer';
 @use 'layout/topbar';
+@use 'layout/store';
 // @use 'layout/grid';
 
 // ## COMPONENTS
@@ -29,11 +30,12 @@
 @use 'components/w-table';
 @use 'components/w-select';
 @use 'components/w-modal';
+@use 'components/base-tags';
 
 // ## ATOM
 @use 'atom/display';
 @use 'atom/margin';
-// @use 'atom/padding';
-// @use 'atom/size';
-// @use 'atom/text';
-// @use 'atom/other';
+@use 'atom/padding';
+@use 'atom/size';
+@use 'atom/text';
+@use 'atom/other';

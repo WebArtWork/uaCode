@@ -17,14 +17,12 @@
 
 	&__title {
 		display: inline-block;
-		color: var(--c-text-primary);
-		// font-size: calc(#{$fs} - 4px);
 		font-size: 19px;
 		line-height: calc(#{vars.$fs} + 2px);
 		letter-spacing: vars.$letter-spacing;
-		// margin-bottom: 6px;
-		font-weight: 500;
+		font-weight: 700;
 		margin-bottom: 15px;
+		text-align: left;
 	}
 	&__component {
 		label {
@@ -98,4 +96,9 @@
 		max-height: 250px;
 		margin-top: 10px;
 	}
+}
+.w-forms__component .w-forms__title {
+	font-size: 14px !important;
+	margin-bottom: 3px !important;
+	font-weight: 700 !important;
 }

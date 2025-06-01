@@ -9,7 +9,7 @@ html {
 }
 body {
 	font-family: vars.$ff-base;
-	color: var(--c-text-primary);
+	color: #333;
 	line-height: 1.4;
 	position: relative;
 	overflow: hidden;
@@ -20,7 +20,6 @@ body {
 		to bottom,
 		#9d74e7 0%,
 		#d1c4e9 50%,
-		#f2f2f2 50%,
 		#f2f2f2 100%
 	);
 	background-attachment: fixed;
