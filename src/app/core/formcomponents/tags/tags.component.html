@@ -12,7 +12,11 @@
 
 		<ng-container *ngFor="let tag of data.submition[data.key]; index as i">
 			<span>{{tag}}</span>
-			<i (click)="data.submition[data.key].splice(i, 1)">X</i>
+			<i
+				(click)="data.submition[data.key].splice(i, 1)"
+				class="material-icons"
+				>delete</i
+			>
 		</ng-container>
 
 		<!--  [disabled]="!inputRef.value" -->

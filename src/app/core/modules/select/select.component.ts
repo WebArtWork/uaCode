@@ -101,13 +101,19 @@ export class SelectComponent implements OnInit, OnChanges {
 				this.items[i] = {
 					name: this.items[i]
 				};
+
 				this.items[i][this.value] = this.items[i].name;
 			}
+
 			this._items[this.items[i][this.value]] = this.items[i];
 		}
 
 		if (this.multiple) {
-			this._values = this.select || [];
+			this._values = (this.select || []).filter((value: any) => {
+				return !!this.items.find(
+					(item: any) => item[this.value] === value
+				);
+			});
 		} else {
 			this._selected = this._items[this.select]
 				? this._items[this.select][this.name]

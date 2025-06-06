@@ -115,8 +115,6 @@ export class FileComponent implements OnInit, OnChanges {
 	) {}
 
 	ngOnInit(): void {
-		console.log(this.value);
-
 		if (!this.name && !this.multiple && this.value) {
 			const paths = ((this.value as string) || '').split('/');
 

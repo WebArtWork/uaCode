@@ -50,7 +50,7 @@
 						<div *ngIf="!_values.length">{{ placeholder }}</div>
 						<span *ngFor="let id of _values; index as i">
 							<span *ngIf="i">, </span>
-							<span *ngIf="_items[id]"
+							<span *ngIf="_items[id] && _items[id] !== 0"
 								>{{ _items[id][name] }}
 								<i
 									class="material-icons avatar__icon"
@@ -68,7 +68,11 @@
 		</div>
 
 		<!-- Clearable icon -->
-		<div class="w-select__arrow" *ngIf="clearable" (click)="clear()">
+		<div
+			(click)="clear(); _selected = ''"
+			*ngIf="clearable && _selected"
+			class="w-select__arrow"
+		>
 			<span class="material-icons">close</span>
 		</div>
 

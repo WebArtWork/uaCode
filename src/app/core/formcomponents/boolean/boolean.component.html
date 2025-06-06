@@ -1,7 +1,10 @@
 <ng-template #templateRef let-data>
 	<winput
 		[value]="data.submition[data.key]"
-		(wChange)="data.submition[data.key] = $event"
+		(wChange)="
+			data.submition[data.key] = $event;
+			data.wChange()
+		"
 		[name]="data.field.Label || 'name'"
 		[focused]="data.component.focused"
 		[ngClass]="data.component.class"

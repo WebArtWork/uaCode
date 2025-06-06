@@ -8,7 +8,7 @@
 	<span class="w-forms__title" *ngIf="label">{{ label }}</span>
 	<div style="position: relative">
 		<input
-			[placeholder]="placeholder || 'Введіть оцінку...'"
+			[placeholder]="placeholder || 'Enter text...'"
 			(ngModelChange)="value = $event; onChange(); error = false"
 			(keyup.enter)="onSubmit()"
 			[type]="type || 'text'"
