@@ -1,0 +1,1 @@
+import{ib as o,jb as a,l as e,o as i}from"./chunk-YUGEWMTU.js";var p=(()=>{class t extends a{constructor(r){super({name:"uacodetournamentparticipation"}),this._alert=r}static{this.\u0275fac=function(c){return new(c||t)(i(o))}}static{this.\u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{p as a};
