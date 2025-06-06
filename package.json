@@ -28,7 +28,7 @@
     "rxjs": "~7.5.0",
     "socket.io-client": "^4.5.1",
     "tinymce": "^7.5.1",
-    "wacom": "^19.7.4",
+    "wacom": "^20.0.11",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
