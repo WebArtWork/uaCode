@@ -36,11 +36,8 @@
 		</div>
 	</div>
 
-	<div
-		class="documents-main-row"
-		*ngIf="classService.mineClass && participation"
-	>
-		<div class="documents__title">{{participation.name}}</div>
+	<div *ngIf="classService.mineClass && participation">
+		<div>{{participation.name}}</div>
 
 		<winput
 			type="textarea"
@@ -57,7 +54,7 @@
 		></winput>
 	</div>
 
-	<div class="documents-main-row" *ngIf="!classService.mineClass">
+	<div *ngIf="!classService.mineClass">
 		<wform [config]="participateForm" [submition]="submition"></wform>
 	</div>
 </div>

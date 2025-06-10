@@ -8,7 +8,6 @@ html {
 	height: 100%;
 }
 body {
-	font-family: vars.$ff-base;
 	color: #333;
 	line-height: 1.4;
 	position: relative;
@@ -16,12 +15,8 @@ body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	background: linear-gradient(
-		to bottom,
-		#9d74e7 0%,
-		#d1c4e9 50%,
-		#f2f2f2 100%
-	);
+	font-family: 'Roboto';
+	background: linear-gradient(to bottom, #5595ff, #c4dde9, #ffffd2);
 	background-attachment: fixed;
 }
 /* === PAGE LAYOUT === */
