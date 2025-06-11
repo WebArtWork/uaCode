@@ -1,22 +1,11 @@
 @use 'scss';
 
-.wrong {
-	.form-container {
-		border: 3px solid red;
-	}
-}
-
 .right {
 	.form-container {
 		border: 3px solid blue;
 	}
 }
 
-.codeBlock {
-	textarea {
-		height: calc((61vh - 70px - 16px - 2px) / 2);
-	}
-}
 .documents-header {
 	height: 52px;
 }

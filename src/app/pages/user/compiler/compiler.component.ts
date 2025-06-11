@@ -80,7 +80,7 @@ export class CompilerComponent {
 				name: 'Text',
 				key: 'answer',
 				hidden: !this.isQuestion,
-				class: 'wrong',
+				class: 'codeBlock wrong',
 				fields: [
 					{
 						name: 'Placeholder',

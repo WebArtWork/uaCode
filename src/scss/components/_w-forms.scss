@@ -21,8 +21,8 @@
 		line-height: calc(#{vars.$fs} + 2px);
 		letter-spacing: vars.$letter-spacing;
 		font-weight: 700;
-		margin-bottom: 15px;
-		text-align: left;
+		margin-bottom: 10px;
+		text-align: center;
 	}
 	&__component {
 		label {
@@ -94,11 +94,5 @@
 		min-height: 80px;
 		resize: vertical;
 		max-height: 250px;
-		margin-top: 10px;
 	}
-}
-.w-forms__component .w-forms__title {
-	font-size: 14px !important;
-	margin-bottom: 3px !important;
-	font-weight: 700 !important;
 }

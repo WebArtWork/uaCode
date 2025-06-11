@@ -10,7 +10,7 @@ h2 {
 blockquote {
 	margin: 0;
 	padding-left: 20px;
-	border-left: 2px solid blue;
+	border-left: 2px solid var(--c-primary-hover);
 }
 p {
 	margin-top: 0;
@@ -27,5 +27,8 @@ section {
 	}
 }
 a {
-	color: blue;
+	color: var(--c-primary-hover);
+}
+hr {
+	border-bottom: 1px solid #fcfcfc;
 }

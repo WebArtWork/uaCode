@@ -3,7 +3,13 @@
 	gap: 10px;
 	margin-bottom: 15px;
 }
-
+.form-buy {
+	form-component:last-of-type {
+		.form-container {
+			margin-bottom: 0;
+		}
+	}
+}
 .c-item {
 	background: #fff;
 	box-shadow: 0 1px 8px rgb(0 0 0 / 22%);

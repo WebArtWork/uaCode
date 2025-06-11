@@ -1,7 +1,6 @@
 <!-- General Input -->
 <label
 	*ngIf="type !== 'radio' && type !== 'checkbox' && type !== 'textarea'"
-	[class.inputFocused]="inputFocused"
 	class="w-forms"
 	[for]="name"
 >
@@ -39,7 +38,7 @@
 
 <!-- Textarea -->
 <ng-container *ngIf="type === 'textarea'">
-	<label class="w-forms" [for]="name" [class.inputFocused]="inputFocused">
+	<label class="w-forms" [for]="name">
 		<span class="w-forms__title">{{ label }}</span>
 		<textarea
 			(ngModelChange)="value = $event; onChange()"
