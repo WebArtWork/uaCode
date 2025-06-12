@@ -13,10 +13,10 @@ import { Uacodequiz } from 'src/app/modules/uacodequiz/interfaces/uacodequiz.int
 
 @Component({
 	templateUrl: './quiz.component.html',
-	styleUrls: ['./quiz.component.scss'],
 	standalone: false
 })
 export class QuizComponent {
+	// title 	{{quiz.name || (`Common.No name` | translate)}}
 	quizId = this._router.url.replace('/quiz/', '');
 
 	quiz = this._quizService.doc(this.quizId);

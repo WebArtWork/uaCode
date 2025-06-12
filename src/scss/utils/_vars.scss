@@ -78,10 +78,10 @@ $padding: if(meta.variable-exists(--padding), var(--padding), $default-padding);
 $default-fs: 16px;
 $fs: if(meta.variable-exists(--fs), var(--fs), $default-fs);
 
-$default-ff-bold: bold;
+$default-ff-bold: 400;
 $ff-bold: if(meta.variable-exists(--ff-bold), var(--ff-bold), $default-ff-bold);
 
-$default-ff-base: 'Poppins', sans-serif;
+$default-ff-base: 'Roboto', sans-serif;
 $ff-base: if(meta.variable-exists(--ff-base), var(--ff-base), $default-ff-base);
 
 $default-letter-spacing: 0.3px;
@@ -102,8 +102,8 @@ $transition: if(
 :root {
 	--c-white: #fff;
 	--c-basic: #3558ae;
-	--c-primary: #256eff;
-	--c-primary-hover: #0051f1;
+	--c-primary: #449ddd;
+	--c-primary-hover: #3d89c0;
 	--c-secondary: rgb(197, 61, 61);
 	--c-secondary-hover: rgb(150, 42, 42);
 	--c-bg-primary: #f3f4f7;
@@ -136,8 +136,8 @@ $transition: if(
 	--transition: all 0.3s;
 	--events: #4c8e9d;
 	--border: rgba(102, 91, 91, 0.432);
-	--header-doc:#d8d8d8;
-	--doc-products:#f5f5f5;
+	--header-doc: #d8d8d8;
+	--doc-products: #f5f5f5;
 	--shadow: 0px 0px 10px -2px #00000052;
 	--compliper: #fff;
 	--border-comp: #96939387;
@@ -158,8 +158,8 @@ html.dark:root {
 	--day-name: #dad5d5;
 	--events: #1c2e32;
 	--border: rgb(255 255 255 / 23%);
-	--header-doc:#1b1b1be3;
-	--doc-products:#252222;
+	--header-doc: #1b1b1be3;
+	--doc-products: #252222;
 	--shadow: unset;
 	--compliper: rgb(26, 23, 23);
 	--border-comp: #ffffff;

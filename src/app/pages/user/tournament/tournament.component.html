@@ -1,67 +1,49 @@
-<div class="documents-wrapper">
-	<div class="documents-container">
-		<div class="documents-list">
-			<div class="documents-header">
-				<core-theme></core-theme>
-				<div class="documents-header__title">{{name[method]}}</div>
-				<div
-					class="burger-wrap"
-					routerLink="/achievements/{{isClass ? 'class' : 'public'}}/{{method}}"
-				>
-					<span class="material-icons">emoji_events</span>
-				</div>
-			</div>
-			<div class="documents-main">
-				<div class="documents-main-content">
-					<div
-						*ngIf="participations.length"
-						class="documents-main-row"
+<a
+	class="c-item mb15"
+	routerLink="/achievements/{{isClass ? 'class' : 'public'}}/{{method}}"
+>
+	<div>Досягнення</div>
+	<i class="material-icons cl-main-d">emoji_events</i>
+</a>
+<div>
+	<div *ngIf="participations.length">
+		<div class="fw500">Учасники</div>
+		<div class="code-item">
+			<div
+				class="member-item"
+				*ngFor="let participant of participations; index as i"
+			>
+				<div>
+					<span>{{i+1}}. {{participant.name}} </span>
+					<span *ngIf="participant.points">
+						- {{participant.points}}</span
 					>
-						<div class="documents__title">Учасники</div>
-						<div class="documents__description">
-							<ul>
-								<li *ngFor="let participant of participations">
-									<span>{{participant.name}}</span>
-									<span *ngIf="participant.points">
-										- {{participant.points}}</span
-									>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="documents-main-row">
-						<div class="documents__title">
-							Детальніше про {{name[method]}}
-						</div>
-						<div class="documents__description">
-							<h3>Доступні зміни</h3>
-							<pre>{{variables[method]}}</pre>
-							<h3>Варіанти виконання вашого коду</h3>
-							<ul>
-								<li *ngFor="let option of options">
-									{{option}}
-								</li>
-							</ul>
-							<div style="position: relative">
-								<h3>Базовий приклад коду</h3>
-								<i
-									style="position: absolute; top: 0; right: 0"
-									class="material-icons"
-									(click)="copySample()"
-									>content_copy</i
-								>
-							</div>
-							<pre>{{samples[method]}}</pre>
-						</div>
-					</div>
-					<div class="documents-main-row">
-						<wform
-							[config]="participateForm"
-							[submition]="submition"
-						></wform>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<h1 class="mb15">Турнір: {{name[method]}}</h1>
+	<div class="code-item">
+		<h3>Доступні зміни</h3>
+		<pre>{{variables[method]}}</pre>
+		<h3>Варіанти виконання вашого коду</h3>
+		<ul>
+			<li *ngFor="let option of options">{{option}}</li>
+		</ul>
+		<div style="position: relative">
+			<h3>Базовий приклад коду</h3>
+			<i
+				style="position: absolute; top: 0; right: 0"
+				class="material-icons"
+				(click)="copySample()"
+				>content_copy</i
+			>
+		</div>
+		<pre>{{samples[method]}}</pre>
+	</div>
+	<wform
+		class="group-item mb0"
+		[config]="participateForm"
+		[submition]="submition"
+	></wform>
 </div>

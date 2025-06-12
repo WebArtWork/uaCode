@@ -1,0 +1,128 @@
+.insta-block {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+.form-buy {
+	.w-forms__title {
+		font-size: 16px !important;
+	}
+	form-component:last-of-type {
+		.form-container {
+			margin-bottom: 0;
+		}
+	}
+}
+.c-item {
+	background: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 22%);
+	border-radius: 10px;
+	padding: 8px 15px;
+	display: flex;
+	justify-content: space-between;
+	white-space: nowrap;
+	font-size: 18px;
+	color: #333;
+	align-items: center;
+	& + & {
+		margin-top: 12px;
+	}
+	i {
+		color: #ccc;
+	}
+}
+.c-item + h1 {
+	margin-top: 20px;
+}
+.group-item {
+	background: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 22%);
+	border-radius: 10px;
+	padding: 10px 15px 15px;
+	display: flex;
+	white-space: nowrap;
+	font-size: 18px;
+	color: #333;
+	flex-direction: column;
+	gap: 15px;
+	margin-bottom: 20px;
+	i {
+		color: #ccc;
+	}
+	&_title {
+		font-size: 16px;
+		font-weight: 500;
+		margin-bottom: 3px;
+	}
+	&_btns {
+		display: flex;
+		gap: 15px;
+		overflow: hidden;
+	}
+	form-component:last-of-type {
+		.form-container {
+			margin-bottom: 0;
+		}
+	}
+	&._code {
+		textarea {
+			min-height: 200px !important;
+		}
+	}
+}
+.code-item {
+	background: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 22%);
+	border-radius: 10px;
+	padding: 10px 15px;
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 15px;
+	i {
+		color: #ccc;
+	}
+	.w-forms {
+		padding: 0 !important;
+	}
+	textarea {
+		margin-bottom: 5px;
+		border-radius: 4px !important;
+		min-height: 200px !important;
+		resize: vertical !important;
+	}
+	h3 {
+		margin-top: 0 !important;
+	}
+}
+
+.achiv-item {
+	background: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 22%);
+	border-radius: 10px;
+	padding: 12px;
+	display: flex;
+	font-size: 18px;
+	color: #333;
+	& + & {
+		margin-top: 15px;
+	}
+	img {
+		width: 75px;
+		height: 75px;
+		margin-right: 15px;
+		border-radius: 4px;
+	}
+}
+.member-item {
+	display: flex;
+	align-items: center;
+	& + & {
+		margin-top: 10px;
+		padding-top: 10px;
+		border-top: 1px dashed #ccc;
+	}
+	i {
+		margin-left: 5px;
+		font-size: 30px;
+	}
+}

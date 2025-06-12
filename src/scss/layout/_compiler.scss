@@ -1,0 +1,59 @@
+.compiler-wrapper {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0 10px 12px;
+	.w-forms {
+		flex-grow: 1;
+		display: flex;
+		gap: 0 !important;
+		form {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+	}
+	.w-forms__title {
+		font-size: 14px !important;
+		color: #000 !important;
+		margin-bottom: 0 !important;
+	}
+	.form-container {
+		margin-bottom: 0 !important;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		winput {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			.w-forms {
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+				textarea {
+					flex-grow: 1;
+					background: #fff !important;
+					border-radius: 4px !important;
+					border: 1px solid #ccc !important;
+					&:focus {
+						border: 1px solid var(--c-primary-hover) !important;
+					}
+				}
+			}
+		}
+	}
+}
+.w-forms__component.codeBlock {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	&.wrong textarea {
+		border: 1px solid red !important;
+	}
+}

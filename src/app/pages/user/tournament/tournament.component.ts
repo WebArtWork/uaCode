@@ -12,10 +12,10 @@ import { TournamentService } from 'src/app/core/services/tournament.service';
 
 @Component({
 	templateUrl: './tournament.component.html',
-	styleUrls: ['./tournament.component.scss'],
 	standalone: false
 })
 export class TournamentComponent {
+	// title {{name[method]}} 
 	readonly isClass = this._router.url.split('/')[2] === 'class';
 
 	readonly method = this._router.url.split('/')[3].split('%20').join(' ');

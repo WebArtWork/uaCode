@@ -5,10 +5,10 @@ import { AlertService, HttpService } from 'wacom';
 
 @Component({
 	templateUrl: './store.component.html',
-	styleUrls: ['./store.component.scss'],
 	standalone: false
 })
 export class StoreComponent {
+	// title Магазин
 	submition: Record<string, unknown> = {};
 
 	formDoc: FormInterface = this._form.getForm('docForm', {

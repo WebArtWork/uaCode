@@ -29,7 +29,7 @@ export class UserService extends CrudService<User> {
 
 	employees = (environment as unknown as { roles: string[] }).roles || [];
 
-	mode = 'dark';
+	mode = 'white';
 
 	modes = (
 		(environment as unknown as { modes: string[] }).modes || []
@@ -98,7 +98,7 @@ export class UserService extends CrudService<User> {
 			if (mode) {
 				this.setMode(mode);
 			} else {
-				this.setMode('dark');
+				this.setMode('white');
 			}
 		});
 	}

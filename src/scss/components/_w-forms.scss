@@ -17,14 +17,12 @@
 
 	&__title {
 		display: inline-block;
-		color: var(--c-text-primary);
-		// font-size: calc(#{$fs} - 4px);
 		font-size: 19px;
 		line-height: calc(#{vars.$fs} + 2px);
 		letter-spacing: vars.$letter-spacing;
-		// margin-bottom: 6px;
-		font-weight: 500;
-		margin-bottom: 15px;
+		font-weight: 700;
+		margin-bottom: 10px;
+		text-align: center;
 	}
 	&__component {
 		label {
@@ -96,6 +94,5 @@
 		min-height: 80px;
 		resize: vertical;
 		max-height: 250px;
-		margin-top: 10px;
 	}
 }
