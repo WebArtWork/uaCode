@@ -1,8 +1,16 @@
-<div *ngIf="classService.mineClass" class="burger-wrap" (click)="add()">
-	<span class="material-icons">add</span>
-</div>
-<core-class (wChange)="load($event)"></core-class>
-<div routerLink="/quiz/{{quiz._id}}" *ngFor="let quiz of quizzes">
-	<div class="documents__title">{{quiz.name}}</div>
+<core-class class="group-item" (wChange)="load($event)"></core-class>
+<button
+	*ngIf="classService.mineClass"
+	class="w-btn _green mb15"
+	(click)="add()"
+>
+	Новий квіз
+</button>
+<div
+	class="code-item"
+	routerLink="/quiz/{{quiz._id}}"
+	*ngFor="let quiz of quizzes; index as i"
+>
+	<div class="documents__title">{{i+1}}. {{quiz.name}}</div>
 	<div [innerHtml]="quiz.description" *ngIf="quiz.description"></div>
 </div>

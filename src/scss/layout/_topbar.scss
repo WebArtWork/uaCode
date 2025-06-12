@@ -2,8 +2,10 @@
 	padding: 12px 15px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	position: relative;
+	padding-top: 12px;
+	padding-top: calc(env(safe-area-inset-top) + 12px);
 }
 .topbar-compiler {
 	display: flex;
@@ -21,4 +23,10 @@
 		color: #fefd70;
 		border-bottom: 1px solid #fefd70;
 	}
+}
+.topbar-back {
+	position: absolute;
+	left: 15px;
+	top: 10px;
+	color: #fff;
 }

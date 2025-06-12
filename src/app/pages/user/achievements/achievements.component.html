@@ -1,24 +1,14 @@
 <div class="documents-main-content">
-	<div class="documents-main-row" *ngIf="false">No achievements section</div>
-	<div class="documents-main-row" *ngFor="let achievement of [{}, {}, {}]">
-		<div class="documents__title" *ngIf="!method">
-			Камінь, ножиці, папір
-		</div>
-		<div class="documents-wrap">
-			<div class="documents-img">
-				<img
-					style="width: 100px; height: 100px"
-					src="/assets/achievement.png"
-					alt=""
-				/>
-			</div>
-			<div class="documents-text">
-				<div class="documents-text__title">
-					<span>Honchar Denys</span>
-
-					<span>15.05.2025</span>
-				</div>
-			</div>
+	<div class="c-item mb15" *ngIf="true">
+		<div>Нема досягнень</div>
+		<i class="material-icons">mood_bad</i>
+	</div>
+	<div class="achiv-item" *ngFor="let achievement of [{}, {}, {}]">
+		<img src="/assets/achievement.png" alt="" />
+		<div>
+			<div class="fw700" *ngIf="!method">Камінь, ножиці, папір</div>
+			<div class="fw500">Honchar Denys</div>
+			<small>15.05.2025</small>
 		</div>
 	</div>
 </div>

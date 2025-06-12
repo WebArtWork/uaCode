@@ -8,7 +8,8 @@ import { Uacodeclass } from 'src/app/modules/uacodeclass/interfaces/uacodeclass.
 import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { FormService } from '../../modules/form/form.service';
 import { FormInterface } from '../../modules/form/interfaces/form.interface';
-import { CoreService, HttpService, StoreService } from 'wacom';
+import { CoreService, HttpService, StoreService, AlertService } from 'wacom';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
 	selector: 'core-class',
@@ -29,6 +30,8 @@ export class ClassComponent {
 		private _http: HttpService,
 		private _core: CoreService,
 		private _form: FormService,
+		private _clipboard: Clipboard,
+		private _alert: AlertService,
 		private _cdr: ChangeDetectorRef
 	) {
 		this._core.onComplete('class').then(() => {
@@ -63,7 +66,14 @@ export class ClassComponent {
 
 		this._mine();
 	}
+	copySample(content: any) {
+		this._clipboard.copy(content);
 
+		this._alert.info({
+			unique: 'copy',
+			text: 'Скопійовано'
+		});
+	}
 	create() {
 		this._form.modal<Uacodeclass>(this._classCreationForm, {
 			label: 'Створити',
@@ -148,20 +158,20 @@ export class ClassComponent {
 						}
 					]
 				},
-				{
-					name: 'Text',
-					key: 'description',
-					fields: [
-						{
-							name: 'Placeholder',
-							value: 'Введіть опис групи...'
-						},
-						{
-							name: 'Label',
-							value: 'Опис групи'
-						}
-					]
-				}
+				// {
+				// 	name: 'Text',
+				// 	key: 'description',
+				// 	fields: [
+				// 		{
+				// 			name: 'Placeholder',
+				// 			value: 'Введіть опис групи...'
+				// 		},
+				// 		{
+				// 			name: 'Label',
+				// 			value: 'Опис групи'
+				// 		}
+				// 	]
+				// }
 			]
 		}
 	);

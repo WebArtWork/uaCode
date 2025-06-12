@@ -1,18 +1,22 @@
-<h3>Група</h3>
-
-<wselect
-	placeholder="Приєднайтеся або створіть групу"
-	[select]="loaded ? classService.classId : null"
-	[disabled]="!classService.classes.length"
-	(modelChange)="setClass($event)"
-	[items]="classService.classes"
-	*ngIf="loaded"
-></wselect>
-
-<i class="material-icons" (click)="join()">group_add</i>
-
-<i class="material-icons" (click)="create()">add</i>
-
+<div>
+	<div class="group-item_title">Вибір групи</div>
+	<wselect
+		placeholder="Приєднайтеся або створіть групу"
+		[select]="loaded ? classService.classId : null"
+		[disabled]="!classService.classes.length"
+		(modelChange)="setClass($event)"
+		[items]="classService.classes"
+		*ngIf="loaded"
+	></wselect>
+</div>
+<div class="group-item_btns">
+	<button class="w-btn" (click)="join()">
+		<span>Приєднатись</span>
+	</button>
+	<button class="w-btn _green" (click)="create()">
+		<span>Створити</span>
+	</button>
+</div>
 <div *ngIf="classService.mineClass && class">
-	Код для приєднання: {{class.code}}
+	Код для приєднання: <b (click)="copySample(class.code)">{{class.code}}</b>
 </div>

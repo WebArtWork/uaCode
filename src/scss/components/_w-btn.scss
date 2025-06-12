@@ -38,6 +38,12 @@
 		background-color: var(--c-white);
 		color: #256eff;
 	}
+	&._green {
+		background-color: var(--file-add-bg);
+		&:hover {
+			background-color: var(--file-add-bg-hover);
+		}
+	}
 
 	&._danger {
 		background-color: var(--c-secondary);

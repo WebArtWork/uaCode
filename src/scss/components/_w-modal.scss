@@ -16,10 +16,13 @@
 		top: -2px;
 		right: 5px;
 
-		font-size: 50px;
+		font-size: 40px;
 	}
 	.close:hover {
 		color: var(--c-text-secondary);
+	}
+	.btn-action {
+		padding-top: 0;
 	}
 }
 

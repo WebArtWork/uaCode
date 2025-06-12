@@ -1,51 +1,61 @@
-<div *ngIf="classService.mineClass" class="burger-wrap" (click)="mutate()">
-	<span class="material-icons">edit</span>
+<div *ngIf="classService.mineClass" class="w-btn mb15" (click)="mutate()">
+	Редагувати квіз
 </div>
-<div class="documents-main-content" *ngIf="loaded">
-	<div *ngIf="quiz?.description" class="documents-main-row">
-		<div
-			class="documents__description"
-			*ngIf="quiz?.description"
-			[innerHtml]="quiz.description"
-		></div>
+
+<div *ngIf="loaded">
+	<div *ngIf="quiz?.description" class="code-item">
+		<div [innerHtml]="quiz.description"></div>
 	</div>
-	<div *ngIf="participations.length" class="documents-main-row">
-		<div class="documents__title">Учасники</div>
-		<div class="documents__description">
-			<ul>
-				<li *ngFor="let participant of participations">
-					<span>{{participant.name}}</span>
-					<span
-						class="material-icons"
-						*ngIf="classService.mineClass"
-						(click)="loadParticipant(participant)"
-						>play_arrow</span
-					>
 
-					<winput
-						*ngIf="classService.mineClass"
-						[value]="participant.grade"
-						(wChange)="updateGrade(participant, $event)"
-					></winput>
+	<div *ngIf="participations.length">
+		<div class="fw500">Учасники</div>
+		<div class="code-item">
+			<div
+				class="member-item"
+				*ngFor="let participant of participations; index as i"
+			>
+				<div class="fg-1">
+					<div class="d-f ai-c">
+						<span class="fg-1"
+							>{{i+1}}. <b>{{participant.name}}</b></span
+						>
+					</div>
+					<div class="d-f ai-c gap10">
+						<span>Оцінка:</span>
+						<winput
+							style="width: 60px"
+							*ngIf="classService.mineClass"
+							[value]="participant.grade"
+							(wChange)="updateGrade(participant, $event)"
+						></winput>
 
-					<span *ngIf="!classService.mineClass && participant.grade">
-						({{participant.grade}})</span
-					>
-				</li>
-			</ul>
+						<span
+							*ngIf="!classService.mineClass && participant.grade"
+						>
+							({{participant.grade}})</span
+						>
+					</div>
+				</div>
+				<i
+					class="material-icons cl-green"
+					*ngIf="classService.mineClass"
+					(click)="loadParticipant(participant)"
+					>play_circle</i
+				>
+			</div>
 		</div>
 	</div>
 
-	<div *ngIf="classService.mineClass && participation">
-		<div>{{participation.name}}</div>
-
+	<div class="code-item" *ngIf="classService.mineClass && participation">
+		<div>Учасник: <b>{{participation.name}}</b></div>
+		<small>Код:</small>
 		<winput
 			type="textarea"
 			[value]="participation.code"
 			[disabled]="true"
 			placeholder="code"
 		></winput>
-
+		<small>Результат:</small>
 		<winput
 			type="textarea"
 			[value]="output"
@@ -54,7 +64,7 @@
 		></winput>
 	</div>
 
-	<div *ngIf="!classService.mineClass">
+	<div class="group-item _code" *ngIf="!classService.mineClass">
 		<wform [config]="participateForm" [submition]="submition"></wform>
 	</div>
 </div>
