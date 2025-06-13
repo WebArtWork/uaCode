@@ -1,14 +1,17 @@
 <div class="documents-main-content">
-	<div class="c-item mb15" *ngIf="true">
+	<div class="c-item mb15" *ngIf="false">
 		<div>Нема досягнень</div>
 		<i class="material-icons">mood_bad</i>
 	</div>
-	<div class="achiv-item" *ngFor="let achievement of [{}, {}, {}]">
+	<div
+		class="achiv-item"
+		*ngFor="let achievement of ['25.05.2025', '01.06.2025', '08.06.2025']"
+	>
 		<img src="/assets/achievement.png" alt="" />
 		<div>
 			<div class="fw700" *ngIf="!method">Камінь, ножиці, папір</div>
 			<div class="fw500">Honchar Denys</div>
-			<small>15.05.2025</small>
+			<small>{{achievement}}</small>
 		</div>
 	</div>
 </div>
