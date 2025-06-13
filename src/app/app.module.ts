@@ -71,6 +71,16 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
+				path: 'privacy',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Privacy'
+					}
+				},
+				loadChildren: () => import('./pages/user/privacy/privacy.module').then(m => m.PrivacyModule)
+			}, 
+			{
 				path: 'achievements',
 				canActivate: [MetaGuard],
 				data: {
