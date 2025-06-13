@@ -1,0 +1,1 @@
+import{eb as c,kb as n,l as i,o}from"./chunk-SLNSAEGX.js";var p=(()=>{let t=class t extends n{constructor(e){super({name:"uacodetournamentparticipation"}),this._alert=e}};t.\u0275fac=function(a){return new(a||t)(o(c))},t.\u0275prov=i({token:t,factory:t.\u0275fac,providedIn:"root"});let r=t;return r})();export{p as a};
