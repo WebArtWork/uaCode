@@ -2,7 +2,7 @@
 	<winput
 		[value]="data.submition[data.key]"
 		(wChange)="
-			data.submition[data.key] = $event;
+			data.submition[data.key] = number($event);
 			data.wChange()
 		"
 		[placeholder]="data.field.Placeholder"

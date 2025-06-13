@@ -197,8 +197,47 @@ export class FormService {
 		return form;
 	}
 
-	/** Retrieves a form by its ID, initializing it if necessary */
+	/** Prepare form component */
+	prepareForm(form: FormInterface): FormInterface {
+		const formId = form.formId + '';
+
+		if (this.formIds.indexOf(formId) === -1) {
+			this.formIds.push(formId);
+
+			this._store.setJson('formIds', this.formIds);
+		}
+
+		form = form || this.getDefaultForm(formId);
+
+		form.formId = formId;
+
+		this._core.onComplete('form_loaded').then(() => {
+			const customForms = this._cfs.customforms.filter(
+				(f) => f.active && f.formId === form.formId
+			);
+
+			for (const customForm of customForms) {
+				form.title = form.title || customForm.name;
+
+				form.class = form.class || customForm.class;
+
+				for (const component of customForm.components) {
+					component.key = component.key?.startsWith('data.')
+						? component.key
+						: 'data.' + component.key;
+
+					form.components.push(component);
+				}
+			}
+
+			this.translateForm(form);
+		});
+
+		return form;
+	}
 	getForm(formId: string, form?: FormInterface): FormInterface {
+		console.warn('This function is deprecated');
+
 		if (
 			form &&
 			this.forms.map((c) => c.formId).indexOf(form?.formId) === -1
