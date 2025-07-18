@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { FormService } from 'src/app/core/modules/form/form.service';
-import { UacodeService } from 'src/app/core/services/uacode.service';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { UacodeService } from 'src/app/core/services/uacode.service';
 
 @Component({
 	templateUrl: './compiler.component.html',
@@ -84,11 +84,11 @@ export class CompilerComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio'
+						value: 'Напишіть тут результат...'
 					},
 					{
 						name: 'Label',
-						value: 'Bio'
+						value: 'Виведення'
 					},
 					{
 						name: 'Textarea',
