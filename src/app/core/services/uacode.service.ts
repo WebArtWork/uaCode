@@ -1,11 +1,11 @@
+import { formatDate, registerLocaleData } from '@angular/common';
+import localeUk from '@angular/common/locales/uk';
 import { Injectable } from '@angular/core';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UacodeService {
-	constructor() {}
-
 	getExample(id: number): string {
 		const command = this.commands.find((cmd) => cmd.id === id);
 
@@ -112,9 +112,17 @@ export class UacodeService {
 		const finalCode = protectedCode
 			.replace(/__STR_PLACEHOLDER_(\d+)__/g, (_, i) => placeholders[+i])
 			.split('elseif')
-			.join('else if');
+			.join('else if')
+			.split('new Date()')
+			.join(
+				"'" + formatDate(new Date(), 'dd.MM.yyyy HH:mm', 'uk-UA') + "'"
+			);
 
 		return finalCode.trim();
+	}
+
+	constructor() {
+		registerLocaleData(localeUk);
 	}
 
 	commands = [
