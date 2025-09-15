@@ -4,10 +4,10 @@ The Input Module is a customizable Angular component designed to handle various 
 
 ## Features
 
--   Supports a wide range of input types including text, password, email, radio, checkbox, textarea, and more.
--   Customizable validation and replacement logic.
--   Emits events for value changes, form submissions, and blur events.
--   Error handling with visual feedback.
+- Supports a wide range of input types including text, password, email, radio, checkbox, textarea, and more.
+- Customizable validation and replacement logic.
+- Emits events for value changes, form submissions, and blur events.
+- Error handling with visual feedback.
 
 ## Installation
 
@@ -57,19 +57,19 @@ Here's a basic example of how to use the input component in your Angular templat
 
 The `InputComponent` supports a wide variety of input types:
 
--   `text`
--   `password`
--   `email`
--   `radio`
--   `checkbox`
--   `textarea`
--   `number`
--   `url`
--   `date`
--   `time`
--   `file`
--   `color`
--   And more...
+- `text`
+- `password`
+- `email`
+- `radio`
+- `checkbox`
+- `textarea`
+- `number`
+- `url`
+- `date`
+- `time`
+- `file`
+- `color`
+- And more...
 
 Example:
 
@@ -99,20 +99,20 @@ You can provide custom validation and replacement logic:
 
 ### Inputs
 
--   **type** (`string`): The type of input. Supports all standard HTML input types.
--   **value** (`string | number | boolean`): The current value of the input.
--   **placeholder** (`string`): The placeholder text for the input.
--   **disabled** (`boolean`): Whether the input is disabled.
--   **focused** (`boolean`): Whether the input should be focused when initialized.
--   **wClass** (`string`): Custom CSS classes for styling the input.
--   **name** (`string`): The name attribute of the input.
--   **label** (`string`): The label for the input.
+- **type** (`string`): The type of input. Supports all standard HTML input types.
+- **value** (`string | number | boolean`): The current value of the input.
+- **placeholder** (`string`): The placeholder text for the input.
+- **disabled** (`boolean`): Whether the input is disabled.
+- **focused** (`boolean`): Whether the input should be focused when initialized.
+- **wClass** (`string`): Custom CSS classes for styling the input.
+- **name** (`string`): The name attribute of the input.
+- **label** (`string`): The label for the input.
 
 ### Outputs
 
--   **wChange** (`EventEmitter<unknown>`): Emits the new value whenever the input value changes.
--   **wSubmit** (`EventEmitter<unknown>`): Emits the value when the form is submitted (e.g., on pressing Enter).
--   **wBlur** (`EventEmitter<void>`): Emits when the input loses focus.
+- **wChange** (`EventEmitter<unknown>`): Emits the new value whenever the input value changes.
+- **wSubmit** (`EventEmitter<unknown>`): Emits the value when the form is submitted (e.g., on pressing Enter).
+- **wBlur** (`EventEmitter<void>`): Emits when the input loses focus.
 
 ## Customization
 

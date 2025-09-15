@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {
 	ChangeDetectorRef,
 	Component,
@@ -6,10 +7,9 @@ import {
 } from '@angular/core';
 import { Uacodeclass } from 'src/app/modules/uacodeclass/interfaces/uacodeclass.interface';
 import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
+import { AlertService, CoreService, HttpService, StoreService } from 'wacom';
 import { FormService } from '../../modules/form/form.service';
 import { FormInterface } from '../../modules/form/interfaces/form.interface';
-import { CoreService, HttpService, StoreService, AlertService } from 'wacom';
-import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
 	selector: 'core-class',
@@ -150,14 +150,14 @@ export class ClassComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: "Введіть назву групи..."
+							value: 'Введіть назву групи...'
 						},
 						{
 							name: 'Label',
-							value: "Назва групи"
+							value: 'Назва групи'
 						}
 					]
-				},
+				}
 				// {
 				// 	name: 'Text',
 				// 	key: 'description',
@@ -189,11 +189,11 @@ export class ClassComponent {
 					fields: [
 						{
 							name: 'Placeholder',
-							value: "Введіть назву групи..."
+							value: 'Введіть назву групи...'
 						},
 						{
 							name: 'Label',
-							value: "Назва групи"
+							value: 'Назва групи'
 						}
 					]
 				},

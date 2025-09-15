@@ -1,69 +1,29 @@
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 // Core
-import { GuestComponent } from './core/theme/guest/guest.component';
-import { UserComponent } from './core/theme/user/user.component';
-import { PublicComponent } from './core/theme/public/public.component';
-import { AppComponent } from './app.component';
-import { CoreModule } from 'src/app/core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from 'src/app/core/core.module';
+import { AppComponent } from './app.component';
+import { GuestComponent } from './core/theme/guest/guest.component';
+import { PublicComponent } from './core/theme/public/public.component';
+import { UserComponent } from './core/theme/user/user.component';
 // config
-import { WacomModule, MetaGuard } from 'wacom';
 import { environment } from 'src/environments/environment';
+import { MetaGuard, WacomModule } from 'wacom';
 // guards
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { QRCodeComponent } from 'angularx-qrcode';
+import * as io from 'socket.io-client';
+import { AdminsGuard } from './core/guards/admins.guard';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { GuestGuard } from './core/guards/guest.guard';
-import { AdminsGuard } from './core/guards/admins.guard';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import * as io from 'socket.io-client';
 
 const routes: Routes = [
 	{
 		path: '',
 		redirectTo: '/compiler',
 		pathMatch: 'full'
-	},
-	{
-		path: '',
-		canActivate: [GuestGuard],
-		component: GuestComponent,
-		children: [
-			/* guest */
-			{
-				path: 'sign',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Sign'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/guest/sign/sign.module').then(
-						(m) => m.SignModule
-					)
-			}
-		]
-	},
-	{
-		path: '',
-		canActivate: [AuthenticatedGuard],
-		component: UserComponent,
-		children: [
-			{
-				path: 'profile',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'My Profile'
-					}
-				},
-				loadChildren: () =>
-					import('./pages/user/profile/profile.module').then(
-						(m) => m.ProfileModule
-					)
-			}
-		]
 	},
 	{
 		path: '',
@@ -78,8 +38,11 @@ const routes: Routes = [
 						title: 'Privacy'
 					}
 				},
-				loadChildren: () => import('./pages/user/privacy/privacy.module').then(m => m.PrivacyModule)
-			}, 
+				loadChildren: () =>
+					import('./pages/user/privacy/privacy.module').then(
+						(m) => m.PrivacyModule
+					)
+			},
 			{
 				path: 'achievements',
 				canActivate: [MetaGuard],
@@ -94,32 +57,6 @@ const routes: Routes = [
 					).then((m) => m.AchievementsModule)
 			},
 			{
-				path: 'quizparticipantions',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Quizparticipantions'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/uacodequizparticipation/pages/quizparticipantions/quizparticipantions.routes'
-					).then((r) => r.quizparticipantionsRoutes)
-			},
-			{
-				path: 'tournamentparticipations',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Tournamentparticipations'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/uacodetournamentparticipation/pages/tournamentparticipations/tournamentparticipations.routes'
-					).then((r) => r.tournamentparticipationsRoutes)
-			},
-			{
 				path: 'store',
 				canActivate: [MetaGuard],
 				data: {
@@ -131,32 +68,6 @@ const routes: Routes = [
 					import('./pages/user/store/store.module').then(
 						(m) => m.StoreModule
 					)
-			},
-			{
-				path: 'allquizes',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Allquizes'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/uacodequiz/pages/allquizes/allquizes.module'
-					).then((m) => m.AllquizesModule)
-			},
-			{
-				path: 'classes',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Classes'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/uacodeclass/pages/classes/classes.module'
-					).then((m) => m.ClassesModule)
 			},
 			{
 				path: 'quiz',
@@ -258,32 +169,6 @@ const routes: Routes = [
 					).then((r) => r.achievementsRoutes)
 			},
 			{
-				path: 'users',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Users'
-					}
-				},
-				loadChildren: () =>
-					import('./modules/user/pages/users/users.module').then(
-						(m) => m.UsersModule
-					)
-			},
-			{
-				path: 'forms',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Forms'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/customform/pages/customforms/customforms.module'
-					).then((m) => m.CustomformsModule)
-			},
-			{
 				path: 'translates',
 				canActivate: [MetaGuard],
 				data: {
@@ -313,6 +198,7 @@ const routes: Routes = [
 		PublicComponent
 	],
 	imports: [
+		QRCodeComponent,
 		CoreModule,
 		BrowserModule,
 		BrowserAnimationsModule,

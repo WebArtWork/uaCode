@@ -1,25 +1,25 @@
 .play_btn {
-    width: 28px;
-  height: 28px;
-  padding: 0;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #00bf63 !important;
-  color: #c1ff72;
-  font-weight: 600;
-  font-size: 18px;
-  transition: all 0.3s;
-  text-decoration: none;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #00bf63 !important;
+	color: #c1ff72;
+	font-weight: 600;
+	font-size: 18px;
+	transition: all 0.3s;
+	text-decoration: none;
 }
 
 .example_container {
-    display: flex;
-    align-items: center;
-    gap: 8px; // відступ між текстом і кнопкою
-  }
+	display: flex;
+	align-items: center;
+	gap: 8px; // відступ між текстом і кнопкою
+}
 
-  .documents-header{
-    height: 45px;
+.documents-header {
+	height: 45px;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormInterface } from '../../interfaces/form.interface';
 import { HttpService } from 'wacom';
+import { FormInterface } from '../../interfaces/form.interface';
 
 @Component({
 	selector: 'app-modal-unique',

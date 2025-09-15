@@ -1,27 +1,32 @@
 import { Component } from '@angular/core';
-import { AlertService, CoreService } from 'wacom';
-import { UacodequizService } from '../../services/uacodequiz.service';
-import { Uacodequiz } from '../../interfaces/uacodequiz.interface';
-import { FormService } from 'src/app/core/modules/form/form.service';
-import { TranslateService } from 'src/app/core/modules/translate/translate.service';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { uacodequizFormComponents } from '../../formcomponents/uacodequiz.formcomponents';
 import { firstValueFrom } from 'rxjs';
+import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { TranslateService } from 'src/app/core/modules/translate/translate.service';
+import { AlertService, CoreService } from 'wacom';
+import { uacodequizFormComponents } from '../../formcomponents/uacodequiz.formcomponents';
+import { Uacodequiz } from '../../interfaces/uacodequiz.interface';
+import { UacodequizService } from '../../services/uacodequiz.service';
 
 @Component({
 	templateUrl: './allquizes.component.html',
 	styleUrls: ['./allquizes.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class AllquizesComponent {
 	columns = ['name', 'description'];
 
-	form: FormInterface = this._form.getForm('uacodequiz', uacodequizFormComponents);
+	form: FormInterface = this._form.getForm(
+		'uacodequiz',
+		uacodequizFormComponents
+	);
 
 	config = {
 		paginate: this.setRows.bind(this),
 		perPage: 20,
-		setPerPage: this._uacodequizService.setPerPage.bind(this._uacodequizService),
+		setPerPage: this._uacodequizService.setPerPage.bind(
+			this._uacodequizService
+		),
 		allDocs: false,
 		create: (): void => {
 			this._form.modal<Uacodequiz>(this.form, {
@@ -36,7 +41,7 @@ export class AllquizesComponent {
 					);
 
 					this.setRows();
-				},
+				}
 			});
 		},
 		update: (doc: Uacodequiz): void => {
@@ -55,39 +60,45 @@ export class AllquizesComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._uacodequizService.delete(doc));
+							await firstValueFrom(
+								this._uacodequizService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
 			{
 				icon: 'cloud_download',
 				click: (doc: Uacodequiz): void => {
-					this._form.modalUnique<Uacodequiz>('uacodequiz', 'url', doc);
-				},
-			},
+					this._form.modalUnique<Uacodequiz>(
+						'uacodequiz',
+						'url',
+						doc
+					);
+				}
+			}
 		],
 		headerButtons: [
 			{
 				icon: 'playlist_add',
 				click: this._bulkManagement(),
-				class: 'playlist',
+				class: 'playlist'
 			},
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Uacodequiz[] = [];
@@ -137,7 +148,8 @@ export class AllquizesComponent {
 						for (const uacodequiz of this.rows) {
 							if (
 								!uacodequizs.find(
-									(localUacodequiz) => localUacodequiz._id === uacodequiz._id
+									(localUacodequiz) =>
+										localUacodequiz._id === uacodequiz._id
 								)
 							) {
 								await firstValueFrom(
@@ -148,14 +160,17 @@ export class AllquizesComponent {
 
 						for (const uacodequiz of uacodequizs) {
 							const localUacodequiz = this.rows.find(
-								(localUacodequiz) => localUacodequiz._id === uacodequiz._id
+								(localUacodequiz) =>
+									localUacodequiz._id === uacodequiz._id
 							);
 
 							if (localUacodequiz) {
 								this._core.copy(uacodequiz, localUacodequiz);
 
 								await firstValueFrom(
-									this._uacodequizService.update(localUacodequiz)
+									this._uacodequizService.update(
+										localUacodequiz
+									)
 								);
 							} else {
 								this._preCreate(uacodequiz);

@@ -9,6 +9,7 @@
 		*ngIf="loaded"
 	></wselect>
 </div>
+
 <div class="group-item_btns">
 	<button class="w-btn" (click)="join()">
 		<span>Приєднатись</span>
@@ -17,6 +18,16 @@
 		<span>Створити</span>
 	</button>
 </div>
-<div *ngIf="classService.mineClass && class">
-	Код для приєднання: <b (click)="copySample(class.code)">{{class.code}}</b>
+
+@if(classService.mineClass && class) {
+<div>
+	<span>Код для приєднання: </span>
+	<b (click)="copySample(class.code)">{{class.code}}</b>
+	<span
+		(click)="classService.showGlobalQrCode = true"
+		style="margin-left: 10px"
+		class="material-icons"
+		>qr_code</span
+	>
 </div>
+}

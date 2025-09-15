@@ -4,6 +4,6 @@ import { AchievementsComponent } from './achievements.component';
 export const achievementsRoutes: Routes = [
 	{
 		path: '',
-		component: AchievementsComponent,
-	},
+		component: AchievementsComponent
+	}
 ];

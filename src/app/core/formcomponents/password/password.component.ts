@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormService } from '../../modules/form/form.service';
 import { UiService } from 'wacom';
+import { FormService } from '../../modules/form/form.service';
 interface Interface {}
 @Component({
 	templateUrl: './password.component.html',
@@ -10,7 +10,10 @@ interface Interface {}
 export class PasswordComponent implements OnInit {
 	@ViewChild('templateRef', { static: true })
 	templateRef: TemplateRef<Interface>;
-	constructor(private _form: FormService, public ui: UiService) {}
+	constructor(
+		private _form: FormService,
+		public ui: UiService
+	) {}
 	ngOnInit(): void {
 		this._form.addTemplateComponent<Interface>(
 			'Password',

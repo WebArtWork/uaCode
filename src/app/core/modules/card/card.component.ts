@@ -1,9 +1,9 @@
 import {
-	Component,
-	Input,
 	AfterContentInit,
+	Component,
 	ContentChild,
-	ElementRef
+	ElementRef,
+	Input
 } from '@angular/core';
 
 /**

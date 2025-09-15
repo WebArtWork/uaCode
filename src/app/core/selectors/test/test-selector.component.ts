@@ -6,7 +6,7 @@ import {
 	Output,
 	SimpleChanges
 } from '@angular/core';
-import { TestService, Test } from 'src/app/core/services/test.service';
+import { Test, TestService } from 'src/app/core/services/test.service';
 
 @Component({
 	selector: 'test-selector',

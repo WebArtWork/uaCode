@@ -1,9 +1,9 @@
 import {
 	Component,
+	EventEmitter,
 	HostListener,
-	Output,
 	Input,
-	EventEmitter
+	Output
 } from '@angular/core';
 import { CalendarDate } from './calendar.interface';
 

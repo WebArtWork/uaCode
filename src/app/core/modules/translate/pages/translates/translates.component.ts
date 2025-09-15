@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Language, TranslateService, Word } from '../../translate.service';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { HttpService } from 'wacom';
+import { Language, TranslateService, Word } from '../../translate.service';
 
 interface Translate {
 	translate: string;
@@ -146,7 +146,7 @@ export class TranslatesComponent {
 		const rows = missed
 			? this.rows.filter(
 					(r) => !this.ts.translates[this.ts.language.code][r.slug]
-			  )
+				)
 			: this.rows;
 		const words = JSON.stringify(rows.map((r) => r.word));
 		const slugs = rows.map((r) => r.slug);

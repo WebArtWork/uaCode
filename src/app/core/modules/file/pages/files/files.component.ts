@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { AlertService, CoreService } from 'wacom';
-import { FileService } from '../../services/file.service';
-import { File } from '../../interfaces/file.interface';
-import { FormService } from 'src/app/core/modules/form/form.service';
-import { TranslateService } from 'src/app/core/modules/translate/translate.service';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { fileFormComponents } from '../../formcomponents/file.formcomponents';
-import { firstValueFrom } from 'rxjs';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Component } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { TranslateService } from 'src/app/core/modules/translate/translate.service';
+import { AlertService, CoreService } from 'wacom';
+import { fileFormComponents } from '../../formcomponents/file.formcomponents';
+import { File } from '../../interfaces/file.interface';
+import { FileService } from '../../services/file.service';
 
 @Component({
 	templateUrl: './files.component.html',

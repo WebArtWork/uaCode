@@ -7,10 +7,10 @@ import {
 	Output,
 	SimpleChanges
 } from '@angular/core';
-import { HttpService, ModalService } from 'wacom';
-import { FileService } from './file.service';
-import { FileCropperComponent } from './file-cropper/file-cropper.component';
 import { environment } from 'src/environments/environment';
+import { HttpService, ModalService } from 'wacom';
+import { FileCropperComponent } from './file-cropper/file-cropper.component';
+import { FileService } from './file.service';
 
 /**
  * The FileComponent is responsible for handling file uploads, primarily images,

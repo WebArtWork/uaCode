@@ -1,20 +1,20 @@
 import {
-	SimpleChanges,
-	EventEmitter,
 	Component,
+	EventEmitter,
+	Input,
 	OnChanges,
 	Output,
-	Input,
+	SimpleChanges
 } from '@angular/core';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
-import { FileService } from '../../services/file.service';
 import { File } from '../../interfaces/file.interface';
+import { FileService } from '../../services/file.service';
 
 @Component({
 	selector: 'file-selector',
 	templateUrl: './file-selector.component.html',
 	styleUrls: ['./file-selector.component.scss'],
-	imports: [SelectModule],
+	imports: [SelectModule]
 })
 export class FileSelectorComponent implements OnChanges {
 	@Input() value: string;

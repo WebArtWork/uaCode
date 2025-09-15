@@ -3,9 +3,9 @@ import { FormService } from 'src/app/core/modules/form/form.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { TranslateService } from 'src/app/core/modules/translate/translate.service';
 import { AlertService, CoreService } from 'wacom';
+import { userFormComponents } from '../../formcomponents/user.formcomponents';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
-import { userFormComponents } from '../../formcomponents/user.formcomponents';
 
 @Component({
 	selector: 'app-users',

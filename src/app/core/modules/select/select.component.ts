@@ -1,14 +1,14 @@
 import {
 	Component,
 	ElementRef,
-	Input,
-	TemplateRef,
-	ViewChild,
-	Output,
 	EventEmitter,
-	OnInit,
+	Input,
 	OnChanges,
-	SimpleChanges
+	OnInit,
+	Output,
+	SimpleChanges,
+	TemplateRef,
+	ViewChild
 } from '@angular/core';
 
 /**

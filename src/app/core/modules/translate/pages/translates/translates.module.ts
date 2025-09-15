@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslatesComponent } from './translates.component';
+import { RouterModule, Routes } from '@angular/router';
+import { ButtonModule } from 'src/app/core/modules/button/button.module';
+import { SelectModule } from 'src/app/core/modules/select/select.module';
+import { TableModule } from 'src/app/core/modules/table/table.module';
 import { WacomModule } from 'wacom';
 import { TranslateModule } from '../../translate.module';
-import { ButtonModule } from 'src/app/core/modules/button/button.module';
-import { TableModule } from 'src/app/core/modules/table/table.module';
-import { SelectModule } from 'src/app/core/modules/select/select.module';
+import { TranslatesComponent } from './translates.component';
 
 const routes: Routes = [
 	{

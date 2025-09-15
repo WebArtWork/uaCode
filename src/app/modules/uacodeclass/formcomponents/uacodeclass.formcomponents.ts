@@ -9,11 +9,11 @@ export const uacodeclassFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodeclass title',
+					value: 'fill uacodeclass title'
 				},
 				{
 					name: 'Label',
-					value: 'Title',
+					value: 'Title'
 				}
 			]
 		},
@@ -23,13 +23,13 @@ export const uacodeclassFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodeclass description',
+					value: 'fill uacodeclass description'
 				},
 				{
 					name: 'Label',
-					value: 'Description',
+					value: 'Description'
 				}
 			]
 		}
 	]
-}
+};

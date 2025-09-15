@@ -4,11 +4,11 @@ The Card Module is a highly flexible Angular component designed to act as a cont
 
 ## Features
 
--   Flexible layout for various content types.
--   Optional header and footer sections.
--   Supports custom CSS classes for further styling.
--   Uses CSS Flexbox for responsive and adaptive layout design.
--   Accepts an array of strings to render multiple body sections.
+- Flexible layout for various content types.
+- Optional header and footer sections.
+- Supports custom CSS classes for further styling.
+- Uses CSS Flexbox for responsive and adaptive layout design.
+- Accepts an array of strings to render multiple body sections.
 
 ## Installation
 
@@ -109,10 +109,10 @@ You can provide custom classes for additional styling:
 
 ### Inputs
 
--   **cardClass** (`string`): Custom CSS classes to apply to the card.
--   **sections** (`string[] | null`): Array of strings representing multiple content sections in the body.
--   **header** (`TemplateRef<any> | null`): Optional header template for the card.
--   **footer** (`TemplateRef<any> | null`): Optional footer template for the card.
+- **cardClass** (`string`): Custom CSS classes to apply to the card.
+- **sections** (`string[] | null`): Array of strings representing multiple content sections in the body.
+- **header** (`TemplateRef<any> | null`): Optional header template for the card.
+- **footer** (`TemplateRef<any> | null`): Optional footer template for the card.
 
 ## Customization
 

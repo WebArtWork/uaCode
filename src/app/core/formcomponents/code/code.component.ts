@@ -1,8 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormService } from '../../modules/form/form.service';
 import 'brace';
 import 'brace/mode/json';
 import 'brace/theme/monokai';
+import { FormService } from '../../modules/form/form.service';
 
 interface Interface {}
 

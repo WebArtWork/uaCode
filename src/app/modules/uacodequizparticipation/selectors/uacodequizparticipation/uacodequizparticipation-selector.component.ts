@@ -1,20 +1,20 @@
 import {
-	SimpleChanges,
-	EventEmitter,
 	Component,
+	EventEmitter,
+	Input,
 	OnChanges,
 	Output,
-	Input,
+	SimpleChanges
 } from '@angular/core';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
-import { UacodequizparticipationService } from '../../services/uacodequizparticipation.service';
 import { Uacodequizparticipation } from '../../interfaces/uacodequizparticipation.interface';
+import { UacodequizparticipationService } from '../../services/uacodequizparticipation.service';
 
 @Component({
 	selector: 'uacodequizparticipation-selector',
 	templateUrl: './uacodequizparticipation-selector.component.html',
 	styleUrls: ['./uacodequizparticipation-selector.component.scss'],
-	imports: [SelectModule],
+	imports: [SelectModule]
 })
 export class UacodequizparticipationSelectorComponent implements OnChanges {
 	@Input() value: string;
@@ -25,7 +25,9 @@ export class UacodequizparticipationSelectorComponent implements OnChanges {
 		return this._uacodequizparticipationService.uacodequizparticipations;
 	}
 
-	constructor(private _uacodequizparticipationService: UacodequizparticipationService) {}
+	constructor(
+		private _uacodequizparticipationService: UacodequizparticipationService
+	) {}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['value'] && !changes['value'].firstChange) {

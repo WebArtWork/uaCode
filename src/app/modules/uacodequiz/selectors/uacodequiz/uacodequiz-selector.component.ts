@@ -1,20 +1,20 @@
 import {
-	SimpleChanges,
-	EventEmitter,
 	Component,
+	EventEmitter,
+	Input,
 	OnChanges,
 	Output,
-	Input,
+	SimpleChanges
 } from '@angular/core';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
-import { UacodequizService } from '../../services/uacodequiz.service';
 import { Uacodequiz } from '../../interfaces/uacodequiz.interface';
+import { UacodequizService } from '../../services/uacodequiz.service';
 
 @Component({
 	selector: 'uacodequiz-selector',
 	templateUrl: './uacodequiz-selector.component.html',
 	styleUrls: ['./uacodequiz-selector.component.scss'],
-	imports: [SelectModule],
+	imports: [SelectModule]
 })
 export class UacodequizSelectorComponent implements OnChanges {
 	@Input() value: string;

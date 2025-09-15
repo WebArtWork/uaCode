@@ -206,13 +206,13 @@
 		&__input {
 			display: none;
 
-			&:checked+.checkbox__body .checkbox__svg {
+			&:checked + .checkbox__body .checkbox__svg {
 				background: var(--c-sky);
 				border-color: var(--c-sky);
 				animation: wave 0.4s ease;
 			}
 
-			&:checked+.checkbox__body .checkbox__svg svg {
+			&:checked + .checkbox__body .checkbox__svg svg {
 				stroke-dashoffset: 0;
 			}
 		}

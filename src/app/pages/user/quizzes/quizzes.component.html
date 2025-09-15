@@ -1,16 +1,10 @@
 <core-class class="group-item" (wChange)="load($event)"></core-class>
-<button
-	*ngIf="classService.mineClass"
-	class="w-btn _green mb15"
-	(click)="add()"
->
-	Новий квіз
-</button>
-<div
-	class="code-item"
-	routerLink="/quiz/{{quiz._id}}"
-	*ngFor="let quiz of quizzes; index as i"
->
+
+@if (classService.mineClass) {
+<button class="w-btn _green mb15" (click)="add()">Новий квіз</button>
+} @for (quiz of quizzes; track $index; let i = $index) {
+<div class="code-item" routerLink="/quiz/{{quiz._id}}">
 	<div class="documents__title">{{i+1}}. {{quiz.name}}</div>
 	<div [innerHtml]="quiz.description" *ngIf="quiz.description"></div>
 </div>
+}

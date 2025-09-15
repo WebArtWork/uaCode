@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ImageCropperModule, ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
 import { ButtonModule } from 'src/app/core/modules/button/button.module';
 
 @Component({

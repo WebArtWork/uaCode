@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { FormService } from 'src/app/core/modules/form/form.service';
 import { Router } from '@angular/router';
-import { CoreService, SocketService } from 'wacom';
-import { Uacodequizparticipation } from 'src/app/modules/uacodequizparticipation/interfaces/uacodequizparticipation.interface';
-import { UacodequizService } from 'src/app/modules/uacodequiz/services/uacodequiz.service';
-import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
-import { UacodequizparticipationService } from 'src/app/modules/uacodequizparticipation/services/uacodequizparticipation.service';
+import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { Value } from 'src/app/core/modules/input/input.component';
 import { UacodeService } from 'src/app/core/services/uacode.service';
+import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { Uacodequiz } from 'src/app/modules/uacodequiz/interfaces/uacodequiz.interface';
+import { UacodequizService } from 'src/app/modules/uacodequiz/services/uacodequiz.service';
+import { Uacodequizparticipation } from 'src/app/modules/uacodequizparticipation/interfaces/uacodequizparticipation.interface';
+import { UacodequizparticipationService } from 'src/app/modules/uacodequizparticipation/services/uacodequizparticipation.service';
+import { CoreService, SocketService } from 'wacom';
 
 @Component({
 	templateUrl: './quiz.component.html',

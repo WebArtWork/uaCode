@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CoreService, CrudService, CrudDocument } from 'wacom';
+import { CoreService, CrudDocument, CrudService } from 'wacom';
 
 export interface CustomformcomponnetfieldInterface {
 	name: string;

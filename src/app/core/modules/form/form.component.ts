@@ -5,9 +5,9 @@ import {
 	Input,
 	Output
 } from '@angular/core';
+import { CoreService } from 'wacom';
 import { FormComponentInterface } from './interfaces/component.interface';
 import { FormInterface } from './interfaces/form.interface';
-import { CoreService } from 'wacom';
 
 @Component({
 	selector: 'wform',

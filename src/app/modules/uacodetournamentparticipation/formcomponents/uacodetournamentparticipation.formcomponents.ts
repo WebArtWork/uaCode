@@ -9,11 +9,11 @@ export const uacodetournamentparticipationFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodetournamentparticipation title',
+					value: 'fill uacodetournamentparticipation title'
 				},
 				{
 					name: 'Label',
-					value: 'Title',
+					value: 'Title'
 				}
 			]
 		},
@@ -23,13 +23,13 @@ export const uacodetournamentparticipationFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodetournamentparticipation description',
+					value: 'fill uacodetournamentparticipation description'
 				},
 				{
 					name: 'Label',
-					value: 'Description',
+					value: 'Description'
 				}
 			]
 		}
 	]
-}
+};

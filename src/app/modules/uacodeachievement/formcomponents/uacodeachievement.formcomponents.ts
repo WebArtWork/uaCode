@@ -9,11 +9,11 @@ export const uacodeachievementFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodeachievement title',
+					value: 'fill uacodeachievement title'
 				},
 				{
 					name: 'Label',
-					value: 'Title',
+					value: 'Title'
 				}
 			]
 		},
@@ -23,13 +23,13 @@ export const uacodeachievementFormComponents = {
 			fields: [
 				{
 					name: 'Placeholder',
-					value: 'fill uacodeachievement description',
+					value: 'fill uacodeachievement description'
 				},
 				{
 					name: 'Label',
-					value: 'Description',
+					value: 'Description'
 				}
 			]
 		}
 	]
-}
+};

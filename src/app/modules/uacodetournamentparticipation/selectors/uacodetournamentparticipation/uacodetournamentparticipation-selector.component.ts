@@ -1,31 +1,36 @@
 import {
-	SimpleChanges,
-	EventEmitter,
 	Component,
+	EventEmitter,
+	Input,
 	OnChanges,
 	Output,
-	Input,
+	SimpleChanges
 } from '@angular/core';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
-import { UacodetournamentparticipationService } from '../../services/uacodetournamentparticipation.service';
 import { Uacodetournamentparticipation } from '../../interfaces/uacodetournamentparticipation.interface';
+import { UacodetournamentparticipationService } from '../../services/uacodetournamentparticipation.service';
 
 @Component({
 	selector: 'uacodetournamentparticipation-selector',
 	templateUrl: './uacodetournamentparticipation-selector.component.html',
 	styleUrls: ['./uacodetournamentparticipation-selector.component.scss'],
-	imports: [SelectModule],
+	imports: [SelectModule]
 })
-export class UacodetournamentparticipationSelectorComponent implements OnChanges {
+export class UacodetournamentparticipationSelectorComponent
+	implements OnChanges
+{
 	@Input() value: string;
 
 	@Output() wChange = new EventEmitter();
 
 	get items(): Uacodetournamentparticipation[] {
-		return this._uacodetournamentparticipationService.uacodetournamentparticipations;
+		return this._uacodetournamentparticipationService
+			.uacodetournamentparticipations;
 	}
 
-	constructor(private _uacodetournamentparticipationService: UacodetournamentparticipationService) {}
+	constructor(
+		private _uacodetournamentparticipationService: UacodetournamentparticipationService
+	) {}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['value'] && !changes['value'].firstChange) {

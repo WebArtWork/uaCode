@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormService } from 'src/app/core/modules/form/form.service';
-import {
-	CustomformService,
-	Customform
-} from '../../services/customform.service';
-import { AlertService } from 'wacom';
-import { TranslateService } from 'src/app/core/modules/translate/translate.service';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormComponentInterface } from 'src/app/core/modules/form/interfaces/component.interface';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { TranslateService } from 'src/app/core/modules/translate/translate.service';
+import { AlertService } from 'wacom';
+import {
+	Customform,
+	CustomformService
+} from '../../services/customform.service';
 
 @Component({
 	templateUrl: './customforms.component.html',

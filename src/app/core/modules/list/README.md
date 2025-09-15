@@ -4,11 +4,11 @@ The `ngx-list` component is an Angular component designed for displaying a list 
 
 ## Features
 
--   Infinite scrolling to load more items as the user scrolls.
--   Pull to refresh functionality.
--   Load more items with a button click.
--   Flexible and customizable layout.
--   Adjustable step for loading more items.
+- Infinite scrolling to load more items as the user scrolls.
+- Pull to refresh functionality.
+- Load more items with a button click.
+- Flexible and customizable layout.
+- Adjustable step for loading more items.
 
 ## Installation
 
@@ -73,23 +73,23 @@ When there are more items to load, a "Load More" button will appear at the botto
 
 ### Inputs
 
--   **items** (`any[]`): The array of items to be displayed in the list.
--   **limit** (`number`): The initial limit on the number of items to display (default: 100).
--   **step** (`number`): The number of items to load each time more items are requested (default: 100).
+- **items** (`any[]`): The array of items to be displayed in the list.
+- **limit** (`number`): The initial limit on the number of items to display (default: 100).
+- **step** (`number`): The number of items to load each time more items are requested (default: 100).
 
 ### Methods
 
--   **loadMore()**: Manually loads more items into the list.
--   **refresh()**: Refreshes the list by resetting the limit and optionally reloading the items.
+- **loadMore()**: Manually loads more items into the list.
+- **refresh()**: Refreshes the list by resetting the limit and optionally reloading the items.
 
 ### SCSS Customization
 
 The component supports CSS variables for easy customization. Below are some of the customizable variables:
 
--   `--refresh-bg`: Background color for the pull-to-refresh message (default: `#f0f0f0`).
--   `--refresh-color`: Text color for the pull-to-refresh message (default: `#666`).
--   `--load-more-bg`: Background color for the load-more button (default: `#007bff`).
--   `--load-more-bg-hover`: Background color for the load-more button on hover (default: `#0056b3`).
+- `--refresh-bg`: Background color for the pull-to-refresh message (default: `#f0f0f0`).
+- `--refresh-color`: Text color for the pull-to-refresh message (default: `#666`).
+- `--load-more-bg`: Background color for the load-more button (default: `#007bff`).
+- `--load-more-bg-hover`: Background color for the load-more button on hover (default: `#0056b3`).
 
 ### Example of Custom CSS Variables
 

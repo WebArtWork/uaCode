@@ -1,27 +1,32 @@
 import { Component } from '@angular/core';
-import { AlertService, CoreService } from 'wacom';
-import { UacodeclassService } from '../../services/uacodeclass.service';
-import { Uacodeclass } from '../../interfaces/uacodeclass.interface';
-import { FormService } from 'src/app/core/modules/form/form.service';
-import { TranslateService } from 'src/app/core/modules/translate/translate.service';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { uacodeclassFormComponents } from '../../formcomponents/uacodeclass.formcomponents';
 import { firstValueFrom } from 'rxjs';
+import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { TranslateService } from 'src/app/core/modules/translate/translate.service';
+import { AlertService, CoreService } from 'wacom';
+import { uacodeclassFormComponents } from '../../formcomponents/uacodeclass.formcomponents';
+import { Uacodeclass } from '../../interfaces/uacodeclass.interface';
+import { UacodeclassService } from '../../services/uacodeclass.service';
 
 @Component({
 	templateUrl: './classes.component.html',
 	styleUrls: ['./classes.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class ClassesComponent {
 	columns = ['name', 'description'];
 
-	form: FormInterface = this._form.getForm('uacodeclass', uacodeclassFormComponents);
+	form: FormInterface = this._form.getForm(
+		'uacodeclass',
+		uacodeclassFormComponents
+	);
 
 	config = {
 		paginate: this.setRows.bind(this),
 		perPage: 20,
-		setPerPage: this._uacodeclassService.setPerPage.bind(this._uacodeclassService),
+		setPerPage: this._uacodeclassService.setPerPage.bind(
+			this._uacodeclassService
+		),
 		allDocs: false,
 		create: (): void => {
 			this._form.modal<Uacodeclass>(this.form, {
@@ -36,7 +41,7 @@ export class ClassesComponent {
 					);
 
 					this.setRows();
-				},
+				}
 			});
 		},
 		update: (doc: Uacodeclass): void => {
@@ -55,39 +60,45 @@ export class ClassesComponent {
 				),
 				buttons: [
 					{
-						text: this._translate.translate('Common.No'),
+						text: this._translate.translate('Common.No')
 					},
 					{
 						text: this._translate.translate('Common.Yes'),
 						callback: async (): Promise<void> => {
-							await firstValueFrom(this._uacodeclassService.delete(doc));
+							await firstValueFrom(
+								this._uacodeclassService.delete(doc)
+							);
 
 							this.setRows();
-						},
-					},
-				],
+						}
+					}
+				]
 			});
 		},
 		buttons: [
 			{
 				icon: 'cloud_download',
 				click: (doc: Uacodeclass): void => {
-					this._form.modalUnique<Uacodeclass>('uacodeclass', 'url', doc);
-				},
-			},
+					this._form.modalUnique<Uacodeclass>(
+						'uacodeclass',
+						'url',
+						doc
+					);
+				}
+			}
 		],
 		headerButtons: [
 			{
 				icon: 'playlist_add',
 				click: this._bulkManagement(),
-				class: 'playlist',
+				class: 'playlist'
 			},
 			{
 				icon: 'edit_note',
 				click: this._bulkManagement(false),
-				class: 'edit',
-			},
-		],
+				class: 'edit'
+			}
+		]
 	};
 
 	rows: Uacodeclass[] = [];
@@ -137,7 +148,8 @@ export class ClassesComponent {
 						for (const uacodeclass of this.rows) {
 							if (
 								!uacodeclasss.find(
-									(localUacodeclass) => localUacodeclass._id === uacodeclass._id
+									(localUacodeclass) =>
+										localUacodeclass._id === uacodeclass._id
 								)
 							) {
 								await firstValueFrom(
@@ -148,14 +160,17 @@ export class ClassesComponent {
 
 						for (const uacodeclass of uacodeclasss) {
 							const localUacodeclass = this.rows.find(
-								(localUacodeclass) => localUacodeclass._id === uacodeclass._id
+								(localUacodeclass) =>
+									localUacodeclass._id === uacodeclass._id
 							);
 
 							if (localUacodeclass) {
 								this._core.copy(uacodeclass, localUacodeclass);
 
 								await firstValueFrom(
-									this._uacodeclassService.update(localUacodeclass)
+									this._uacodeclassService.update(
+										localUacodeclass
+									)
 								);
 							} else {
 								this._preCreate(uacodeclass);

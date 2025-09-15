@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/modules/user/services/user.service';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { UserService } from 'src/app/modules/user/services/user.service';
 
 @Component({
 	templateUrl: './privacy.component.html',
 	styleUrls: ['./privacy.component.scss'],
-	standalone: false,
+	standalone: false
 })
 export class PrivacyComponent {
 	formDoc: FormInterface = this._form.getForm('docForm', {
@@ -20,13 +20,13 @@ export class PrivacyComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your name',
+						value: 'Enter your name'
 					},
 					{
 						name: 'Label',
-						value: 'Name',
-					},
-				],
+						value: 'Name'
+					}
+				]
 			},
 			{
 				name: 'Text',
@@ -34,13 +34,13 @@ export class PrivacyComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your phone',
+						value: 'Enter your phone'
 					},
 					{
 						name: 'Label',
-						value: 'Phone',
-					},
-				],
+						value: 'Phone'
+					}
+				]
 			},
 			{
 				name: 'Text',
@@ -48,37 +48,40 @@ export class PrivacyComponent {
 				fields: [
 					{
 						name: 'Placeholder',
-						value: 'Enter your bio',
+						value: 'Enter your bio'
 					},
 					{
 						name: 'Label',
-						value: 'Bio',
+						value: 'Bio'
 					},
 					{
 						name: 'Textarea',
-						value: true,
-					},
-				],
+						value: true
+					}
+				]
 			},
 			{
 				name: 'Button',
 				fields: [
 					{
 						name: 'Label',
-						value: "Let's go",
+						value: "Let's go"
 					},
 					{
 						name: 'Submit',
-						value: true,
-					},
-				],
-			},
-		],
+						value: true
+					}
+				]
+			}
+		]
 	});
 
 	isMenuOpen = false;
 
-	constructor(public userService: UserService, private _form: FormService) {}
+	constructor(
+		public userService: UserService,
+		private _form: FormService
+	) {}
 
 	back(): void {
 		window.history.back();

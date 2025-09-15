@@ -27,10 +27,10 @@ export class AppModule {}
 
 ### Component Inputs
 
--   `title`: The title of the table.
--   `columns`: Array of column definitions with properties `title` and `field`.
--   `rows`: Array of data rows to display in the table.
--   `config`: Configuration object for the table with options like `perPage`, `pageSizeOptions`, `searchable`, etc.
+- `title`: The title of the table.
+- `columns`: Array of column definitions with properties `title` and `field`.
+- `rows`: Array of data rows to display in the table.
+- `config`: Configuration object for the table with options like `perPage`, `pageSizeOptions`, `searchable`, etc.
 
 ### Example
 
@@ -40,11 +40,11 @@ export class AppModule {}
 
 ### Configuration
 
--   `pageSizeOptions`: Array of numbers for items per page options.
--   `perPage`: Number of items to show per page (-1 for all).
--   `page`: Current page number.
--   `searchable`: Boolean, whether to enable search functionality.
--   `create`: Function to execute when the "Add New" button is clicked.
+- `pageSizeOptions`: Array of numbers for items per page options.
+- `perPage`: Number of items to show per page (-1 for all).
+- `page`: Current page number.
+- `searchable`: Boolean, whether to enable search functionality.
+- `create`: Function to execute when the "Add New" button is clicked.
 
 ### Custom Templates
 

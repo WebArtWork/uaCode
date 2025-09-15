@@ -4,6 +4,6 @@ import { TournamentparticipationsComponent } from './tournamentparticipations.co
 export const tournamentparticipationsRoutes: Routes = [
 	{
 		path: '',
-		component: TournamentparticipationsComponent,
-	},
+		component: TournamentparticipationsComponent
+	}
 ];

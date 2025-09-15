@@ -1,7 +1,7 @@
-import { UserService } from 'src/app/modules/user/services/user.service';
-import { coreAnimation } from '../../animations/core.animations';
 import { Platform } from '@angular/cdk/platform';
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/modules/user/services/user.service';
+import { coreAnimation } from '../../animations/core.animations';
 
 @Component({
 	selector: 'app-user',
@@ -19,5 +19,8 @@ export class UserComponent {
 		}
 	}
 
-	constructor(public us: UserService, private _platform: Platform) {}
+	constructor(
+		public us: UserService,
+		private _platform: Platform
+	) {}
 }

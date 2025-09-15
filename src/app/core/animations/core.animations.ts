@@ -1,9 +1,9 @@
 import {
-	trigger,
+	animate,
 	state,
 	style,
-	animate,
-	transition
+	transition,
+	trigger
 } from '@angular/animations';
 
 export const coreAnimation = [

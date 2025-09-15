@@ -4,10 +4,10 @@ The Button Module is a customizable Angular component for creating various types
 
 ## Features
 
--   Supports multiple button types: primary, secondary, success, danger, warning, info, light, dark, link.
--   Customizable classes for additional styling.
--   Supports disabled state.
--   Emits custom click events.
+- Supports multiple button types: primary, secondary, success, danger, warning, info, light, dark, link.
+- Customizable classes for additional styling.
+- Supports disabled state.
+- Emits custom click events.
 
 ## Installation
 
@@ -56,15 +56,15 @@ Here's a basic example of how to use the button component in your Angular templa
 
 The `ButtonComponent` supports a variety of button types:
 
--   `primary`
--   `secondary`
--   `success`
--   `danger`
--   `warning`
--   `info`
--   `light`
--   `dark`
--   `link`
+- `primary`
+- `secondary`
+- `success`
+- `danger`
+- `warning`
+- `info`
+- `light`
+- `dark`
+- `link`
 
 Example:
 
@@ -95,15 +95,15 @@ You can provide custom classes for additional styling:
 
 ### Inputs
 
--   **type** (`string`): The type of button. Options include primary, secondary, success, danger, warning, info, light, dark, and link.
--   **class** (`string`): Custom CSS classes to add to the button.
--   **disabled** (`boolean`): Whether the button is disabled.
--   **disableSubmit** (`boolean`): When true, the button will not submit the form, even if placed inside a form.
--   **click** (`(() => void) | undefined`): Custom function to handle the click event.
+- **type** (`string`): The type of button. Options include primary, secondary, success, danger, warning, info, light, dark, and link.
+- **class** (`string`): Custom CSS classes to add to the button.
+- **disabled** (`boolean`): Whether the button is disabled.
+- **disableSubmit** (`boolean`): When true, the button will not submit the form, even if placed inside a form.
+- **click** (`(() => void) | undefined`): Custom function to handle the click event.
 
 ### Outputs
 
--   **wClick** (`EventEmitter<void>`): Emits an event when the button is clicked.
+- **wClick** (`EventEmitter<void>`): Emits an event when the button is clicked.
 
 ## Customization
 

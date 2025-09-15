@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UacodeachievementService } from '../../services/uacodeachievement.service';
-import { Uacodeachievement } from '../../interfaces/uacodeachievement.interface';
+import { Component } from '@angular/core';
 import { FormService } from 'src/app/core/modules/form/form.service';
-import { TranslateService } from 'src/app/core/modules/translate/translate.service';
-import { uacodeachievementFormComponents } from '../../formcomponents/uacodeachievement.formcomponents';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
 import { TableModule } from 'src/app/core/modules/table/table.module';
+import { TranslateService } from 'src/app/core/modules/translate/translate.service';
 import { CrudComponent } from 'wacom';
+import { uacodeachievementFormComponents } from '../../formcomponents/uacodeachievement.formcomponents';
+import { Uacodeachievement } from '../../interfaces/uacodeachievement.interface';
+import { UacodeachievementService } from '../../services/uacodeachievement.service';
 
 @Component({
 	imports: [CommonModule, TableModule],
 	templateUrl: './achievements.component.html',
-	styleUrls: ['./achievements.component.scss'],
+	styleUrls: ['./achievements.component.scss']
 })
 export class AchievementsComponent extends CrudComponent<
 	UacodeachievementService,
@@ -22,7 +22,7 @@ export class AchievementsComponent extends CrudComponent<
 	columns = ['name', 'description'];
 
 	config = {
-		...this.getConfig(),
+		...this.getConfig()
 	};
 
 	constructor(
@@ -30,7 +30,12 @@ export class AchievementsComponent extends CrudComponent<
 		_translate: TranslateService,
 		_form: FormService
 	) {
-		super(uacodeachievementFormComponents, _form, _translate, _uacodeachievementService);
+		super(
+			uacodeachievementFormComponents,
+			_form,
+			_translate,
+			_uacodeachievementService
+		);
 
 		this.setDocuments();
 	}

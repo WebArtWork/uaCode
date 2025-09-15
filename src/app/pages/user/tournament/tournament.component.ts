@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
-import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { FormService } from 'src/app/core/modules/form/form.service';
-import { Router } from '@angular/router';
-import { AlertService, CoreService, SocketService } from 'wacom';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormService } from 'src/app/core/modules/form/form.service';
+import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
+import { TournamentService } from 'src/app/core/services/tournament.service';
 import { UacodeService } from 'src/app/core/services/uacode.service';
+import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
 import { UacodetournamentparticipationService } from 'src/app/modules/uacodetournamentparticipation/services/uacodetournamentparticipation.service';
-import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
-import { TournamentService } from 'src/app/core/services/tournament.service';
+import { AlertService, CoreService, SocketService } from 'wacom';
 
 @Component({
 	templateUrl: './tournament.component.html',
 	standalone: false
 })
 export class TournamentComponent {
-	// title {{name[method]}} 
+	// title {{name[method]}}
 	readonly isClass = this._router.url.split('/')[2] === 'class';
 
 	readonly method = this._router.url.split('/')[3].split('%20').join(' ');

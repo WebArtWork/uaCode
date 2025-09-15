@@ -4,11 +4,11 @@ The `ngx-file` component is an Angular component designed for handling file uplo
 
 ## Features
 
--   Upload single or multiple files.
--   Handle image cropping before upload.
--   Customizable error handling.
--   Flexible styling with CSS variables.
--   Support for different file types.
+- Upload single or multiple files.
+- Handle image cropping before upload.
+- Customizable error handling.
+- Flexible styling with CSS variables.
+- Support for different file types.
 
 ## Installation
 
@@ -69,37 +69,37 @@ You can enable multiple file uploads by setting the `multiple` input property:
 
 ### Inputs
 
--   **container** (`string`): The container where the file will be stored (default: `'general'`).
--   **name** (`string`): The name of the file.
--   **err** (`string`): Error message for handling errors.
--   **label** (`string`): Label for the file input.
--   **class** (`string`): Custom CSS class for styling.
--   **imgStyle** (`object`): Style object for the image.
--   **multiple** (`boolean`): Whether multiple files can be uploaded.
--   **isPhoto** (`boolean`): Whether the file is a photo.
--   **isRound** (`boolean`): Whether the image should be displayed as a round shape.
--   **resize** (`number`): Resize factor for the image.
--   **width** (`number`): Width for cropping the image.
--   **height** (`number`): Height for cropping the image.
--   **value** (`string | string[]`): The value of the uploaded file(s).
+- **container** (`string`): The container where the file will be stored (default: `'general'`).
+- **name** (`string`): The name of the file.
+- **err** (`string`): Error message for handling errors.
+- **label** (`string`): Label for the file input.
+- **class** (`string`): Custom CSS class for styling.
+- **imgStyle** (`object`): Style object for the image.
+- **multiple** (`boolean`): Whether multiple files can be uploaded.
+- **isPhoto** (`boolean`): Whether the file is a photo.
+- **isRound** (`boolean`): Whether the image should be displayed as a round shape.
+- **resize** (`number`): Resize factor for the image.
+- **width** (`number`): Width for cropping the image.
+- **height** (`number`): Height for cropping the image.
+- **value** (`string | string[]`): The value of the uploaded file(s).
 
 ### Outputs
 
--   **update** (`EventEmitter<string | string[]>`): Event emitter to notify parent components of updates.
+- **update** (`EventEmitter<string | string[]>`): Event emitter to notify parent components of updates.
 
 ### Methods
 
--   **set()**: Initiates the file selection and cropping process.
--   **uploadImage(dataUrl: string)**: Uploads the image to the server.
+- **set()**: Initiates the file selection and cropping process.
+- **uploadImage(dataUrl: string)**: Uploads the image to the server.
 
 ### SCSS Customization
 
 The component supports CSS variables for easy customization. Below are some of the customizable variables:
 
--   `--file-img-border-radius`: Border radius for the images (default: `8px`).
--   `--file-add-bg`: Background color for the add button (default: `#007bff`).
--   `--file-add-bg-hover`: Background color for the add button on hover (default: `#0056b3`).
--   `--file-item-border-radius`: Border radius for file items (default: `4px`).
+- `--file-img-border-radius`: Border radius for the images (default: `8px`).
+- `--file-add-bg`: Background color for the add button (default: `#007bff`).
+- `--file-add-bg-hover`: Background color for the add button on hover (default: `#0056b3`).
+- `--file-item-border-radius`: Border radius for file items (default: `4px`).
 
 ### Example of Custom CSS Variables
 

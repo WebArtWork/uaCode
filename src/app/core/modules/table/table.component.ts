@@ -1,22 +1,22 @@
 import {
+	AfterContentInit,
 	Component,
-	Input,
+	ContentChild,
 	ContentChildren,
+	EventEmitter,
+	Input,
 	OnInit,
 	Output,
-	QueryList,
-	AfterContentInit,
-	EventEmitter,
-	ContentChild
+	QueryList
 } from '@angular/core';
-import {
-	CellDirective,
-	SortDirective,
-	ActionsDirective,
-	CustomEditDirective
-} from './table.directive';
 import { Router } from '@angular/router';
 import { StoreService } from 'wacom';
+import {
+	ActionsDirective,
+	CellDirective,
+	CustomEditDirective,
+	SortDirective
+} from './table.directive';
 
 /**
  * TableComponent is a reusable component for displaying data in a table format with
@@ -29,7 +29,10 @@ import { StoreService } from 'wacom';
 	standalone: false
 })
 export class TableComponent implements OnInit, AfterContentInit {
-	constructor(private _router: Router, private _store: StoreService) {}
+	constructor(
+		private _router: Router,
+		private _store: StoreService
+	) {}
 
 	/** A unique ID for the table based on the current route. */
 	tableId =

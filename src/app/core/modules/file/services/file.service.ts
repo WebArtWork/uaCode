@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
+import { CrudService, FileService as WacomFileService } from 'wacom';
 import { File } from '../interfaces/file.interface';
-import { FileService as WacomFileService } from 'wacom';
-import { CrudService } from 'wacom';
 
 @Injectable({
 	providedIn: 'root'

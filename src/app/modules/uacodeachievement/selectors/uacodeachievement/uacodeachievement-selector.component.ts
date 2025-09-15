@@ -1,20 +1,20 @@
 import {
-	SimpleChanges,
-	EventEmitter,
 	Component,
+	EventEmitter,
+	Input,
 	OnChanges,
 	Output,
-	Input,
+	SimpleChanges
 } from '@angular/core';
 import { SelectModule } from 'src/app/core/modules/select/select.module';
-import { UacodeachievementService } from '../../services/uacodeachievement.service';
 import { Uacodeachievement } from '../../interfaces/uacodeachievement.interface';
+import { UacodeachievementService } from '../../services/uacodeachievement.service';
 
 @Component({
 	selector: 'uacodeachievement-selector',
 	templateUrl: './uacodeachievement-selector.component.html',
 	styleUrls: ['./uacodeachievement-selector.component.scss'],
-	imports: [SelectModule],
+	imports: [SelectModule]
 })
 export class UacodeachievementSelectorComponent implements OnChanges {
 	@Input() value: string;

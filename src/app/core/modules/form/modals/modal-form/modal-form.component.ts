@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { CoreService } from 'wacom';
 import { FormModalButton } from '../../form.service';
 import { FormInterface } from '../../interfaces/form.interface';
-import { CoreService } from 'wacom';
 
 @Component({
 	templateUrl: './modal-form.component.html',

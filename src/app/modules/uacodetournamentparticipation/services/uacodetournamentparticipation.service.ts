@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Uacodetournamentparticipation } from '../interfaces/uacodetournamentparticipation.interface';
 import { AlertService, CrudService } from 'wacom';
+import { Uacodetournamentparticipation } from '../interfaces/uacodetournamentparticipation.interface';
 
 @Injectable({
 	providedIn: 'root'

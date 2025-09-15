@@ -1,12 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Uacodeclass } from '../interfaces/uacodeclass.interface';
+import { HostListener, Injectable } from '@angular/core';
 import { CoreService, CrudService, StoreService } from 'wacom';
+import { Uacodeclass } from '../interfaces/uacodeclass.interface';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UacodeclassService extends CrudService<Uacodeclass> {
+	qrWidth = window.innerWidth;
+
+	@HostListener('window:resize', ['$event'])
+	onResize() {
+		this.qrWidth = window.innerWidth;
+	}
+
 	classes: Uacodeclass[];
+
+	showGlobalQrCode = false;
 
 	classId: string;
 

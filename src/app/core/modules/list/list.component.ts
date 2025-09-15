@@ -2,10 +2,10 @@ import {
 	Component,
 	ContentChild,
 	ElementRef,
-	Input,
-	ViewChild,
 	HostListener,
-	OnInit
+	Input,
+	OnInit,
+	ViewChild
 } from '@angular/core';
 import { ItemDirective } from './list.directive';
 

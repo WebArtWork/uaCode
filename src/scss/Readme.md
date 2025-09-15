@@ -2,7 +2,7 @@
 
 ## I. GET STARTED
 
--   Import app.scss to your global styles -> `@import: "scss/waw";`
+- Import app.scss to your global styles -> `@import: "scss/waw";`
 
 ## II. STRUCTURE
 
@@ -46,7 +46,7 @@
 
 ## III. SETTINGS
 
--   Go to `waw.scss` and turn on/off imports scss files
+- Go to `waw.scss` and turn on/off imports scss files
 
 ## IV. INFO
 
@@ -60,11 +60,11 @@
 
 ## V. HOW TO USE COMPONENTS
 
--   Go to `scss/components/README.md` - ready made html for components
+- Go to `scss/components/README.md` - ready made html for components
 
 ## VI. HOW TO USE CLASESS
 
--   Go to `scss/Classes.md` - ready made htnl classes
+- Go to `scss/Classes.md` - ready made htnl classes
 
 ## VII. HTML/SCSS RULES
 
