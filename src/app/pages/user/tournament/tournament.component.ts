@@ -101,7 +101,7 @@ export class TournamentComponent {
 	constructor(
 		private _participationService: UacodetournamentparticipationService,
 		private _tournamentService: TournamentService,
-		private _classService: UacodeclassService,
+		public classService: UacodeclassService,
 		private _commandService: UacodeService,
 		private _socket: SocketService,
 		private _clipboard: Clipboard,
@@ -118,7 +118,7 @@ export class TournamentComponent {
 			if (
 				data.method === this.method &&
 				((!this.isClass && !data.class) ||
-					data.class === this._classService.classId)
+					data.class === this.classService.classId)
 			) {
 				this._load();
 			}
@@ -164,7 +164,7 @@ export class TournamentComponent {
 				this._participationService
 					.create({
 						...this.submition,
-						class: this.isClass ? this._classService.classId : null,
+						class: this.isClass ? this.classService.classId : null,
 						method: this.method,
 						device: this._core.deviceID
 					} as Uacodetournamentparticipation)
@@ -187,7 +187,7 @@ export class TournamentComponent {
 					? {
 							device: this._core.deviceID,
 							method: this.method,
-							class: this._classService.classId
+							class: this.classService.classId
 						}
 					: {
 							device: this._core.deviceID,
@@ -212,7 +212,7 @@ export class TournamentComponent {
 					query:
 						`method=${this.method}` +
 						(this.isClass
-							? '&class=' + this._classService.classId
+							? '&class=' + this.classService.classId
 							: '')
 				},
 				{ name: 'public' }
@@ -225,4 +225,6 @@ export class TournamentComponent {
 				this.participations = participations;
 			});
 	}
+
+	completeTournament() {}
 }

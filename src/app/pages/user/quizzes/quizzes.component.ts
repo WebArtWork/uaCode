@@ -24,13 +24,17 @@ export class QuizzesComponent {
 	) {}
 
 	load(classId: string): void {
-		this._quizService
-			.get({
-				query: 'class=' + classId
-			})
-			.subscribe((quizzes) => {
-				this.quizzes = quizzes;
-			});
+		if (classId) {
+			this._quizService
+				.get({
+					query: 'class=' + classId
+				})
+				.subscribe((quizzes) => {
+					this.quizzes = quizzes;
+				});
+		} else {
+			this.quizzes = [];
+		}
 	}
 
 	add(): void {

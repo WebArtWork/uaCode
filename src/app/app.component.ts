@@ -36,6 +36,10 @@ export class AppComponent {
 								this.classService.classId = classDocument._id;
 							}
 						});
+				} else if (url.includes('device')) {
+					this._userService.device = url.split('device/')[1];
+
+					localStorage.setItem('deviceId', this._userService.device);
 				} else {
 					this._router.navigateByUrl('/compiler').then(() => {
 						this._router.navigateByUrl(

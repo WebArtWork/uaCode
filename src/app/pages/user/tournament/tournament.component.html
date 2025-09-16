@@ -1,34 +1,38 @@
 <a
-	class="c-item mb15"
 	routerLink="/achievements/{{isClass ? 'class' : 'public'}}/{{method}}"
+	class="c-item mb15"
 >
 	<div>Досягнення</div>
 	<i class="material-icons cl-main-d">emoji_events</i>
 </a>
 <div>
-	<div *ngIf="participations.length">
+	@if(participations.length) {
+	<div>
 		<div class="fw500">Учасники</div>
 		<div class="code-item">
-			<div
-				class="member-item"
-				*ngFor="let participant of participations; index as i"
-			>
+			@for (participant of participations; track participant._id; let i =
+			$index) {
+			<div class="member-item">
 				<div>
 					<span>{{i+1}}. {{participant.name}} </span>
-					<span *ngIf="participant.points">
-						- {{participant.points}}</span
-					>
+					@if(participant.points) {
+					<span> - {{participant.points}}</span>
+					}
 				</div>
 			</div>
+			}
 		</div>
 	</div>
+	}
 	<h1 class="mb15">Турнір: {{name[method]}}</h1>
 	<div class="code-item">
 		<h3>Доступні зміни</h3>
 		<pre>{{variables[method]}}</pre>
 		<h3>Варіанти виконання вашого коду</h3>
 		<ul>
-			<li *ngFor="let option of options">{{option}}</li>
+			@for (option of options; track $index) {
+			<li>{{option}}</li>
+			}
 		</ul>
 		<div style="position: relative">
 			<h3>Базовий приклад коду</h3>
@@ -42,8 +46,11 @@
 		<pre>{{samples[method]}}</pre>
 	</div>
 	<wform
-		class="group-item mb0"
+		class="group-item mb15"
 		[config]="participateForm"
 		[submition]="submition"
 	></wform>
+	@if(classService.mineClass) {
+	<wbutton>Закінчити Турнір</wbutton>
+	}
 </div>

@@ -14,6 +14,8 @@ import { User } from '../interfaces/user.interface';
 	providedIn: 'root'
 })
 export class UserService extends CrudService<User> {
+	device = localStorage.getItem('deviceId') || this._core.deviceID;
+
 	readonly url = environment.url;
 
 	get thumb(): string {
