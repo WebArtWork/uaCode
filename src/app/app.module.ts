@@ -22,14 +22,61 @@ import { GuestGuard } from './core/guards/guest.guard';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/compiler',
-		pathMatch: 'full'
-	},
-	{
-		path: '',
 		component: PublicComponent,
 		children: [
 			/* user */
+			{
+				path: '',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Меню'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/menu/menu.module').then(
+						(m) => m.MenuModule
+					)
+			},
+			{
+				path: 'franchise',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Франшиза'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/franchise/franchise.module').then(
+						(m) => m.FranchiseModule
+					)
+			},
+			{
+				path: 'mentor',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Ментор'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/mentor/mentor.module').then(
+						(m) => m.MentorModule
+					)
+			},
+			{
+				path: 'opt',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Оптове замовлення книг'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/user/opt/opt.module').then(
+						(m) => m.OptModule
+					)
+			},
 			{
 				path: 'privacy',
 				canActivate: [MetaGuard],
@@ -48,7 +95,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Achievements'
+						title: 'Досягнення'
 					}
 				},
 				loadChildren: () =>
@@ -61,7 +108,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Store'
+						title: 'Магазин'
 					}
 				},
 				loadChildren: () =>
@@ -74,7 +121,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Quiz'
+						title: 'Вікторина'
 					}
 				},
 				loadChildren: () =>
@@ -87,7 +134,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Quizzes'
+						title: 'Вікторини'
 					}
 				},
 				loadChildren: () =>
@@ -100,7 +147,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Tournament'
+						title: 'Турнір'
 					}
 				},
 				loadChildren: () =>
@@ -113,7 +160,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Tournaments'
+						title: 'Турніри'
 					}
 				},
 				loadChildren: () =>
@@ -126,7 +173,7 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Commands'
+						title: 'Команди'
 					}
 				},
 				loadChildren: () =>
@@ -139,47 +186,13 @@ const routes: Routes = [
 				canActivate: [MetaGuard],
 				data: {
 					meta: {
-						title: 'Compiler'
+						title: 'Компілятор'
 					}
 				},
 				loadChildren: () =>
 					import('./pages/user/compiler/compiler.module').then(
 						(m) => m.CompilerModule
 					)
-			}
-		]
-	},
-	{
-		path: 'admin',
-		canActivate: [AdminsGuard],
-		component: UserComponent,
-		children: [
-			/* admin */
-			{
-				path: 'achievements',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Achievements'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./modules/uacodeachievement/pages/achievements/achievements.routes'
-					).then((r) => r.achievementsRoutes)
-			},
-			{
-				path: 'translates',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Translates'
-					}
-				},
-				loadChildren: () =>
-					import(
-						'./core/modules/translate/pages/translates/translates.module'
-					).then((m) => m.TranslatesModule)
 			}
 		]
 	},

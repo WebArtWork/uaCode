@@ -51,6 +51,7 @@
 		[submition]="submition"
 	></wform>
 	@if(classService.mineClass) {
-	<wbutton>Закінчити Турнір</wbutton>
+	<wbutton class="mb15" (click)="runTournament()">Запустити Турнір</wbutton>
+	<wbutton (click)="completeTournament()">Закінчити Турнір</wbutton>
 	}
 </div>
