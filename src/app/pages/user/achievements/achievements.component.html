@@ -3,15 +3,17 @@
 		<div>Нема досягнень</div>
 		<i class="material-icons">mood_bad</i>
 	</div>
-	<div
-		class="achiv-item"
-		*ngFor="let achievement of ['25.05.2025', '01.06.2025', '08.06.2025']"
-	>
-		<img src="/assets/achievement.png" alt="" />
+	@for (achievement of ['25.05.2025', '01.06.2025', '08.06.2025']; track
+	$index) {
+	<div class="achiv-item">
+		<img src="/assets/achievements/rps1.png" alt="" />
 		<div>
-			<div class="fw700" *ngIf="!method">Камінь, ножиці, папір</div>
+			@if (!method) {
+			<div class="fw700">Камінь, ножиці, папір</div>
+			}
 			<div class="fw500">Honchar Denys</div>
 			<small>{{achievement}}</small>
 		</div>
 	</div>
+	}
 </div>

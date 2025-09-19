@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
 import { AlertService } from 'wacom';
 
 /**
@@ -276,5 +277,318 @@ export class TournamentService {
 		}
 	};
 
+	runTournament(
+		method:
+			| 'Rock, Paper, Scissors'
+			| 'Magicians'
+			| "The Prisoner's Dilemma",
+		participations: Uacodetournamentparticipation[]
+	) {
+		participations = participations.filter((participation) =>
+			this.scriptLogicVerification[method](participation.code)
+		);
+		const played = {};
+
+		for (let i = 0; i < participations.length; i++) {
+			for (let j = 0; j < participations.length; j++) {
+				const _id =
+					participations[i]._id > participations[j]._id
+						? participations[i]._id + participations[j]._id
+						: participations[j]._id + participations[i]._id;
+
+				if (i !== j && !played[_id]) {
+					played[_id] = true;
+
+					this._run[method](participations[i], participations[j]);
+				}
+			}
+		}
+
+		console.log(
+			participations.map((p) => {
+				return {
+					name: p.name,
+					points: p.points,
+					class: p.class,
+					method: p.method
+				};
+			})
+		);
+	}
+
 	constructor(private _alert: AlertService) {}
+
+	private _run = {
+		'Rock, Paper, Scissors': (tags, participantA, participantB) => {
+			const beats = {
+				камінь: 'ножиці',
+				ножиці: 'папір',
+				папір: 'камінь'
+			};
+
+			const options = ['камінь', 'папір', 'ножиці'];
+
+			const statsA = {
+				myMove: '',
+				opponentMove: '',
+				myStones: 0,
+				myPaper: 0,
+				myScissors: 0,
+				opponentStones: 0,
+				opponentPaper: 0,
+				opponentScissors: 0
+			};
+
+			const statsB = {
+				myMove: '',
+				opponentMove: '',
+				myStones: 0,
+				myPaper: 0,
+				myScissors: 0,
+				opponentStones: 0,
+				opponentPaper: 0,
+				opponentScissors: 0
+			};
+
+			for (let i = 0; i < 999; i++) {
+				let moveA = getOptionRockPaperScissors(
+					statsA.myMove,
+					statsA.opponentMove,
+					statsA.myStones,
+					statsA.myPaper,
+					statsA.myScissors,
+					statsA.opponentStones,
+					statsA.opponentPaper,
+					statsA.opponentScissors,
+					translate(participantA.code)
+				);
+
+				let moveB = getOptionRockPaperScissors(
+					statsB.myMove,
+					statsB.opponentMove,
+					statsB.myStones,
+					statsB.myPaper,
+					statsB.myScissors,
+					statsB.opponentStones,
+					statsB.opponentPaper,
+					statsB.opponentScissors,
+					translate(participantB.code)
+				);
+
+				const data = applyTags(tags, options, moveA, moveB);
+
+				moveA = data.moveA;
+
+				moveB = data.moveB;
+
+				if (!options.includes(moveA) || !options.includes(moveB))
+					continue;
+
+				statsA.myMove = moveA;
+				statsA.opponentMove = moveB;
+				statsB.myMove = moveB;
+				statsB.opponentMove = moveA;
+
+				switch (moveA) {
+					case 'камінь':
+						statsA.myStones++;
+						statsB.opponentStones++;
+						break;
+					case 'папір':
+						statsA.myPaper++;
+						statsB.opponentPaper++;
+						break;
+					case 'ножиці':
+						statsA.myScissors++;
+						statsB.opponentScissors++;
+						break;
+				}
+				switch (moveB) {
+					case 'камінь':
+						statsB.myStones++;
+						statsA.opponentStones++;
+						break;
+					case 'папір':
+						statsB.myPaper++;
+						statsA.opponentPaper++;
+						break;
+					case 'ножиці':
+						statsB.myScissors++;
+						statsA.opponentScissors++;
+						break;
+				}
+
+				if (moveA === moveB) continue;
+
+				if (beats[moveA] === moveB) {
+					participantA.points++;
+				} else {
+					participantB.points++;
+				}
+			}
+		},
+		Magicians: (tags, participantA, participantB) => {
+			const options = ['атака', 'захист', 'лікування', 'медитація'];
+
+			const statsA = {
+				previousMove: '',
+				health: 100,
+				mana: 100,
+				атака: 0,
+				захист: 0,
+				лікування: 0,
+				медитація: 0
+			};
+
+			const statsB = {
+				previousMove: '',
+				health: 100,
+				mana: 100,
+				атака: 0,
+				захист: 0,
+				лікування: 0,
+				медитація: 0
+			};
+
+			for (let i = 0; i < 999; i++) {
+				let moveA = getOptionMagicians(
+					statsA.previousMove,
+					statsB.previousMove,
+					statsA.атака,
+					statsA.захист,
+					statsA.лікування,
+					statsA.медитація,
+					statsB.атака,
+					statsB.захист,
+					statsB.лікування,
+					statsB.медитація,
+					statsA.health,
+					statsA.mana,
+					statsB.health,
+					statsB.mana,
+					translate(participantA.code)
+				);
+
+				let moveB = getOptionMagicians(
+					statsB.previousMove,
+					statsA.previousMove,
+					statsB.атака,
+					statsB.захист,
+					statsB.лікування,
+					statsB.медитація,
+					statsA.атака,
+					statsA.захист,
+					statsA.лікування,
+					statsA.медитація,
+					statsB.health,
+					statsB.mana,
+					statsA.health,
+					statsA.mana,
+					translate(participantB.code)
+				);
+
+				const data = applyTags(tags, options, moveA, moveB);
+
+				moveA = data.moveA;
+
+				moveB = data.moveB;
+
+				if (!options.includes(moveA) || !options.includes(moveB))
+					continue;
+
+				statsA.previousMove = moveA;
+				statsB.previousMove = moveB;
+
+				statsA[moveA]++;
+				statsB[moveB]++;
+
+				if (
+					(moveA === 'атака' && statsA.mana < 30) ||
+					(moveA === 'захист' && statsA.mana < 10) ||
+					(moveA === 'лікування' && statsA.mana < 10)
+				) {
+					moveA = '';
+				}
+				if (
+					(moveB === 'атака' && statsB.mana < 30) ||
+					(moveB === 'захист' && statsB.mana < 10) ||
+					(moveB === 'лікування' && statsB.mana < 10)
+				) {
+					moveB = '';
+				}
+
+				magicianFight(moveA, moveB, statsA, statsB);
+				magicianFight(moveB, moveA, statsB, statsA);
+
+				if (statsA.health <= 0 && statsB.health <= 0) break;
+				else if (statsA.health <= 0) participantA.points++;
+				else if (statsB.health <= 0) participantB.points++;
+			}
+		},
+		"The Prisoner's Dilemma": (tags, participantA, participantB) => {
+			const options = ['зрадити', 'мовчати'];
+
+			let statsA = {
+				previousMove: '',
+				зрадити: 0,
+				мовчати: 0
+			};
+
+			let statsB = {
+				previousMove: '',
+				зрадити: 0,
+				мовчати: 0
+			};
+
+			for (let i = 0; i < 999; i++) {
+				let moveA = getOptionThePrisonersDilemma(
+					statsA.previousMove,
+					statsB.previousMove,
+					statsA.зрадити,
+					statsA.мовчати,
+					statsB.зрадити,
+					statsB.мовчати,
+					translate(participantA.code)
+				);
+
+				let moveB = getOptionThePrisonersDilemma(
+					statsB.previousMove,
+					statsA.previousMove,
+					statsB.зрадити,
+					statsB.мовчати,
+					statsA.зрадити,
+					statsA.мовчати,
+					translate(participantB.code)
+				);
+
+				const data = applyTags(tags, options, moveA, moveB);
+
+				moveA = data.moveA;
+
+				moveB = data.moveB;
+
+				if (!options.includes(moveA) || !options.includes(moveB))
+					continue;
+
+				statsA.previousMove = moveA;
+				statsB.previousMove = moveB;
+
+				statsA[moveA]++;
+				statsB[moveB]++;
+
+				// нарахування очок
+				if (moveA === 'мовчати' && moveB === 'мовчати') {
+					participantA.points += 3;
+					participantB.points += 3;
+				} else if (moveA === 'мовчати' && moveB === 'зрадити') {
+					participantB.points += 5;
+				} else if (moveA === 'зрадити' && moveB === 'мовчати') {
+					participantA.points += 5;
+				} else {
+					participantA.points += 1;
+					participantB.points += 1;
+				}
+			}
+		}
+	};
 }
