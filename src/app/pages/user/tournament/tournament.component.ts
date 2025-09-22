@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
-import { TournamentService } from 'src/app/core/services/tournament.service';
+import {
+	TournamentMethod,
+	TournamentService
+} from 'src/app/core/services/tournament.service';
 import { UacodeService } from 'src/app/core/services/uacode.service';
 import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
@@ -18,7 +21,10 @@ export class TournamentComponent {
 	// title {{name[method]}}
 	readonly isClass = this._router.url.split('/')[2] === 'class';
 
-	readonly method = this._router.url.split('/')[3].split('%20').join(' ');
+	readonly method: TournamentMethod = this._router.url
+		.split('/')[3]
+		.split('%20')
+		.join(' ') as TournamentMethod;
 
 	readonly name = this._tournamentService.nameTranslation;
 
@@ -226,7 +232,9 @@ export class TournamentComponent {
 			});
 	}
 
-	runTournament() {}
+	runTournament() {
+		this._tournamentService.runTournament(this.method, this.participations);
+	}
 
 	completeTournament() {}
 }

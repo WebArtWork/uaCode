@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
 import { AlertService } from 'wacom';
+import { UacodeService } from './uacode.service';
+
+export type TournamentMethod =
+	| 'Rock, Paper, Scissors'
+	| 'Magicians'
+	| "The Prisoner's Dilemma";
 
 /**
  * TournamentService handles game configuration, option validation,
@@ -278,16 +284,14 @@ export class TournamentService {
 	};
 
 	runTournament(
-		method:
-			| 'Rock, Paper, Scissors'
-			| 'Magicians'
-			| "The Prisoner's Dilemma",
+		method: TournamentMethod,
 		participations: Uacodetournamentparticipation[]
 	) {
 		participations = participations.filter((participation) =>
 			this.scriptLogicVerification[method](participation.code)
 		);
-		const played = {};
+
+		const played: Record<string, true> = {};
 
 		for (let i = 0; i < participations.length; i++) {
 			for (let j = 0; j < participations.length; j++) {
@@ -316,10 +320,17 @@ export class TournamentService {
 		);
 	}
 
-	constructor(private _alert: AlertService) {}
+	constructor(
+		private _alert: AlertService,
+		private _aacodeService: UacodeService
+	) {}
 
 	private _run = {
-		'Rock, Paper, Scissors': (tags, participantA, participantB) => {
+		'Rock, Paper, Scissors': (
+			participantA: Uacodetournamentparticipation,
+			participantB: Uacodetournamentparticipation,
+			tags = {}
+		) => {
 			const beats = {
 				камінь: 'ножиці',
 				ножиці: 'папір',
@@ -351,7 +362,7 @@ export class TournamentService {
 			};
 
 			for (let i = 0; i < 999; i++) {
-				let moveA = getOptionRockPaperScissors(
+				let moveA = this.getOptionRockPaperScissors(
 					statsA.myMove,
 					statsA.opponentMove,
 					statsA.myStones,
@@ -360,10 +371,10 @@ export class TournamentService {
 					statsA.opponentStones,
 					statsA.opponentPaper,
 					statsA.opponentScissors,
-					translate(participantA.code)
+					this._aacodeService.translate(participantA.code)
 				);
 
-				let moveB = getOptionRockPaperScissors(
+				let moveB = this.getOptionRockPaperScissors(
 					statsB.myMove,
 					statsB.opponentMove,
 					statsB.myStones,
@@ -372,10 +383,10 @@ export class TournamentService {
 					statsB.opponentStones,
 					statsB.opponentPaper,
 					statsB.opponentScissors,
-					translate(participantB.code)
+					this._aacodeService.translate(participantB.code)
 				);
 
-				const data = applyTags(tags, options, moveA, moveB);
+				const data = this.applyTags(tags, options, moveA, moveB);
 
 				moveA = data.moveA;
 
@@ -427,7 +438,7 @@ export class TournamentService {
 				}
 			}
 		},
-		Magicians: (tags, participantA, participantB) => {
+		Magicians: (participantA, participantB, tags = {}) => {
 			const options = ['атака', 'захист', 'лікування', 'медитація'];
 
 			const statsA = {
@@ -525,7 +536,7 @@ export class TournamentService {
 				else if (statsB.health <= 0) participantB.points++;
 			}
 		},
-		"The Prisoner's Dilemma": (tags, participantA, participantB) => {
+		"The Prisoner's Dilemma": (participantA, participantB, tags = {}) => {
 			const options = ['зрадити', 'мовчати'];
 
 			let statsA = {
@@ -591,4 +602,51 @@ export class TournamentService {
 			}
 		}
 	};
+
+	getOptionRockPaperScissors(
+		мійОстаннійХід,
+		суперникаОстаннійХід,
+		кількістьМоїхКаменів,
+		кількістьМоїхПаперів,
+		кількістьМоїхНожиців,
+		кількістьСуперникаКаменів,
+		кількістьСуперникаПаперів,
+		кількістьСуперникаНожиців,
+		code
+	) {
+		try {
+			return eval(`()=>{ ${code} }`)();
+		} catch (e) {
+			return null;
+		}
+	}
+
+	applyTags(tags: any, options: any, moveA: any, moveB: any) {
+		if (tags.includes('Reality') && Math.random() < 0.04) {
+			moveA = options[Math.floor(Math.random() * options.length)];
+		}
+
+		if (tags.includes('Reality') && Math.random() < 0.04) {
+			moveB = options[Math.floor(Math.random() * options.length)];
+		}
+
+		if (tags.includes('One Shift')) {
+			if (Math.random() > 0.5) {
+				moveA =
+					options[options.length - 1] === moveA
+						? options[0]
+						: options[options.indexOf(moveA) + 1];
+			} else {
+				moveB =
+					options[options.length - 1] === moveB
+						? options[0]
+						: options[options.indexOf(moveB) + 1];
+			}
+		}
+
+		return {
+			moveA,
+			moveB
+		};
+	}
 }
