@@ -322,7 +322,7 @@ export class TournamentService {
 
 	constructor(
 		private _alert: AlertService,
-		private _aacodeService: UacodeService
+		private _uacodeService: UacodeService
 	) {}
 
 	private _run = {
@@ -371,8 +371,8 @@ export class TournamentService {
 					statsA.opponentStones,
 					statsA.opponentPaper,
 					statsA.opponentScissors,
-					this._aacodeService.translate(participantA.code)
-				);
+					this._uacodeService.translate(participantA.code)
+				) as 'камінь' | 'папір' | 'ножиці';
 
 				let moveB = this.getOptionRockPaperScissors(
 					statsB.myMove,
@@ -383,14 +383,14 @@ export class TournamentService {
 					statsB.opponentStones,
 					statsB.opponentPaper,
 					statsB.opponentScissors,
-					this._aacodeService.translate(participantB.code)
-				);
+					this._uacodeService.translate(participantB.code)
+				) as 'камінь' | 'папір' | 'ножиці';
 
 				const data = this.applyTags(tags, options, moveA, moveB);
 
-				moveA = data.moveA;
+				moveA = data.moveA as 'камінь' | 'папір' | 'ножиці';
 
-				moveB = data.moveB;
+				moveB = data.moveB as 'камінь' | 'папір' | 'ножиці';
 
 				if (!options.includes(moveA) || !options.includes(moveB))
 					continue;
@@ -438,7 +438,11 @@ export class TournamentService {
 				}
 			}
 		},
-		Magicians: (participantA, participantB, tags = {}) => {
+		Magicians: (
+			participantA: Uacodetournamentparticipation,
+			participantB: Uacodetournamentparticipation,
+			tags = {}
+		) => {
 			const options = ['атака', 'захист', 'лікування', 'медитація'];
 
 			const statsA = {
@@ -462,7 +466,7 @@ export class TournamentService {
 			};
 
 			for (let i = 0; i < 999; i++) {
-				let moveA = getOptionMagicians(
+				let moveA = this.getOptionMagicians(
 					statsA.previousMove,
 					statsB.previousMove,
 					statsA.атака,
@@ -477,10 +481,10 @@ export class TournamentService {
 					statsA.mana,
 					statsB.health,
 					statsB.mana,
-					translate(participantA.code)
-				);
+					this._uacodeService.translate(participantA.code)
+				) as '' | 'атака' | 'захист' | 'лікування' | 'медитація';
 
-				let moveB = getOptionMagicians(
+				let moveB = this.getOptionMagicians(
 					statsB.previousMove,
 					statsA.previousMove,
 					statsB.атака,
@@ -495,14 +499,24 @@ export class TournamentService {
 					statsB.mana,
 					statsA.health,
 					statsA.mana,
-					translate(participantB.code)
-				);
+					this._uacodeService.translate(participantB.code)
+				) as '' | 'атака' | 'захист' | 'лікування' | 'медитація';
 
-				const data = applyTags(tags, options, moveA, moveB);
+				const data = this.applyTags(tags, options, moveA, moveB);
 
-				moveA = data.moveA;
+				moveA = data.moveA as
+					| ''
+					| 'атака'
+					| 'захист'
+					| 'лікування'
+					| 'медитація';
 
-				moveB = data.moveB;
+				moveB = data.moveB as
+					| ''
+					| 'атака'
+					| 'захист'
+					| 'лікування'
+					| 'медитація';
 
 				if (!options.includes(moveA) || !options.includes(moveB))
 					continue;
@@ -528,15 +542,19 @@ export class TournamentService {
 					moveB = '';
 				}
 
-				magicianFight(moveA, moveB, statsA, statsB);
-				magicianFight(moveB, moveA, statsB, statsA);
+				this.magicianFight(moveA, moveB, statsA, statsB);
+				this.magicianFight(moveB, moveA, statsB, statsA);
 
 				if (statsA.health <= 0 && statsB.health <= 0) break;
 				else if (statsA.health <= 0) participantA.points++;
 				else if (statsB.health <= 0) participantB.points++;
 			}
 		},
-		"The Prisoner's Dilemma": (participantA, participantB, tags = {}) => {
+		"The Prisoner's Dilemma": (
+			participantA: Uacodetournamentparticipation,
+			participantB: Uacodetournamentparticipation,
+			tags = {}
+		) => {
 			const options = ['зрадити', 'мовчати'];
 
 			let statsA = {
@@ -621,6 +639,46 @@ export class TournamentService {
 		}
 	}
 
+	getOptionMagicians(
+		моєОстаннєЗакляття,
+		останнєЗакляттяСуперника,
+		кількістьМоїхАтак,
+		кількістьМоїхЗахистів,
+		кількістьМоїхЛікувань,
+		кількістьМоїхМедитацій,
+		кількістьСуперникаАтак,
+		кількістьСуперникаЗахистів,
+		кількістьСуперникаЛікувань,
+		кількістьСуперникаМедитацій,
+		рівеньМогоЖиття,
+		рівеньМоєїМани,
+		рівеньЖиттяСуперника,
+		рівеньМаниСуперника,
+		code
+	) {
+		try {
+			return eval(`()=>{ ${code} }`)();
+		} catch (e) {
+			return null;
+		}
+	}
+
+	getOptionThePrisonersDilemma(
+		мійОстаннійВибір,
+		останнійВибірСуперника,
+		кількістьМоїхЗрад,
+		кількістьМоїхМовчань,
+		кількістьЗрадСуперника,
+		кількістьМовчаньСуперника,
+		code
+	) {
+		try {
+			return eval(`()=>{ ${code} }`)();
+		} catch (e) {
+			return null;
+		}
+	}
+
 	applyTags(tags: any, options: any, moveA: any, moveB: any) {
 		if (tags.includes('Reality') && Math.random() < 0.04) {
 			moveA = options[Math.floor(Math.random() * options.length)];
@@ -649,4 +707,24 @@ export class TournamentService {
 			moveB
 		};
 	}
+
+	magicianFight = (a, b, sA, sB) => {
+		if (a === 'атака') {
+			sB.health -= b === 'захист' ? 10 : 30;
+
+			sA.mana -= 30;
+		}
+
+		if (a === 'захист') sA.mana -= 10;
+
+		if (a === 'лікування') {
+			sA.health += 20;
+
+			if (sA.health > 100) sA.health = 100;
+
+			sA.mana -= 10;
+		}
+
+		if (a === 'медитація') sA.mana += 50;
+	};
 }
