@@ -50,7 +50,7 @@
 		[config]="participateForm"
 		[submition]="submition"
 	></wform>
-	@if(classService.mineClass) {
+	@if(isClass ? classService.mineClass : userService.role('admin')) {
 	<wbutton class="mb15" (click)="runTournament()">Запустити Турнір</wbutton>
 	<wbutton (click)="completeTournament()">Закінчити Турнір</wbutton>
 	}

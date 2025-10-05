@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
-import { AlertService } from 'wacom';
+import { AlertService, HttpService } from 'wacom';
 import { UacodeService } from './uacode.service';
 
 export type TournamentMethod =
@@ -16,6 +16,7 @@ export type TournamentMethod =
 	providedIn: 'root'
 })
 export class TournamentService {
+	private _http = inject(HttpService);
 	/**
 	 * Supported game methods.
 	 */
@@ -285,7 +286,8 @@ export class TournamentService {
 
 	runTournament(
 		method: TournamentMethod,
-		participations: Uacodetournamentparticipation[]
+		participations: Uacodetournamentparticipation[],
+		query: object
 	) {
 		participations = participations.filter((participation) =>
 			this.scriptLogicVerification[method](
@@ -317,6 +319,16 @@ export class TournamentService {
 				}
 			}
 		}
+
+		this._http.post('/api/uacode/tournament/run', {
+			...query,
+			participations: participations.map((p) => {
+				return {
+					points: p.points,
+					_id: p._id
+				};
+			})
+		});
 	}
 
 	constructor(

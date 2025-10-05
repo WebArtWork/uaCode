@@ -193,6 +193,19 @@ const routes: Routes = [
 					import('./pages/user/compiler/compiler.module').then(
 						(m) => m.CompilerModule
 					)
+			},
+			{
+				path: 'sign',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Sign'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/guest/sign/sign.module').then(
+						(m) => m.SignModule
+					)
 			}
 		]
 	},

@@ -109,7 +109,7 @@ export class SignComponent {
 		private _form: FormService,
 		private _translate: TranslateService
 	) {
-		this._router.navigateByUrl('/compiler');
+		// this._router.navigateByUrl('/compiler');
 	}
 
 	submit(): void {

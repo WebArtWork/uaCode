@@ -1,5 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormService } from 'src/app/core/modules/form/form.service';
 import { FormInterface } from 'src/app/core/modules/form/interfaces/form.interface';
@@ -11,6 +11,7 @@ import { UacodeService } from 'src/app/core/services/uacode.service';
 import { UacodeclassService } from 'src/app/modules/uacodeclass/services/uacodeclass.service';
 import { Uacodetournamentparticipation } from 'src/app/modules/uacodetournamentparticipation/interfaces/uacodetournamentparticipation.interface';
 import { UacodetournamentparticipationService } from 'src/app/modules/uacodetournamentparticipation/services/uacodetournamentparticipation.service';
+import { UserService } from 'src/app/modules/user/services/user.service';
 import { AlertService, CoreService, SocketService } from 'wacom';
 
 @Component({
@@ -18,6 +19,8 @@ import { AlertService, CoreService, SocketService } from 'wacom';
 	standalone: false
 })
 export class TournamentComponent {
+	readonly userService = inject(UserService);
+
 	// title {{name[method]}}
 	readonly isClass = this._router.url.split('/')[2] === 'class';
 
@@ -120,7 +123,9 @@ export class TournamentComponent {
 
 		this._load();
 
-		this._socket.on('uacode', (data) => {
+		this._socket.on('uacodetournament', (data) => {
+			console.log(data);
+
 			if (
 				data.method === this.method &&
 				((!this.isClass && !data.class) ||
@@ -232,9 +237,38 @@ export class TournamentComponent {
 			});
 	}
 
-	runTournament() {
-		this._tournamentService.runTournament(this.method, this.participations);
+	runTournament(complete = false) {
+		this._tournamentService.runTournament(
+			this.method,
+			this.participations,
+			this.isClass
+				? {
+						device: this._core.deviceID,
+						method: this.method,
+						class: this.classService.classId,
+						complete
+					}
+				: {
+						method: this.method,
+						complete
+					}
+		);
 	}
 
-	completeTournament() {}
+	completeTournament() {
+		this._alert.question({
+			text: 'Ви готові закрити цей турнір?',
+			buttons: [
+				{
+					text: 'Ні'
+				},
+				{
+					text: 'Так',
+					callback: () => {
+						this.runTournament(true);
+					}
+				}
+			]
+		});
+	}
 }
